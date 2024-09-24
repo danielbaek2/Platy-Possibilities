@@ -8,7 +8,7 @@ An online U-Fund system built in Java 17=> and ___ _replace with other platform 
 - Javier Amaro
 - Daniel Baek
 - Leo Mai
-- MEMBER4
+- Kinkade Knox-Silvia
 - MEMBER5
 
 
