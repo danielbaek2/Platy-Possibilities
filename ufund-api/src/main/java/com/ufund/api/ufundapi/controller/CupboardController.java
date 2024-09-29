@@ -116,7 +116,7 @@ public class CupboardController {
 
         // Replace below with your implementation
         try {
-            boolean delete = needDao.deleteNeed(id);
+            boolean delete = boardDAO.deleteNeed(id);
             if (delete) {
                 return new ResponseEntity<>(HttpStatus.OK);
             } else {
