@@ -15,6 +15,7 @@ geometry: margin=1in
   * Javier Amaro
   * Kinkade Knox-Silva
   * Kaila Grant
+  * Leo Mai
 
 ## Executive Summary
 
