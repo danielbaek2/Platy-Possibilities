@@ -11,8 +11,12 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class CupboardFileDAO implements CupboardDAO{
     private String filename;
+
     private ObjectMapper objectMapper = null;
+
     private HashMap<Integer, Need> needs;
+
+    private static int nextID;
     /**
      * CupboardFileDao -  Current instance of the cupboard data access.
      *
@@ -164,4 +168,12 @@ public class CupboardFileDAO implements CupboardDAO{
             }
         }
     }
+
+
+    private static synchronized int getNextID(){
+        int id = nextID;
+        nextID++;
+        return id;
+    }
+
 }
