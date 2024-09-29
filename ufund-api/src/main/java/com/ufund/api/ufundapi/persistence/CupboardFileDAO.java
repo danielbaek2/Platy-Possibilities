@@ -79,7 +79,7 @@ public class CupboardFileDAO implements CupboardDAO{
      * @throws IOException
      */
     @Override
-    public Need CreateNeed(Need need) throws IOException {
+    public Need createNeed(Need need) throws IOException {
         synchronized(needs){
             if(needs.containsKey(need.getId())){
                 return null; // if the need exists, do nothing.
@@ -98,7 +98,7 @@ public class CupboardFileDAO implements CupboardDAO{
      * @throws IOException
      */
     @Override
-    public Need UpdateNeed(Need need) throws IOException {
+    public Need updateNeed(Need need) throws IOException {
         synchronized(needs){
             if(this.needs.containsKey(need.getId())) {
                 this.needs.put(need.getId(), need);
@@ -116,7 +116,7 @@ public class CupboardFileDAO implements CupboardDAO{
      * @throws IOException
      */
     @Override
-    public Need GetNeed(int id) throws IOException {
+    public Need getNeed(int id) throws IOException {
         synchronized(needs){
             if (this.needs.containsKey(id)){
                 return this.needs.get(id);
@@ -132,14 +132,14 @@ public class CupboardFileDAO implements CupboardDAO{
      * @throws IOException 
      */
     @Override
-    public Need[] GetNeeds() throws IOException {
+    public Need[] getNeeds() throws IOException {
         synchronized(needs){
             return getNeedsArray();
         }
     }
 
     @Override
-    public Need[] SearchNeeds(String substring) throws IOException {
+    public Need[] searchNeeds(String substring) throws IOException {
         synchronized(needs){
             return getNeedsArray(substring);
         }
@@ -152,7 +152,7 @@ public class CupboardFileDAO implements CupboardDAO{
      * @throws IOException
      */
     @Override
-    public boolean DeleteNeed(int id) throws IOException {
+    public boolean deleteNeed(int id) throws IOException {
         synchronized(needs){
             if (this.needs.containsKey(id)){
                 this.needs.remove(id);
