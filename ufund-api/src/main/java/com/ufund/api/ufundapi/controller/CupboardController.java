@@ -191,7 +191,8 @@ public class CupboardController {
 
 //Testing Create : curl -X POST -H Content-Type:application/json http://localhost:8080/Cupboard -d "{\"title\": \"Releasing Pigeons\"}"
 //Testing Get all needs : curl -X GET http://localhost:8080/Cupboard
-//Testing Search for needs: curl -X GET http://localhost:8080/Cupboard/?title=Re
+//Testing Get one need : curl -X GET http://localhost:8080/Cupboard/2
+//Testing Search for needs: curl -X GET http://localhost:8080/Cupboard/?need_title=Re
 //Testing deleting a need: curl -i -X DELETE http://localhost:8080/Cupboard/<ID>   REPLACE ID
 //Testing updating a need: curl -i -X PUT -H Content-Type:application/json http://localhost:8080/Cupboard -d "{\"id\": <ID>, \"title\": \"Releasing Wolves\"}" REPLACE ID
 }
