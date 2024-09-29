@@ -2,6 +2,7 @@ package com.ufund.api.ufundapi.persistence;
 
 import java.io.IOException;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.ufund.api.ufundapi.model.Need;
@@ -42,22 +43,32 @@ public class CupboardFileDAO implements CupboardDAO{
      * @throws IOException
      */
     private void saveFile() throws IOException{
-        Need[] needArrayList = getNeedsArray();
+        Need[] needArrayList = getNeedsArray(null);
         objectMapper.writeValue(new File(filename),needArrayList);
     }
 
-    private Need[] getNeedsArray() {
+
+
+    private Need[] getNeedsArray(){
         return getNeedsArray(null);
     }
 
+    /**
+     * Generate an array of needs from the hashmap, using a given substring as a filter.
+     * 
+     * @param containsText the substring we are comparing the titles of needs to.
+     * 
+     * @return an array of Needs, possibly empty.
+     */
     private Need[] getNeedsArray(String containsText) {
-        ArrayList<Need> =needArrayList = new ArrayList<>();
+        ArrayList<Need> needArrayList = new ArrayList<>();
         for (Need need : needs.values()) {
-            if (containsText == null || need.getId().contains(containsText)) {
+            if (containsText == null || need.getTitle().contains(containsText)) {
                 needArrayList.add(need);
             }
         }
-        return needArrayList.toArray(new Need[0]);
+        Need[] needArray = new Need[needArrayList.size()];
+        return needArrayList.toArray(needArray);
     }
 
 
@@ -116,9 +127,6 @@ public class CupboardFileDAO implements CupboardDAO{
     @Override
     public Need[] GetNeeds() throws IOException {
         // TODO Auto-generated method stub
-        synchronized (needs){
-            return getNeedsArray();
-        }
         return null;
     }
 
