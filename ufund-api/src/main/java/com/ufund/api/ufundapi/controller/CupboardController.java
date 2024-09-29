@@ -136,7 +136,7 @@ public class CupboardController {
      */
     @GetMapping("")
     public ResponseEntity<Need[]> GetNeeds() {
-        LOG.info("GET/needs");
+        LOG.info("GET /Cupboard");
 
         try {
             Need[] needs = boardDAO.getNeeds();
@@ -150,7 +150,7 @@ public class CupboardController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Need> deleteNeed(@PathVariable int id) {
-        LOG.info("DELETE /need/" + id);
+        LOG.info("DELETE /Cupboard/" + id);
 
         // Replace below with your implementation
         try {
