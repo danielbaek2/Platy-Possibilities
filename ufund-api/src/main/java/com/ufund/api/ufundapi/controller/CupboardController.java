@@ -35,4 +35,32 @@ public class CupboardController {
     public CupboardController(CupboardDAO boardDAO) {
         this.boardDAO = boardDAO;
     }
+
+
+    /**
+     * 
+     * @param need the need object to create
+     * 
+     * @return a Response Entity with the need and HttpStatus.Created if successful
+     * @return a Response Entity with HttpStatus.INTERNAL_SERVER_ERROR if creation unsuccessful or IO exception occurred
+     */
+    @PostMapping("")
+    public ResponseEntity<Need> createNeed(@RequestBody Need need){
+        LOG.info("POST /Cupboard " + need);
+
+        try{
+            Need newNeed = boardDAO.CreateNeed(need); //try to create a need
+            if(newNeed != null){
+                return new ResponseEntity<Need>(newNeed, HttpStatus.CREATED);//return status created and need if successful
+            }
+
+            else{
+                return new ResponseEntity<Need>(HttpStatus.INTERNAL_SERVER_ERROR);//return status Server Error and if unsuccessful
+            }
+        }
+
+        catch(IOException error){
+            return new ResponseEntity<Need>(HttpStatus.INTERNAL_SERVER_ERROR);//return status Server Error and if IO exception occurred.
+        }
+    }
 }
