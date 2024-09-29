@@ -2,7 +2,6 @@ package com.ufund.api.ufundapi.persistence;
 
 import java.io.IOException;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.ufund.api.ufundapi.model.Need;
@@ -22,7 +21,7 @@ public class CupboardFileDAO implements CupboardDAO{
     // not sure how to recieve file name.
     public CupboardFileDAO(String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
-        this.objectMapper = objectMapper;
+        this.objectMapper = objectmapper;
         this.needs = new HashMap<>();
         loadFile();
     }
