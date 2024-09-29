@@ -36,9 +36,15 @@ public class CupboardFileDAO implements CupboardDAO{
      * @throws IOException
      */
     private void loadFile() throws IOException{
+        nextID = 0;
+
         Need[] needList = objectMapper.readValue(new File(filename),Need[].class);
         for (Need currNeed : needList){ // for each need, load hashmap of needs with ID and need structure.
             needs.put(currNeed.getId(), currNeed);
+
+            if(currNeed.getId() > nextID){
+                nextID = currNeed.getId();
+            }
         }
     }
 
@@ -47,7 +53,7 @@ public class CupboardFileDAO implements CupboardDAO{
      * @throws IOException
      */
     private void saveFile() throws IOException{
-        Need[] needArrayList = getNeedsArray(null);
+        Need[] needArrayList = getNeedsArray();
         objectMapper.writeValue(new File(filename),needArrayList);
     }
 
@@ -85,15 +91,13 @@ public class CupboardFileDAO implements CupboardDAO{
     @Override
     public Need createNeed(Need need) throws IOException {
         synchronized(needs){
-            if(needs.containsKey(need.getId())){
-                return null; // if the need exists, do nothing.
-            } else {
-                this.needs.put(need.getId(), need);
-                saveFile();
-                return need;
+            Need newNeed = new Need(getNextID(),need.getTitle());
+            this.needs.put(need.getId(), need);
+            saveFile();
+            return newNeed;
             }
         }
-    }
+
 
     /**
      * UpdateNeed - If the need parameter's ID exists, the need is replaced.
@@ -104,9 +108,11 @@ public class CupboardFileDAO implements CupboardDAO{
     @Override
     public Need updateNeed(Need need) throws IOException {
         synchronized(needs){
-            if(this.needs.containsKey(need.getId())) {
-                this.needs.put(need.getId(), need);
+            if(needs.containsKey(need.getId())) {
+                needs.put(need.getId(), need);
+                saveFile();
                 return need;
+                
             } else {
                 return null;
             }
@@ -158,8 +164,8 @@ public class CupboardFileDAO implements CupboardDAO{
     @Override
     public boolean deleteNeed(int id) throws IOException {
         synchronized(needs){
-            if (this.needs.containsKey(id)){
-                this.needs.remove(id);
+            if (needs.containsKey(id)){
+                needs.remove(id);
                 saveFile();
                 return true;
             }
