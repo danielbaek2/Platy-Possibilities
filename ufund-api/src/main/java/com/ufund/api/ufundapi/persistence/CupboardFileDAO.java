@@ -85,7 +85,7 @@ public class CupboardFileDAO implements CupboardDAO{
                 return null; // if the need exists, do nothing.
             } else {
                 this.needs.put(need.getId(), need);
-                // might need to save new need
+                saveFile();
                 return need;
             }
         }
@@ -156,8 +156,8 @@ public class CupboardFileDAO implements CupboardDAO{
         synchronized(needs){
             if (this.needs.containsKey(id)){
                 this.needs.remove(id);
+                saveFile();
                 return true;
-                // might need to save change.
             }
             else{
                 return false;
