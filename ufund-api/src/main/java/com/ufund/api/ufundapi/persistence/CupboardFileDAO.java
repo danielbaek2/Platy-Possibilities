@@ -41,8 +41,20 @@ public class CupboardFileDAO implements CupboardDAO{
      * @throws IOException
      */
     private void saveFile() throws IOException{
-
+        Need[] needArrayList = getNeedsArray(null);
+        objectMapper.writeValue(new File(filename),needArrayList);
     }
+
+    private Need[] getNeedsArray(String containsText) {
+        ArrayList<Need> =needArrayList = new ArrayList<>();
+        for (Need need : needs.values()) {
+            if (containsText == null || need.getId().contains(containsText)) {
+                needArrayList.add(need);
+            }
+        }
+        return needArrayList.toArray(new Need[0]);
+    }
+
 
     /**
      * CreateNeed - Adds the need parameter into the needs hashmap.
