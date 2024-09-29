@@ -59,8 +59,6 @@ public class CupboardController {
                 return new ResponseEntity<Need>(HttpStatus.INTERNAL_SERVER_ERROR);//return status Server Error and if unsuccessful
             }
         }
-
-
         catch(IOException error){
             return new ResponseEntity<Need>(HttpStatus.INTERNAL_SERVER_ERROR);//return status Server Error and if IO exception occurred.
         }
