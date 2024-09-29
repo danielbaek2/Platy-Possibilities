@@ -38,6 +38,7 @@ public class CupboardController {
 
 
     /**
+     * Create a need object using given need if it exists
      * 
      * @param need the need object to create
      * 
@@ -49,7 +50,7 @@ public class CupboardController {
         LOG.info("POST /Cupboard " + need);
 
         try{
-            Need newNeed = boardDAO.CreateNeed(need); //try to create a need
+            Need newNeed = boardDAO.createNeed(need); //try to create a need
             if(newNeed != null){
                 return new ResponseEntity<Need>(newNeed, HttpStatus.CREATED);//return status created and need if successful
             }
@@ -59,8 +60,6 @@ public class CupboardController {
             }
         }
 
-      
-      
 
         catch(IOException error){
             return new ResponseEntity<Need>(HttpStatus.INTERNAL_SERVER_ERROR);//return status Server Error and if IO exception occurred.
@@ -68,21 +67,21 @@ public class CupboardController {
     }
 
     /**
-     * Updates the {@linkplain Hero hero} with the provided {@linkplain Hero hero} object, if it exists
+     * Updates the Need with the provided need object, if it exists
      *
-     * @param hero The {@link Hero hero} to update
+     * @param need The need to update
      *
-     * @return ResponseEntity with updated {@link Hero hero} object and HTTP status of OK if updated<br>
+     * @return ResponseEntity with updated need object and HTTP status of OK if updated<br>
      * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
     public ResponseEntity<Need> updateNeed(@RequestBody Need need) {
-        LOG.info("PUT /heroes " + hero);
+        LOG.info("PUT /Cupboard " + need);
 
         // Replace below with your implementation
         try{
-            Need uNeed = needDao.updateNeed(need);
+            Need uNeed = boardDAO.updateNeed(need);
             if (uNeed != null) {
                 return new ResponseEntity<>(uNeed, HttpStatus.OK);
             } else{
@@ -91,4 +90,8 @@ public class CupboardController {
         } catch (Exception e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+}
+
+
 }
