@@ -1,6 +1,5 @@
 package com.ufund.api.ufundapi.controller;
 
-import org.apache.catalina.connector.Response;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -189,4 +188,10 @@ public class CupboardController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
+
+//Testing Create : curl -X POST -H Content-Type:application/json http://localhost:8080/Cupboard -d "{\"title\": \"Releasing Pigeons\"}"
+//Testing Get all needs : curl -X GET http://localhost:8080/Cupboard
+//Testing Search for needs: curl -X GET http://localhost:8080/Cupboard/?title=Re
+//Testing deleting a need: curl -i -X DELETE http://localhost:8080/Cupboard/<ID>   REPLACE ID
+//Testing updating a need: curl -i -X PUT -H Content-Type:application/json http://localhost:8080/Cupboard -d "{\"id\": <ID>, \"title\": \"Releasing Wolves\"}" REPLACE ID
 }
