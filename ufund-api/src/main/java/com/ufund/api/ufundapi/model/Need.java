@@ -25,8 +25,6 @@ public class Need {
     public Need(@JsonProperty("id") int id, @JsonProperty("title") String title){
         this.id = id;
         this.title = title;
-        this.total_funding = total_funding;
-        this.description = description;
     }
 
     /**
