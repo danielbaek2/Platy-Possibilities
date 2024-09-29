@@ -12,9 +12,9 @@ geometry: margin=1in
 * Team name: Platy Possibilities
 * Team members
   * Daniel Baek
-  * MEMBER2
-  * MEMBER3
-  * MEMBER4
+  * Javier Amaro
+  * Kinkade Knox-Silva
+  * Kaila Grant
 
 ## Executive Summary
 
