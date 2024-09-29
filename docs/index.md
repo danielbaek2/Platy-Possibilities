@@ -4,8 +4,11 @@ Welcome to the PROJECT Project!
 
 ## Team
 
-* MEMBER1
-* MEMBER2
+* Daniel Baek
+* Javier Amaro
+* Kinkade Knox-Silva
+* Kaila Grant
+* Leo Mai
 
 ## [Design Documentation](DesignDoc)
 
