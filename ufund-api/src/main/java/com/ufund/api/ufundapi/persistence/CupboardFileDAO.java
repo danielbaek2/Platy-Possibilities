@@ -147,8 +147,6 @@ public class CupboardFileDAO implements CupboardDAO{
         // TODO Auto-generated method stub
         if (this.needs.containsKey(id)){
             this.needs.remove(id);
-            return true;
-            // might need to save change.
         }
         else{
             return false;
