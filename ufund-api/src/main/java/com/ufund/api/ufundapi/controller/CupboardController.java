@@ -36,7 +36,6 @@ public class CupboardController {
         this.boardDAO = boardDAO;
     }
 
-
     /**
      * Create a need object using given need if it exists
      * 
@@ -111,6 +110,23 @@ public class CupboardController {
         catch(IOException e){
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Need> deleteNeed(@PathVariable int id) {
+        LOG.info("DELETE /need/" + id);
+
+        // Replace below with your implementation
+        try {
+            boolean delete = needDao.deleteNeed(id);
+            if (delete) {
+                return new ResponseEntity<>(HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
         }
     }
 }
