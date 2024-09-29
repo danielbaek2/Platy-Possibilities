@@ -91,4 +91,25 @@ public class CupboardController {
         } catch (Exception e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    
+    /**
+     * Responds to the GET request for all {@linkplain Need needs} whose title contains the test in the need_title
+     * 
+     * @param need_title needs containing this text are returned
+     * 
+     * @return ResponseEntity with array of {@link Need needs} objects and HTTP OK status
+     * HTTP INTERNAL_SERVER_ERROR if there is a problem
+     */
+    @GetMapping("/")
+    public ResponseEntity<Need[]> searchNeeds(@RequestParam String need_title) {
+        LOG.info("GET /Cupboard/?title="+need_title);
+        try{
+            Need[] needs = boardDAO.SearchNeeds(need_title);
+            return new ResponseEntity<Need[]>(needs,HttpStatus.OK);
+        }
+        catch(IOException e){
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
