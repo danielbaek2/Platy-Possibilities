@@ -47,8 +47,12 @@ public class CupboardController {
     @PostMapping("")
     public ResponseEntity<Need> createNeed(@RequestBody Need need){
         LOG.info("POST /Cupboard " + need);
-
+        
         try{
+            if(boardDAO.searchNeeds(need.getTitle()) == null){
+                return new ResponseEntity<>(HttpStatus.CONFLICT); //need with same title already exists
+            }
+
             Need newNeed = boardDAO.createNeed(need); //try to create a need
             if(newNeed != null){
                 return new ResponseEntity<Need>(newNeed, HttpStatus.CREATED);//return status created and need if successful
