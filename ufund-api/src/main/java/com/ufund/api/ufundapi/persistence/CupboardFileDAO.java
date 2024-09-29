@@ -42,8 +42,12 @@ public class CupboardFileDAO implements CupboardDAO{
      * @throws IOException
      */
     private void saveFile() throws IOException{
-        Need[] needArrayList = getNeedsArray(null);
+        Need[] needArrayList = getNeedsArray();
         objectMapper.writeValue(new File(filename),needArrayList);
+    }
+
+    private Need[] getNeedsArray() {
+        return getNeedsArray(null);
     }
 
     private Need[] getNeedsArray(String containsText) {
@@ -112,6 +116,9 @@ public class CupboardFileDAO implements CupboardDAO{
     @Override
     public Need[] GetNeeds() throws IOException {
         // TODO Auto-generated method stub
+        synchronized (needs){
+            return getNeedsArray();
+        }
         return null;
     }
 
