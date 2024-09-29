@@ -81,14 +81,16 @@ public class CupboardController {
         LOG.info("PUT /heroes " + hero);
 
         // Replace below with your implementation
-        try{
+        try {
             Need uNeed = needDao.updateNeed(need);
             if (uNeed != null) {
                 return new ResponseEntity<>(uNeed, HttpStatus.OK);
-            } else{
+            } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
         } catch (Exception e) {
-            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }
