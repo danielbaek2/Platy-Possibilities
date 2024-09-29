@@ -23,8 +23,16 @@ import com.ufund.api.ufundapi.model.Need;
 @RestController
 @RequestMapping("Cupboard")
 public class CupboardController {
+    private static final Logger LOG = Logger.getLogger(CupboardController.class.getName());
+    private CupboardDAO boardDAO;
 
-
-
-    
+    /**
+     * Creates a REST API controller for the Cupboard Requests
+     * 
+     * @param boardDAO The Cupboard Data Access Object which will perform CRUD operations
+     *
+     */
+    public CupboardController(CupboardDAO boardDAO) {
+        this.boardDAO = boardDAO;
+    }
 }
