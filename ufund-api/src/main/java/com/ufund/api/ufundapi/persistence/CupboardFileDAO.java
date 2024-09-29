@@ -80,13 +80,14 @@ public class CupboardFileDAO implements CupboardDAO{
      */
     @Override
     public Need CreateNeed(Need need) throws IOException {
-        // TODO Auto-generated method stub
-        if(needs.containsKey(need.getId())){
-            return null; // if the need exists, do nothing.
-        } else {
-            this.needs.put(need.getId(), need);
-            // might need to save new need
-            return need;
+        synchronized(needs){
+            if(needs.containsKey(need.getId())){
+                return null; // if the need exists, do nothing.
+            } else {
+                this.needs.put(need.getId(), need);
+                // might need to save new need
+                return need;
+            }
         }
     }
 
@@ -98,12 +99,13 @@ public class CupboardFileDAO implements CupboardDAO{
      */
     @Override
     public Need UpdateNeed(Need need) throws IOException {
-        // TODO Auto-generated method stub
-        if(this.needs.containsKey(need.getId())) {
-            this.needs.put(need.getId(), need);
-            return need;
-        } else {
-            return null;
+        synchronized(needs){
+            if(this.needs.containsKey(need.getId())) {
+                this.needs.put(need.getId(), need);
+                return need;
+            } else {
+                return null;
+            }
         }
     }
 
@@ -115,25 +117,32 @@ public class CupboardFileDAO implements CupboardDAO{
      */
     @Override
     public Need GetNeed(int id) throws IOException {
-        // TODO Auto-generated method stub
+        synchronized(needs){
             if (this.needs.containsKey(id)){
                 return this.needs.get(id);
             }
             else{
                 return null;
             }
+        }
     }
 
+    /**
+     * Returns the entire array of needs
+     * @throws IOException 
+     */
     @Override
     public Need[] GetNeeds() throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+        synchronized(needs){
+            return getNeedsArray();
+        }
     }
 
     @Override
     public Need[] SearchNeeds(String substring) throws IOException {
-        // TODO Auto-generated method stub
-        return null;
+        synchronized(needs){
+            return getNeedsArray(substring);
+        }
     }
 
     /**
@@ -144,14 +153,15 @@ public class CupboardFileDAO implements CupboardDAO{
      */
     @Override
     public boolean DeleteNeed(int id) throws IOException {
-        // TODO Auto-generated method stub
-        if (this.needs.containsKey(id)){
-            this.needs.remove(id);
-            return true;
-            // might need to save change.
-        }
-        else{
-            return false;
+        synchronized(needs){
+            if (this.needs.containsKey(id)){
+                this.needs.remove(id);
+                return true;
+                // might need to save change.
+            }
+            else{
+                return false;
+            }
         }
     }
 }
