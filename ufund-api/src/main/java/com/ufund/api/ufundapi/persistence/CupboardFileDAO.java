@@ -6,11 +6,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.ufund.api.ufundapi.model.Need;
-import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 
 public class CupboardFileDAO implements CupboardDAO{
-
+    private String filename;
+    private ObjectMapper objectMapper = null;
+    private HashMap<Integer, Need> needs;
     /**
      * CupboardFileDao -  Current instance of the cupboard data access.
      *
@@ -21,7 +23,7 @@ public class CupboardFileDAO implements CupboardDAO{
     public CupboardFileDAO(String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectMapper;
-        this.needs = new HashMap<>():
+        this.needs = new HashMap<>();
         loadFile();
     }
 
@@ -32,7 +34,7 @@ public class CupboardFileDAO implements CupboardDAO{
     private void loadFile() throws IOException{
         Need[] needList = objectMapper.readValue(new File(filename),Need[].class);
         for (Need currNeed : needList){ // for each need, load hashmap of needs with ID and need structure.
-            needs.put(currNeed.getId(), need);
+            needs.put(currNeed.getId(), currNeed);
         }
     }
 
