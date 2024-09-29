@@ -165,4 +165,27 @@ public class CupboardController {
             return new ResponseEntity<>(HttpStatus.NOT_IMPLEMENTED);
         }
     }
+    /**
+     * Gets the Need with the provided int ID, if it exists
+     *
+     * @param id The ID of the Need to get
+     *
+     * @return ResponseEntity with gotten need object and HTTP status of OK if updated<br>
+     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
+     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     */
+    @GetMapping("/{id}")
+    public ResponseEntity<Need> getNeed(@PathVariable int id) {
+        LOG.info("GET /Cupboard/" + id);
+        try {
+            Need need = boardDAO.getNeed(id);
+            if (need != null)
+                return new ResponseEntity<Need>(need,HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        catch(IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
 }
