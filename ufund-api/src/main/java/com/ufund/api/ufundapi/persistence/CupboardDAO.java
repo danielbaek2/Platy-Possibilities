@@ -15,7 +15,7 @@ public interface CupboardDAO {
      * 
      * @throws IOException if there is an issue with the data storage
      */
-    Need[] GetNeeds() throws IOException;
+    Need[] getNeeds() throws IOException;
 
     /**
      * Gets all {@linkplain Need needs} whose name contains substring
@@ -26,7 +26,7 @@ public interface CupboardDAO {
      * 
      * @throws IOException if there is an issue with the data storage
      */
-    Need[] SearchNeeds(String substring) throws IOException;
+    Need[] searchNeeds(String substring) throws IOException;
 
     /**
      * Get a {@linkplain Need need} with the given id
@@ -39,7 +39,7 @@ public interface CupboardDAO {
      * 
      * @throws IOException if there is an issue with the data storage
      */
-    Need GetNeed(int id) throws IOException;
+    Need getNeed(int id) throws IOException;
 
 
     /**
@@ -53,7 +53,7 @@ public interface CupboardDAO {
      * 
      * @throws IOException if there is an issue with the data storage
      */
-    Need CreateNeed(Need need) throws IOException;
+    Need createNeed(Need need) throws IOException;
 
 
     /**
@@ -67,7 +67,7 @@ public interface CupboardDAO {
      * 
      * @throws IOException if there is an issue with the data storage
      */
-    Need UpdateNeed(Need need) throws IOException;
+    Need updateNeed(Need need) throws IOException;
 
     /**
      * Delete a {@linkplain Need need} from data storage
@@ -78,5 +78,5 @@ public interface CupboardDAO {
      * 
      * @throws IOException if there is an issue with the data storage
      */
-    boolean DeleteNeed(int id) throws IOException;
+    boolean deleteNeed(int id) throws IOException;
 }
