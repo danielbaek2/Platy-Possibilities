@@ -98,7 +98,7 @@ public class CupboardFileDAO implements CupboardDAO{
     public Need createNeed(Need need) throws IOException {
         synchronized(needs){
             Need newNeed = new Need(getNextID(),need.getTitle());
-            this.needs.put(need.getId(), need);
+            this.needs.put(newNeed.getId(), newNeed);
             saveFile();
             return newNeed;
             }
