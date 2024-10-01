@@ -47,23 +47,13 @@ public class CupboardController {
     @PostMapping("")
     public ResponseEntity<Need> createNeed(@RequestBody Need need){
         LOG.info("POST /Cupboard " + need);
-        
-        try{
-            if(boardDAO.searchNeeds(need.getTitle()) == null){
-                return new ResponseEntity<>(HttpStatus.CONFLICT); //need with same title already exists
-            }
 
-            Need newNeed = boardDAO.createNeed(need); //try to create a need
-            if(newNeed != null){
-                return new ResponseEntity<Need>(newNeed, HttpStatus.CREATED);//return status created and need if successful
-            }
-
-            else{
-                return new ResponseEntity<Need>(HttpStatus.INTERNAL_SERVER_ERROR);//return status Server Error and if unsuccessful
-            }
-        }
-        catch(IOException error){
-            return new ResponseEntity<Need>(HttpStatus.INTERNAL_SERVER_ERROR);//return status Server Error and if IO exception occurred.
+        try {
+            Need nNeed = boardDAO.createNeed(need);
+            return new ResponseEntity<>(nNeed, HttpStatus.CREATED);
+        } catch (IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
