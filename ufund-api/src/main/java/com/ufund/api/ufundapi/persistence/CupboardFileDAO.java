@@ -4,12 +4,17 @@ import java.io.IOException;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Logger;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import com.ufund.api.ufundapi.model.Need;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-
+@Component
 public class CupboardFileDAO implements CupboardDAO{
+
     private String filename;
 
     private ObjectMapper objectMapper = null;
@@ -24,7 +29,8 @@ public class CupboardFileDAO implements CupboardDAO{
      * @param objectmapper - The object mapper.
      */
     // not sure how to recieve file name.
-    public CupboardFileDAO(String filename, ObjectMapper objectmapper) throws IOException{
+    
+    public CupboardFileDAO(@Value("data/needs.json") String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
         this.needs = new HashMap<>();
@@ -92,7 +98,7 @@ public class CupboardFileDAO implements CupboardDAO{
     public Need createNeed(Need need) throws IOException {
         synchronized(needs){
             Need newNeed = new Need(getNextID(),need.getTitle());
-            this.needs.put(need.getId(), need);
+            this.needs.put(newNeed.getId(), newNeed);
             saveFile();
             return newNeed;
             }
