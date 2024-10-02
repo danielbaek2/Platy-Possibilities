@@ -110,7 +110,7 @@ public class CupboardController {
      * 
      * @param <T> Generic parameter, allowing method to work with Need objects and arrays
      * @param input Need object/array to be returned
-     * @param error_status The HTTP Status to be returned if the object is null
+     * @param errorStatus The HTTP Status to be returned if the object is null
      * @return ResponseEntity with the {@linkplain Need need} object or array and 
      * HTTP status of OK if found, HTTP status of error_status if not found or if there is a conflict
      */
