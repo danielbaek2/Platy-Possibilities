@@ -1,3 +1,4 @@
+
 package com.ufund.api.ufundapi.controller;
 
 import org.springframework.http.HttpStatus;
@@ -28,7 +29,7 @@ public class CupboardController {
 
     /**
      * Creates a REST API controller for the Cupboard Requests
-     * 
+     *
      * @param boardDAO The Cupboard Data Access Object which will perform CRUD operations
      *
      */
@@ -38,9 +39,9 @@ public class CupboardController {
 
     /**
      * Create a need object using given need if it exists
-     * 
+     *
      * @param need the need object to create
-     * 
+     *
      * @return a Response Entity with the need and HttpStatus.Created if successful
      * @return a Response Entity with HttpStatus.INTERNAL_SERVER_ERROR if creation unsuccessful or IO exception occurred
      */
@@ -82,14 +83,14 @@ public class CupboardController {
         } catch (Exception e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-            }
+        }
     }
 
     /**
      * Responds to the GET request for all {@linkplain Need needs} whose title contains the test in the need_title
-     * 
+     *
      * @param need_title needs containing this text are returned
-     * 
+     *
      * @return ResponseEntity with array of {@link Need needs} objects and HTTP OK status
      * HTTP INTERNAL_SERVER_ERROR if there is a problem
      */
@@ -108,7 +109,7 @@ public class CupboardController {
 
     /**
      * Helper method to return the correct object and HTTP status
-     * 
+     *
      * @param <T> Generic parameter, allowing method to work with Need objects and arrays
      * @param input Need object/array to be returned
      * @param errorStatus The HTTP Status to be returned if the object is null
@@ -124,7 +125,7 @@ public class CupboardController {
 
     /**
      * Responds to the GET request for all {@linkplain Need needs}
-     * 
+     *
      * @return ResponseEntity with array of {@linkplain Need need} objects and 
      * HTTP status of OK if found, HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
@@ -139,7 +140,7 @@ public class CupboardController {
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }    
+        }
     }
 
     @DeleteMapping("/{id}")
@@ -181,8 +182,8 @@ public class CupboardController {
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
     }
-}
 
 //Testing Create : curl -X POST -H Content-Type:application/json http://localhost:8080/Cupboard -d "{\"title\": \"Releasing Pigeons\"}"
 //Testing Get all needs : curl -X GET http://localhost:8080/Cupboard
