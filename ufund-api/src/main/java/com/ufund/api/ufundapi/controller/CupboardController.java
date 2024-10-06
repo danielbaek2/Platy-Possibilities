@@ -49,6 +49,7 @@ public class CupboardController {
         LOG.info("POST /Cupboard " + need);
 
         try {
+            if(boardDAO.searchNeeds(need.getTitle()).length > 0){return new ResponseEntity<>(HttpStatus.CONFLICT);} //checking for unique title
             Need nNeed = boardDAO.createNeed(need);
             return new ResponseEntity<>(nNeed, HttpStatus.CREATED);
         } catch (IOException e) {
