@@ -2,9 +2,8 @@ package com.ufund.api.ufundapi.persistence;
 
 import java.io.IOException;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Map;
+
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
@@ -56,15 +55,6 @@ public class UserFileDAO implements UserDAO{
     private void saveFile() throws IOException{
         User[] users = this.users.values().toArray(new User[0]);
         objectMapper.writeValue(new File(this.filename),users);
-    }
-
-    public User createUser(User user) throws IOException {
-        synchronized (users) {
-            User newUser = new User(user.getUsername());
-            users.put(newUser.getUsername(), newUser);
-            saveFile(); // may throw an IOException
-            return newUser;
-        }
     }
 }
 
