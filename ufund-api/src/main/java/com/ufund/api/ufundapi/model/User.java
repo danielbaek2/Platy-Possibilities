@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 /**
  * Class representing a User
  */
-public class User {
+public abstract class User {
 
     @JsonProperty("username") private String username;
     //@JsonProperty("password") private String password;
@@ -29,12 +29,6 @@ public class User {
      * @return the username of user
      */
     public String getUsername() {return this.username;}
-
-    /**
-     * Acquire the password of user
-     * @return the password of user
-     */
-    //public String getPassword() {return this.password;}
 
     @Override
     public String toString() {
