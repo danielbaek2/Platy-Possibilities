@@ -12,4 +12,7 @@ public class Helper extends User {
         this.fundingBasket = new ArrayList<>();
     }
 
+    public void addNeedToBasket(Need need){
+        fundingBasket.add(need);
+    }
 }
