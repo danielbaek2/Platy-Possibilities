@@ -12,4 +12,11 @@ public class Helper extends User {
         this.fundingBasket = new ArrayList<>();
     }
 
+    /***
+     * Remove a need from the funding basket
+     * @param index The id of the need to be removed from the basket
+     */
+    public void removeNeed(Need need){
+        fundingBasket.remove(need);
+    }
 }
