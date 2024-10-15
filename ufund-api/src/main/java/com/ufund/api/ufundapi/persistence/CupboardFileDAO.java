@@ -51,6 +51,7 @@ public class CupboardFileDAO implements CupboardDAO{
                 nextID = currNeed.getId();
             }
         }
+        ++nextID;
     }
 
     /**
@@ -100,8 +101,8 @@ public class CupboardFileDAO implements CupboardDAO{
             this.needs.put(newNeed.getId(), newNeed);
             saveFile();
             return newNeed;
-            }
         }
+    }
 
 
     /**
