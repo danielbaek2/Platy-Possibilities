@@ -9,27 +9,52 @@ public class CupboardControllerTest {
     }
 
     @Test
-    void testCreateNeed() {
+    void testCreateNeedSuccess() {
 
     }
 
     @Test
-    void testDeleteNeed() {
+    void testCreateNeedConflict() {
 
     }
 
     @Test
-    void testGetNeed() {
+    void testDeleteNeedSucess() {
 
     }
 
     @Test
-    void testSearchNeeds() {
+    void testDeleteNeedNotFound() {
 
     }
 
     @Test
-    void testUpdateNeed() {
+    void testGetNeedSuccess() {
+
+    }
+
+    @Test
+    void testGetNeedNotFound() {
+
+    }
+
+    @Test
+    void testSearchNeedsExists() {
+
+    }
+
+    @Test
+    void testSearchNeedsEmpty() {
+
+    }
+
+    @Test
+    void testUpdateNeedSuccess() {
+
+    }
+
+    @Test
+    void testUpdateNeedNotFound() {
 
     }
 }
