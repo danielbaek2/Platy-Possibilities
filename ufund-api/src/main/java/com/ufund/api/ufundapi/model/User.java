@@ -35,4 +35,3 @@ public abstract class User {
         return String.format(STRING_FORMAT, username);
     }
 }
-
