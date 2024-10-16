@@ -6,11 +6,15 @@ import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
+import com.ufund.api.ufundapi.model.Helper;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
+import org.springframework.boot.autoconfigure.couchbase.CouchbaseProperties;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
@@ -34,6 +38,17 @@ public class HelperControllerTest {
         mockHelperDAO = mock(HelperDAO.class);
         mockNeed = mock(Need.class);
         helperController = new HelperController(mockHelperDAO);
+    }
+
+    @Test
+    void testGetBasket() throws IOException {
+        String username = "Jane";
+        List<Need> mockBasket = Arrays.asList(mockNeed);
+        when(mockHelperDAO.getBasket(username)).thenReturn(mockBasket);
+        ResponseEntity<List<Need>> response = helperController.getBasket(username);
+
+        assertEquals(HttpStatus.OK,response.getStatusCode());
+        assertEquals(mockBasket,response.getBody());
     }
 
     @Test
@@ -65,6 +80,16 @@ public class HelperControllerTest {
     }
 
     @Test
+    void testRemoveNeedFromBasket() throws  IOException{
+        String username = "Jane";
+
+        when(mockHelperDAO.removeNeedFromBasket(mockNeed,username)).thenReturn(true);
+        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
     void testRemoveNeedFromBasketNotFound() throws IOException {
         // Setup
         String username = "Jane";
@@ -90,6 +115,16 @@ public class HelperControllerTest {
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());  
+    }
+
+    @Test
+    void testAddNeedToBasket() throws  IOException{
+        String username = "Jane";
+
+        when(mockHelperDAO.addNeedToBasket(mockNeed,username)).thenReturn(true);
+        ResponseEntity<Need> response = helperController.addNeedToBasket(username, mockNeed);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
     }
 
     @Test
