@@ -2,6 +2,7 @@ package com.ufund.api.ufundapi.persistence;
 
 import java.io.IOException;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.ufund.api.ufundapi.model.Need;
-import com.ufund.api.ufundapi.model.User;
+import com.ufund.api.ufundapi.model.Helper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
@@ -19,7 +20,7 @@ public class HelperFileDAO implements HelperDAO{
 
     private ObjectMapper objectMapper = null;
 
-    private HashMap<String, User> users;
+    private HashMap<String, Helper> helpers;
 
     private static int nextID;
     /**
@@ -33,7 +34,7 @@ public class HelperFileDAO implements HelperDAO{
     public HelperFileDAO(@Value("data/users.json") String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
-        this.users = new HashMap<>();
+        this.helpers = new HashMap<>();
         loadFile();
     }
 
@@ -42,9 +43,9 @@ public class HelperFileDAO implements HelperDAO{
      * @throws IOException
      */
     private void loadFile() throws IOException{
-        User[] userList = objectMapper.readValue(new File(filename), User[].class);
-        for (User currUser : userList){ // for each need, load hashmap of needs with ID and need structure.
-            users.put(currUser.getUsername(), currUser);
+        Helper[] helperList = objectMapper.readValue(new File(filename), Helper[].class);
+        for (Helper currHelper : helperList){ // for each need, load hashmap of needs with ID and need structure.
+            helpers.put(currHelper.getUsername(), currHelper);
         }
     }
 
@@ -53,25 +54,52 @@ public class HelperFileDAO implements HelperDAO{
      * @throws IOException
      */
     private void saveFile() throws IOException{
-        User[] users = this.users.values().toArray(new User[0]);
-        objectMapper.writeValue(new File(this.filename),users);
+        Helper[] helpers = this.helpers.values().toArray(new Helper[0]);
+        objectMapper.writeValue(new File(this.filename),helpers);
     }
 
-    public void removeNeedFromBasket(Need need) {
-        synchronized(users) {
-            
+    public boolean removeNeedFromBasket(Need need,String username) throws IOException {
+        synchronized(helpers) {
+            Helper helper = helpers.get(username);
+            if (helper != null){
+                List<Need> basket = helper.getBasket();
+                if (basket.contains(need)) {
+                    helper.removeNeedFromBasket(need);
+                    saveFile();
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            return false;
         }
     }
 
-    public void addNeedToBasket(Need need) {
-        synchronized(users) {
-            
+    public boolean addNeedToBasket(Need need, String username) throws IOException {
+        synchronized (helpers) {
+            Helper helper = helpers.get(username);
+            if (helper != null) {
+                List<Need> basket = helper.getBasket();
+                if (basket.contains(need)) {
+                    return false;
+                } else {
+                    helper.addNeedToBasket(need);
+                    return true;
+                }
+            }
+            return false;
         }
     }
 
-    public List<Need> getBasket() {
-        synchronized(users) {
-            return getBasket();
+    public List<Need> getBasket(String username) throws IOException {
+        synchronized(helpers) {
+            Helper helper = helpers.get(username);
+            if (helper != null){
+                return helper.getBasket();
+            }
+            else{
+                return null;
+            }
         }
     }
 }
