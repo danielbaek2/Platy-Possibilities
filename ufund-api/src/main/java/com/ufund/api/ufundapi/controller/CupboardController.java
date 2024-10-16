@@ -135,7 +135,7 @@ public class CupboardController {
 
         try {
             Need[] needs = boardDAO.getNeeds();
-            return serviceClass(needs, HttpStatus.NOT_FOUND);
+            return serviceClass(needs, HttpStatus.OK);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
