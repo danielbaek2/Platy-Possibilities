@@ -135,4 +135,27 @@ public class CupboardFileDAOTest{
 		}
 		catch (IOException ioe){}
 	}
+	
+	@Test
+	void testUpdateNeed() throws IOException{
+		// Setup
+		int id = 4;
+		Need actual = cupboardFileDAO.getNeed(id);
+		
+		// Invoke
+		Need updatedNeed = cupboardFileDAO.updateNeed(actual);
+
+		// Analyze
+		assertEquals(updatedNeed, actual);
+	}
+
+	@Test
+	void testUpdateNeedNotFound() throws IOException{
+		// Setup
+		int id = 8;
+		Need result = cupboardFileDAO.getNeed(id);
+
+		// Analyze
+		assertNull(result);
+	}
 }
