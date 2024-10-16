@@ -30,13 +30,29 @@ public class CupboardControllerTest {
     }
 
     @Test
-    void testCreateNeedSuccess() {
+    void testCreateNeedSuccess() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        Need mockNeed = mock(Need.class);
+        CupboardController controller = new CupboardController(mockDAO);
 
+        when(mockDAO.searchNeeds(mockNeed.getTitle())).thenReturn(new Need[0]);
+        Need newMockNeed = mock(Need.class);
+        when(mockDAO.createNeed(mockNeed)).thenReturn(newMockNeed);
+        ResponseEntity<Need> expected = new ResponseEntity<>(newMockNeed,HttpStatus.CREATED);
+
+        assertEquals(expected, controller.createNeed(mockNeed));
     }
 
     @Test
-    void testCreateNeedConflict() {
+    void testCreateNeedConflict() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        Need mockNeed = mock(Need.class);
+        CupboardController controller = new CupboardController(mockDAO);
 
+        when(mockDAO.searchNeeds(mockNeed.getTitle())).thenReturn(new Need[1]);
+        ResponseEntity<Object> expected = new ResponseEntity<>(HttpStatus.CONFLICT);
+
+        assertEquals(expected, controller.createNeed(mockNeed));
     }
 
     @Test
