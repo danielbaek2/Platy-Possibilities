@@ -3,12 +3,12 @@ package com.ufund.api.ufundapi.persistence;
 import java.io.IOException;
 import java.io.File;
 import java.util.HashMap;
-
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-
+import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.model.User;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -55,6 +55,24 @@ public class HelperFileDAO implements HelperDAO{
     private void saveFile() throws IOException{
         User[] users = this.users.values().toArray(new User[0]);
         objectMapper.writeValue(new File(this.filename),users);
+    }
+
+    public void removeNeedFromBasket(Need need) {
+        synchronized(users) {
+            
+        }
+    }
+
+    public void addNeedToBasket(Need need) {
+        synchronized(users) {
+            
+        }
+    }
+
+    public List<Need> getBasket() {
+        synchronized(users) {
+            return getBasket();
+        }
     }
 }
 
