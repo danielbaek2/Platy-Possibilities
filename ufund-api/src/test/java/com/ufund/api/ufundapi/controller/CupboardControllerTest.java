@@ -56,23 +56,48 @@ public class CupboardControllerTest {
     }
 
     @Test
-    void testDeleteNeedSucess() {
+    void testDeleteNeedSucess() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        CupboardController controller = new CupboardController(mockDAO);
 
+        when(mockDAO.deleteNeed(0)).thenReturn(true);
+        ResponseEntity<Object> expected = new ResponseEntity<>(HttpStatus.OK);
+
+        assertEquals(expected, controller.deleteNeed(0));
     }
 
     @Test
-    void testDeleteNeedNotFound() {
+    void testDeleteNeedNotFound() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        CupboardController controller = new CupboardController(mockDAO);
 
+        when(mockDAO.deleteNeed(0)).thenReturn(false);
+        ResponseEntity<Object> expected = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        assertEquals(expected, controller.deleteNeed(0));
     }
 
     @Test
-    void testGetNeedSuccess() {
+    void testGetNeedSuccess() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        Need mockNeed = mock(Need.class);
+        CupboardController controller = new CupboardController(mockDAO);
 
+        when(mockDAO.getNeed(0)).thenReturn(mockNeed);
+        ResponseEntity<Need> expected = new ResponseEntity<Need>(mockNeed,HttpStatus.OK);
+
+        assertEquals(expected, controller.getNeed(0));
     }
 
     @Test
-    void testGetNeedNotFound() {
+    void testGetNeedNotFound() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        CupboardController controller = new CupboardController(mockDAO);
 
+        when(mockDAO.getNeed(0)).thenReturn(null);
+        ResponseEntity<Object> expected = new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
+
+        assertEquals(expected, controller.getNeed(0));
     }
 
     @Test
