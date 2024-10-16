@@ -58,29 +58,36 @@ public class HelperFileDAO implements HelperDAO{
         objectMapper.writeValue(new File(this.filename),helpers);
     }
 
-    public void removeNeedFromBasket(Need need,String username) throws IOException {
+    public boolean removeNeedFromBasket(Need need,String username) throws IOException {
         synchronized(helpers) {
             Helper helper = helpers.get(username);
             if (helper != null){
                 List<Need> basket = helper.getBasket();
-                if (basket.contains(need)){
+                if (basket.contains(need)) {
                     helper.removeNeedFromBasket(need);
                     saveFile();
+                    return true;
+                }else{
+                    return false;
                 }
             }
+            return false;
         }
     }
 
-    public void addNeedToBasket(Need need, String username) throws IOException {
+    public boolean addNeedToBasket(Need need, String username) throws IOException {
         synchronized (helpers) {
             Helper helper = helpers.get(username);
             if (helper != null) {
                 List<Need> basket = helper.getBasket();
                 if (basket.contains(need)) {
+                    return false;
                 } else {
                     helper.addNeedToBasket(need);
+                    return true;
                 }
             }
+            return false;
         }
     }
 
