@@ -19,6 +19,9 @@ import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.ufund.api.ufundapi.model.Need;
 
+/**
+ * Test the Cupboard File Data Access Object class
+ */
 @Tag("Persistence-Tier")
 public class CupboardFileDAOTest{
 	CupboardFileDAO cupboardFileDAO;
