@@ -10,7 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Tag("Model-Tier")
-public class HelperTest {
+public class UserTest {
 
     @Test
     void testCreateHelper() {

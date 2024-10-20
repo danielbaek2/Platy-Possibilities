@@ -1,7 +1,7 @@
 package com.ufund.api.ufundapi.controller;
 
 import com.ufund.api.ufundapi.model.Need;
-import com.ufund.api.ufundapi.persistence.HelperDAO;
+import com.ufund.api.ufundapi.persistence.UserDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -18,21 +18,21 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
 
-import com.ufund.api.ufundapi.persistence.HelperFileDAO;
+import com.ufund.api.ufundapi.persistence.UserFileDAO;
 import com.ufund.api.ufundapi.model.User;
 
 @RestController
 @RequestMapping("Helper")
-public class HelperController {
-    private static final Logger LOG = Logger.getLogger(com.ufund.api.ufundapi.controller.HelperController.class.getName());
-    private HelperDAO helperDAO;
+public class UserController {
+    private static final Logger LOG = Logger.getLogger(com.ufund.api.ufundapi.controller.UserController.class.getName());
+    private UserDAO helperDAO;
 
     /**
      * Creates a REST API controller for the user Requests
      *
      * @param helperDAO The Helper Data Access Object which will perform CRUD operations
      */
-    public HelperController(HelperDAO helperDAO) {
+    public UserController(UserDAO helperDAO) {
         this.helperDAO = helperDAO;
 
     }

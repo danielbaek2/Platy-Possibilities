@@ -14,7 +14,7 @@ import com.ufund.api.ufundapi.model.Helper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 @Component
-public class HelperFileDAO implements HelperDAO{
+public class UserFileDAO implements UserDAO{
 
     private String filename;
 
@@ -31,7 +31,7 @@ public class HelperFileDAO implements HelperDAO{
      */
     // not sure how to recieve file name.
 
-    public HelperFileDAO(@Value("data/users.json") String filename, ObjectMapper objectmapper) throws IOException{
+    public UserFileDAO(@Value("data/users.json") String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
         this.helpers = new HashMap<>();

@@ -19,15 +19,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
 import com.ufund.api.ufundapi.model.Need;
-import com.ufund.api.ufundapi.persistence.HelperDAO;
+import com.ufund.api.ufundapi.persistence.UserDAO;
 
 /**
  * Test the Helper Controller class
  */
 @Tag("Controller-Tier")
-public class HelperControllerTest {
-    private HelperController helperController;
-    private HelperDAO mockHelperDAO;
+public class UserControllerTest {
+    private UserController helperController;
+    private UserDAO mockHelperDAO;
     private Need mockNeed;
 
     /**
@@ -35,9 +35,9 @@ public class HelperControllerTest {
      */
     @BeforeEach
     void setUpHelperController() {
-        mockHelperDAO = mock(HelperDAO.class);
+        mockHelperDAO = mock(UserDAO.class);
         mockNeed = mock(Need.class);
-        helperController = new HelperController(mockHelperDAO);
+        helperController = new UserController(mockHelperDAO);
     }
 
     @Test
