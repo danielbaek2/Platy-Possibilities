@@ -66,4 +66,16 @@ public class Need {
     public String toString() {
         return String.format(STRING_FORMAT, id, title);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof Need)) {
+            return false;
+        } else {
+            Need other = (Need) obj;
+            return this.id == other.id &&
+                    this.title.equals(other.getTitle());
+        }
+    }
 }
+
