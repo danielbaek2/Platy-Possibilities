@@ -22,8 +22,17 @@ public class Need {
      * 
      * @param id the id of the need
      * @param title the title of the need
+     * @param quantity the amount of units that can be funded for this need
+     * @param cost the cost of each unit
      * 
      */
+    public Need(@JsonProperty("id") int id, @JsonProperty("title") String title, @JsonProperty("quantity") int quantity, @JsonProperty("cost") int cost){
+        this.id = id;
+        this.title = title;
+        this.quantity = quantity;
+        this.cost = cost;
+    }
+
     public Need(@JsonProperty("id") int id, @JsonProperty("title") String title){
         this.id = id;
         this.title = title;
@@ -65,6 +74,8 @@ public class Need {
      * @return the description of the need
      */
     public String getDescription() {return description;}
+
+    public void setDescription(String description){this.description = description;}
 
     /**
      * Set the title of the need, for JSON deserialization
