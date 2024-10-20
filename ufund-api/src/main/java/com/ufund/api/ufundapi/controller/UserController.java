@@ -126,9 +126,9 @@ public class UserController {
         }
     }
 
-    @GetMapping("{/username}/basket")
+    @GetMapping("{/username}")
     public ResponseEntity<String> login(@PathVariable String username) {
-        LOG.info("GET /Helper" + username);
+        LOG.info("GET /User" + username);
 
         try {
             boolean exists = helperDAO.verifyUser(username);
