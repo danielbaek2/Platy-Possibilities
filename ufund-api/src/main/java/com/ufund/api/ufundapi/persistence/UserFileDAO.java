@@ -103,6 +103,18 @@ public class UserFileDAO implements UserDAO{
         }
     }
 
+    
+    // User Login Functionality
+    @Override
+    public String verifyUser(String username) {
+        synchronized(helpers){
+            if (helpers.get(username) != null){
+                return username;
+            }
+            return null;
+        }
+    }
+
     @Override
     public boolean isAdmin(String username) {
         synchronized(helpers){

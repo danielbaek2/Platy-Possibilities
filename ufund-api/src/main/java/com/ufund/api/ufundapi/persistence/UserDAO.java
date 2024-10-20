@@ -13,6 +13,8 @@ public interface UserDAO {
     
     public List<Need> getBasket(String username) throws IOException;
 
+    public String verifyUser(String username);
+
     public boolean isAdmin(String username);
 }
 
