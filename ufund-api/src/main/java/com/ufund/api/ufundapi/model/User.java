@@ -34,4 +34,14 @@ public abstract class User {
     public String toString() {
         return String.format(STRING_FORMAT, username);
     }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (!(obj instanceof User)) {
+            return false;
+        } else {
+            User other = (User) obj;
+            return this.username.equals(other.getUsername());
+        }
+    }
 }
