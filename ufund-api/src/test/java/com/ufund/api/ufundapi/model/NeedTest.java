@@ -1,4 +1,4 @@
-package com.ufund.api.ufundapi.controller;
+package com.ufund.api.ufundapi.model;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
