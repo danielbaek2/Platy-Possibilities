@@ -10,7 +10,9 @@ public class Need {
     @JsonProperty("id") private int id;
     @JsonProperty("title") private String title;
     @JsonProperty("description") private String description;
-    @JsonProperty("total_funding") private int total_funding = 0;
+    @JsonProperty("quantity") private int quantity; //amount of need units
+    @JsonProperty("cost") private int cost; //cost per need unit
+    @JsonProperty("quantity_funded") private int quantity_funded = 0;
 
     //To string format
     static final String STRING_FORMAT = "Need [id = %d, title = %s]";
@@ -40,10 +42,23 @@ public class Need {
     public String getTitle() {return title;}
 
     /**
-     * Acquire the int total funding amount of the need object
-     * @return the total funding of the need
+     * Acquire the int total funding amount of units that have been funded
+     * @return the amount of funded units
      */
-    public int getTotalFunding() {return total_funding;}
+    public int getQuantityFunded() {return quantity_funded;}
+
+    /**
+     * Acquire the int cost per unit of the need
+     * @return the cost per unit of the need
+     */
+    public int getCost() {return cost;}
+
+    
+    /**
+     * Acquire the int total units the need has available to fund
+     * @return the total units of the need
+     */
+    public int getQuantity() {return quantity;}
 
     /**
      * Acquire the string description of the need object
@@ -57,6 +72,27 @@ public class Need {
      */
     public void setTitle(String title) {this.title = title;}
 
+
+    /**
+     * fund a need x times, x = 1 by default; 
+     * @param amount the int unit amount to fund, default is 1
+     */
+    public void fundNeed(int amount){
+        quantity_funded += amount;
+    }
+
+    public void fundNeed(){
+        quantity_funded ++;
+    }
+
+    /**
+     * Will calculate the dollar amount of the total funding of this need.
+     * 
+     * @return int dollar amount of how much funding the ened has gotten.
+     */
+    public int amountFunded(){
+        return quantity_funded * cost;
+    }
 
     /**
      * A formatted string representation of the need
