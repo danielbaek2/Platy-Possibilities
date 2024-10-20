@@ -1,19 +1,8 @@
 package com.ufund.api.ufundapi.controller;
-import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
-
-
-import java.io.IOException;
-
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
-
 import com.ufund.api.ufundapi.model.Need;
-import com.ufund.api.ufundapi.persistence.CupboardDAO;
 
 
 public class NeedTest {
@@ -45,14 +34,7 @@ public class NeedTest {
 
     @Test
     void testSetDescription(){
-        int ID = 1;
-        String Title = "Saving Ducks";
-        int Quantity = 500;
-        int Cost = 25;
-
         String expectedDescription = "Save ducks from an oilspill";
-
-        Need saveDucks = new Need(ID,Title,Quantity,Cost);
 
         saveDucks.setDescription(expectedDescription);
 
@@ -61,14 +43,7 @@ public class NeedTest {
 
     @Test
     void testFundNeed(){
-        int ID = 1;
-        String Title = "Saving Ducks";
-        int Quantity = 500;
-        int Cost = 25;
-
         int expectedQuantityFunded = 5;
-
-        Need saveDucks = new Need(ID,Title,Quantity,Cost);
 
         saveDucks.fundNeed();
         saveDucks.fundNeed(4);
@@ -77,8 +52,38 @@ public class NeedTest {
     }
 
     @Test
-    void testgetAmountFunded(){}
+    void testgetAmountFunded(){
 
+        int expectedAmountFunded = 125;
 
+        saveDucks.fundNeed(5);
+
+        assertEquals(expectedAmountFunded,saveDucks.amountFunded());
+    }
+
+    @Test
+    void testStringFormat(){
+        String expectedString = "Need [id = 1, title = Saving Ducks]";
+
+        assertEquals(expectedString, saveDucks.toString());
+    }
+
+    @Test
+    void testEquals(){
+        Need DuckSaving = new Need(saveDucks.getId(), saveDucks.getTitle());
+
+        Boolean expectedResult = true;
+
+        assertEquals(expectedResult, DuckSaving.equals(saveDucks));
+    }
+
+    @Test
+    void updateTitle(){
+        String expectedTitle = "Not Saving Ducks";
+
+        saveDucks.setTitle(expectedTitle);
+
+        assertEquals(expectedTitle, saveDucks.getTitle());
+    }
     
 }
