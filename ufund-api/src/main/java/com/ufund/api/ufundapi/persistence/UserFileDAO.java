@@ -106,12 +106,12 @@ public class UserFileDAO implements UserDAO{
     
     // User Login Functionality
     @Override
-    public String verifyUser(String username) {
+    public boolean verifyUser(String username) {
         synchronized(helpers){
             if (helpers.get(username) != null){
-                return username;
+                return true;
             }
-            return null;
+            return false;
         }
     }
 
