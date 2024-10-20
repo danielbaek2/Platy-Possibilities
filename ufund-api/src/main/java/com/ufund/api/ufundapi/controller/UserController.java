@@ -126,4 +126,26 @@ public class UserController {
         }
     }
 
+    @GetMapping("{/username}/basket")
+    public ResponseEntity<String> login(@PathVariable String username) {
+        LOG.info("GET /Helper" + username);
+
+        try {
+            boolean exists = helperDAO.verifyUser(username);
+            if (exists) {
+                boolean admin = helperDAO.isAdmin(username);
+                if (admin) {
+                    return new ResponseEntity<String>("Admin", HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<String>("Not Admin", HttpStatus.OK);
+                }
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
 }
