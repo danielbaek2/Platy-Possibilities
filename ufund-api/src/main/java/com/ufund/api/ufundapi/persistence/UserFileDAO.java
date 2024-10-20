@@ -102,5 +102,12 @@ public class UserFileDAO implements UserDAO{
             }
         }
     }
+
+    @Override
+    public boolean isAdmin(String username) {
+        synchronized(helpers){
+            return helpers.containsKey(username);
+        }
+    }
 }
 
