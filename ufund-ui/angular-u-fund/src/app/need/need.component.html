@@ -1,1 +1,8 @@
-<p>need works!</p>
+<h2>{{need.title}} Details</h2>
+<div><span>id: </span>{{need.id}}</div>
+<div>
+    <label for="title">Need title: </label>
+    <input id="title" [(ngModel)]="need.title" placeholder="title">
+</div>
+<div><span>description: </span>{{need.description}}</div>
+<div><span>total_funding: </span>{{need.total_funding}}</div>
