@@ -8,13 +8,13 @@ import { NeedComponent } from './need/need.component';
 
 @NgModule({
   declarations: [
-    AppComponent,
-    NeedComponent
+    AppComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    FormsModule
+    FormsModule,
+    NeedComponent
   ],
   providers: [],
   bootstrap: [AppComponent]

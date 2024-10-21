@@ -1,16 +1,30 @@
 import { Component } from '@angular/core';
 import { Need } from '../need';
+import { NEEDS } from '../mock-needs';
+import {
+  NgFor,
+  NgIf,
+  UpperCasePipe,
+} from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-need',
   templateUrl: './need.component.html',
-  styleUrl: './need.component.css'
+  styleUrl: './need.component.css',
+  standalone: true,
+  imports: [
+    FormsModule,
+    NgIf,
+    NgFor,
+    UpperCasePipe,
+  ],
 })
 export class NeedComponent {
-  need: Need = {
-    id: 1,
-    title: "Protecting Moo Deng",
-    description: "Moo Deng, the rightful heir of Thailand, must be protected from blood-thirsty predators and disrespectful tourists.",
-    total_funding: 100
-  };
+  needs = NEEDS;
+  selectedNeed?: Need;
+
+  onSelect(need: Need): void {
+    this.selectedNeed = need;
+  }
 }
