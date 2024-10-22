@@ -2,7 +2,6 @@ package com.ufund.api.ufundapi.persistence;
 
 import java.io.IOException;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -21,8 +20,7 @@ public class UserFileDAO implements UserDAO{
     private ObjectMapper objectMapper = null;
 
     private HashMap<String, Helper> helpers;
-
-    private static int nextID;
+    
     /**
      * CupboardFileDao -  Current instance of the cupboard data access.
      *
