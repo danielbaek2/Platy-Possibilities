@@ -103,22 +103,55 @@ public class CupboardControllerTest {
     }
 
     @Test
-    void testSearchNeedsExists() {
+    void testSearchNeedsExists() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        Need mockNeed = mock(Need.class);
+        CupboardController controller = new CupboardController(mockDAO);
 
+        when(mockDAO.getNeed(0)).thenReturn(mockNeed);
+
+        ResponseEntity<Object> expected = new ResponseEntity<>(mockNeed,HttpStatus.OK);
+
+        assertEquals(expected, controller.getNeed(0));
     }
 
     @Test
-    void testSearchNeedsEmpty() {
+    void testSearchNeedsEmpty() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        Need[] List = new Need[10];
+        CupboardController controller = new CupboardController(mockDAO);
 
+        when(mockDAO.searchNeeds(null)).thenReturn(List);
+
+        ResponseEntity<Object> expected = new ResponseEntity<>(List,HttpStatus.OK);
+
+        assertEquals(expected, controller.searchNeeds(null));
     }
 
     @Test
-    void testUpdateNeedSuccess() {
+    void testUpdateNeedSuccess() throws IOException{
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        Need mockNeed =  mock(Need.class);
+        CupboardController controller = new CupboardController(mockDAO);
 
+        when(mockDAO.updateNeed(mockNeed)).thenReturn(mockNeed);
+
+        ResponseEntity<Object> expected = new ResponseEntity<>(mockNeed,HttpStatus.OK);
+
+        assertEquals(expected, controller.updateNeed(mockNeed));
     }
 
     @Test
-    void testUpdateNeedNotFound() {
+    void testUpdateNeedNotFound() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        Need mockNeed =  mock(Need.class);
+        CupboardController controller = new CupboardController(mockDAO);
+
+        when(mockDAO.updateNeed(mockNeed)).thenReturn(null);
+
+        ResponseEntity<Object> expected = new ResponseEntity<>(HttpStatus.NOT_FOUND);
+
+        assertEquals(expected, controller.updateNeed(mockNeed));
 
     }
 }
