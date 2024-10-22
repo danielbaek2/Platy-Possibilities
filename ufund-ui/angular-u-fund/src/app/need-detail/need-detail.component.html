@@ -1,1 +1,10 @@
-<p>need-detail works!</p>
+<div *ngIf="need">
+    <h2>{{need.title | uppercase}} Details</h2>
+    <div>id: {{need.id}}</div>
+    <div>description: {{need.description}}</div>
+    <div>funding: {{need.total_funding}}</div>
+    <div>
+      <label for="need-title">Need title: </label>
+      <input id="need-title" [(ngModel)]="need.title" placeholder="title">
+    </div>
+  </div>
