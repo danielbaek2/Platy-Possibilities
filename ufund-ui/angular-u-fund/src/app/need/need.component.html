@@ -1,19 +1,11 @@
 <h2>Needs</h2>
 <ul class="needs">
   <li *ngFor="let need of needs">
-    <button type="button" (click)="onSelect(need)">
-      <span class="badge">{{need.title}}</span>
+    <button [class.selected]="need === selectedNeed" type="button" (click)="onSelect(need)">
+      <span class="badge">{{need.id}}</span>
+      <span class="title">{{need.title}}</span>
     </button>
   </li>
 </ul>
 
-<div *ngIf="selectedNeed">
-    <h2>{{selectedNeed.title | uppercase}} Details</h2>
-    <div>id: {{selectedNeed.id}}</div>
-    <div>description: {{selectedNeed.description}}</div>
-    <div>funding: {{selectedNeed.total_funding}}</div>
-    <div>
-      <label for="need-title">Hero name: </label>
-      <input id="need-title" [(ngModel)]="selectedNeed.title" placeholder="title">
-    </div>
-  </div>
+<app-need-detail [need]="selectedNeed"></app-need-detail>
