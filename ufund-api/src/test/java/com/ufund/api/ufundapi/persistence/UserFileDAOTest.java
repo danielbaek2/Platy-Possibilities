@@ -1,11 +1,6 @@
 package com.ufund.api.ufundapi.persistence;
 
-import static org.junit.jupiter.api.Assertions.assertDoesNotThrow;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.fail;
-import static org.mockito.Mockito.doThrow;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
 
@@ -60,7 +55,7 @@ public class UserFileDAOTest {
     void testAddNeedToBasket() throws IOException{
         boolean expected = true;
         int expectedNum = 1;
-        boolean actual = helperFileDAO.addNeedToBasket(testNeeds, "Steve Iwrin");
+        boolean actual = helperFileDAO.addNeedToBasket(testNeeds, "Steve Irwin");
         int actualNum = helperFileDAO.getBasket("Steve Irwin").size();
 
         assertEquals(expected, actual);
@@ -71,8 +66,8 @@ public class UserFileDAOTest {
     void testAddNeedToBasketDupelicate() throws  IOException{
         boolean expected = false;
         int expectedNum = 1;
-        helperFileDAO.addNeedToBasket(testNeeds, "Steve Iwrin");
-        boolean actual = helperFileDAO.addNeedToBasket(testNeeds, "Steve Iwrin");
+        helperFileDAO.addNeedToBasket(testNeeds, "Steve Irwin");
+        boolean actual = helperFileDAO.addNeedToBasket(testNeeds, "Steve Irwin");
         int actualNum = helperFileDAO.getBasket("Steve Irwin").size();
 
         assertEquals(expected, actual);
