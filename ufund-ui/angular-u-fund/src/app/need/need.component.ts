@@ -1,15 +1,15 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Need } from '../need';
-import { NEEDS } from '../mock-needs';
 import {
   NgFor,
   NgIf,
-  UpperCasePipe,
+  UpperCasePipe,  
 } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { NeedDetailComponent } from "../need-detail/need-detail.component";
 import { NeedService } from '../need.service';
 import { MessageService } from '../message.service';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-need',
@@ -21,12 +21,12 @@ import { MessageService } from '../message.service';
     NgIf,
     NgFor,
     UpperCasePipe,
-    NeedDetailComponent
+    NeedDetailComponent,
+    RouterModule,
 ],
 })
-export class NeedComponent {
+export class NeedComponent implements OnInit {
   needs: Need[] = [];
-  selectedNeed?: Need;
 
   constructor(private needService: NeedService, private messageService: MessageService) {}
 
@@ -34,12 +34,19 @@ export class NeedComponent {
     this.getNeeds();
   }
 
-  onSelect(need: Need): void {
-    this.selectedNeed = need;
-    this.messageService.add('NeedsComponent: Selected need id=${need.id}');
-  }
-
   getNeeds(): void {
     this.needService.getNeeds().subscribe(needs => this.needs = needs);
+  }
+
+  add(title: string): void {
+    title = title.trim();
+    if (!title) { return; }
+      this.needService.addNeed({ title } as Need).subscribe(need => {this.needs.push(need);
+    });
+  }
+
+  delete(need: Need): void {
+    this.needs = this.needs.filter(n => n !== need);
+    this.needService.deleteNeed(need.id).subscribe();
   }
 }

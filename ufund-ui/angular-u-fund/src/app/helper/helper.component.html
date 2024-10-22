@@ -1,1 +1,8 @@
-<p>helper works!</p>
+<div class="needs-menu">
+  <a *ngFor="let need of needs"
+    routerLink="/detail/{{need.id}}">
+    {{need.title}}
+  </a>  
+</div>
+
+<app-need-search></app-need-search>
