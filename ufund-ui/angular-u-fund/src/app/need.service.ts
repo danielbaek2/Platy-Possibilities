@@ -40,21 +40,21 @@ export class NeedService {
     return this.http.put(this.needsUrl, need, this.httpOptions).pipe(tap(_ => this.log(`updated need id=${need.id}`)), catchError(this.handleError<any>('updateNeed')));
   }
 
-  /** POST: add a new hero to the server */
+  /** POST: add a new Need to the server */
   addNeed(need: Need): Observable<Need> {
     return this.http.post<Need>(this.needsUrl, need, this.httpOptions).pipe(tap((newNeed: Need) => this.log(`added need w/ id=${newNeed.id}`)), catchError(this.handleError<Need>('addNeed')));
   }
 
-  /** DELETE: delete the hero from the server */
+  /** DELETE: delete the Need from the server */
   deleteNeed(id: number): Observable<Need> {
     const url = `${this.needsUrl}/${id}`;
     return this.http.delete<Need>(url, this.httpOptions).pipe(tap(_ => this.log(`deleted need id=${id}`)), catchError(this.handleError<Need>('deleteNeed')));
   }
 
-  /* GET heroes whose name contains search term */
+  /* GET Needs whose title contains search term */
   searchNeeds(term: string): Observable<Need[]> {
     if (!term.trim()) {
-      // if not search term, return empty hero array.
+      // if not search term, return empty need array.
       return of([]);
     }
     return this.http.get<Need[]>(`${this.needsUrl}/?name=${term}`).pipe(tap(x => x.length ?

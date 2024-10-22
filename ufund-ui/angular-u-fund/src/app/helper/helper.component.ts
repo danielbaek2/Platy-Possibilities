@@ -17,7 +17,18 @@ export class HelperComponent implements OnInit {
   }
 
   getNeeds(): void {
-    this.needService.getNeeds()
-      .subscribe(needs => this.needs = needs.slice(1, 5));
+    this.needService.getNeeds().subscribe(needs => this.needs = needs.slice(1, 5));
+  }
+
+  addNeedToBasket(): void{
+    //this.userService.addNeedToBasket();
+  }
+
+  removeNeedFromBasket(): void{
+    //this.userService.removeNeedFromBasket();
+  }
+
+  getBasket(): void{
+    //this.userService.getBasket();
   }
 }
