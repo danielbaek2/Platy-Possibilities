@@ -10,6 +10,8 @@ import { HelperService } from '../helper.service';
 })
 export class HelperComponent implements OnInit {
   needs: Need[] = [];
+  fundingBasket: Need[] = [];
+  username: string = "helper"
 
   constructor(private needService: NeedService, private helperService: HelperService) { }
 
@@ -21,15 +23,16 @@ export class HelperComponent implements OnInit {
     this.needService.getNeeds().subscribe(needs => this.needs = needs.slice(1, 5));
   }
 
-  addNeedToBasket(): void{
-    //this.helperService.addNeedToBasket();
+  addNeedToBasket(need: Need): void{
+    this.helperService.addNeedToBasket(need, this.username).subscribe(need => {this.fundingBasket.push(need);});
   }
 
-  removeNeedFromBasket(): void{
-    //this.helperService.removeNeedFromBasket();
+  removeNeedFromBasket(need: Need): void{
+    this.fundingBasket = this.fundingBasket.filter(n => n !== need)
+    this.helperService.removeNeedFromBasket(need, this.username).subscribe();
   }
 
   getBasket(): void{
-    this.helperService.getBasket();
+    this.helperService.getBasket(this.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket.slice());
   }
 }

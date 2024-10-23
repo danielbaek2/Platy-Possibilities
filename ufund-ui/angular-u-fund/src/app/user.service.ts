@@ -5,53 +5,53 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from './user';
+import { MessageService } from './message.service';
 
 
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
   private usersUrl = 'http://localhost:8080/users';  // URL to web api
-  message: string '';
+  private message = '';
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor(
-    private http: HttpClient) { }
+  constructor( private messageService: MessageService, private http: HttpClient) { }
 
   /** GET heroes from the server */
   getUsers(): Observable<User[]> {
-    return this.http.get<User[]>(this.UserUrl)
+    return this.http.get<User[]>(this.usersUrl)
       .pipe(
         catchError(this.handleError<User[]>('getUsers', []))
       );
   }
 
-  /** GET hero by id. Return `undefined` when id not found */
+  /** GET user by id. Return `undefined` when id not found */
   getUser(username: string): Observable<User> {
-    const url = `${this.usersUrl}/?id=${id}`;
-    return this.http.get<User[]>(url)
+    const url = `${this.usersUrl}/?id=${username}`;
+    return this.http.get<User>(url)
       .pipe(
         tap(h => {
           const outcome = h ? 'fetched' : 'did not find';
-          this.log(`${outcome} user id=${id}`);
+          this.log(`${outcome} user name=${username}`);
         }),
-        catchError(this.handleError<User>(`getUsers id=${id}`))
+        catchError(this.handleError<User>(`getUsers id=${username}`))
       );
   }
 
-  /** GET hero by id. Will 404 if id not found */
-  getUser(username: string): Observable<User> {
-    const url = `${this.usersUrl}/${id}`;
+  /** GET users by id. Will 404 if id not found */
+  getUserNo404(username: string): Observable<User> {
+    const url = `${this.usersUrl}/${username}`;
     return this.http.get<User>(url).pipe(
-      tap(_ => this.log(`fetched user id=${id}`)),
-      catchError(this.handleError<User>(`getUser id=${id}`))
+      tap(_ => this.log(`fetched user id=${username}`)),
+      catchError(this.handleError<User>(`getUser id=${username}`))
     );
   }
 
-  /* GET heroes whose name contains search term */
-  searchUsers(username: string): Observable<User[]> {
+  /* GET users whose name contains search term */
+  searchUsers(term: string): Observable<User[]> {
     if (!term.trim()) {
       return of([]);
     }
@@ -65,28 +65,28 @@ export class UserService {
 
   //////// Save methods //////////
 
-  /** POST: add a new hero to the server */
+  /** POST: add a new user to the server */
   addUser(user: User): Observable<User> {
-    return this.http.post<User>(this.user, user, this.httpOptions).pipe(
-      tap((newUser: User) => this.log(`added user w/ id=${newUser.id}`)),
+    return this.http.post<User>(this.usersUrl, user, this.httpOptions).pipe(
+      tap((newUser: User) => this.log(`added user w/ id=${newUser.username}`)),
       catchError(this.handleError<User>('addUser'))
     );
   }
 
-  /** DELETE: delete the hero from the server */
+  /** DELETE: delete the user from the server */
   deleteUser(username: string): Observable<User> {
-    const url = `${this.usersUrl}/${id}`;
+    const url = `${this.usersUrl}/${username}`;
 
     return this.http.delete<User>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted user id=${id}`)),
+      tap(_ => this.log(`deleted user id=${username}`)),
       catchError(this.handleError<User>('deleteUser'))
     );
   }
 
-  /** PUT: update the hero on the server */
+  /** PUT: update the user on the server */
   updateUser(user: User): Observable<any> {
     return this.http.put(this.usersUrl, user, this.httpOptions).pipe(
-      tap(_ => this.log(`updated user id=${user.id}`)),
+      tap(_ => this.log(`updated user id=${user.username}`)),
       catchError(this.handleError<any>('updateUser'))
     );
   }
