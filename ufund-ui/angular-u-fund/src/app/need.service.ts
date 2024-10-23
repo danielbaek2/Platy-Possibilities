@@ -57,7 +57,7 @@ export class NeedService {
       // if not search term, return empty need array.
       return of([]);
     }
-    return this.http.get<Need[]>(`${this.needsUrl}/?name=${term}`).pipe(tap(x => x.length ?
+    return this.http.get<Need[]>(`${this.needsUrl}/?title=${term}`).pipe(tap(x => x.length ?
         this.log(`found needs matching "${term}"`) :
         this.log(`no needs matching "${term}"`)), catchError(this.handleError<Need[]>('searchNeeds', [])));
   }

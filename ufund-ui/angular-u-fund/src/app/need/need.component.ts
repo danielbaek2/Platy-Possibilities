@@ -41,7 +41,7 @@ export class NeedComponent implements OnInit {
   add(title: string): void {
     title = title.trim();
     if (!title) { return; }
-      this.needService.addNeed({ title } as Need).subscribe(need => {this.needs.push(need);
+    this.needService.addNeed({ title } as Need).subscribe(need => {this.needs.push(need);
     });
   }
 
