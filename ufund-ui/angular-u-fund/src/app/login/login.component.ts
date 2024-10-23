@@ -14,7 +14,7 @@ import { CurrentUserService} from "../current-user.service";
 export class LoginComponent implements  OnInit {
   messages: string = '';
   loginForm: FormGroup = this.fb.group({
-    username: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9]+$')]]
+    username: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9]_+$')]]
     });
   users: User[] = [];
   currentUser!: User;
@@ -40,15 +40,14 @@ export class LoginComponent implements  OnInit {
           if (this.users[i].username === username) {
             this.currentUser = new User(
               this.users[i].username,
-              this.users[i].admin,
             );
             this.userService.loginUser(this.currentUser).subscribe((userData: any) => {
               this.currentUser = userData;
               this.currentUserService.saveCurrentUser(this.currentUser);
-              if (this.currentUser.admin) {
+              if (this.currentUser.username == "admin") {
                 this.router.navigate(['/admin']);
               } else {
-                this.router.navigate(['']); // cupboard/helper
+                this.router.navigate(['/helper']);
               }
             });
           } else {
