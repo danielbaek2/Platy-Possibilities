@@ -13,13 +13,11 @@ import { CurrentUserService} from "../current-user.service";
 })
 export class LoginComponent implements  OnInit {
   messages: string = '';
-  loginForm: FormGroup = this.fb.group({
-    username: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9]_+$')]]
-    });
+  loginForm!: FormGroup;
   users: User[] = [];
   currentUser!: User;
   ngOnInit() : void{
-
+   this.constructForm();
   }
 
   constructor(
@@ -28,6 +26,11 @@ export class LoginComponent implements  OnInit {
     private userService: UserService,
     private currentUserService: CurrentUserService) { }
 
+  constructForm(){
+    this.loginForm = this.fb.group({
+                    username: ['',[Validators.required, Validators.pattern('^[a-zA-Z0-9_]+$')]]
+                  });
+  }
   login(){
     let username: string = this.loginForm.value.username;
 
