@@ -7,6 +7,7 @@ import { NeedDetailComponent } from './need-detail/need-detail.component';
 const routes: Routes = [
   { path: 'needs', component: NeedComponent },
   { path: 'helper', component: HelperComponent },
+  { path: 'helper?username=', component: HelperComponent },
   { path: '', redirectTo: '/helper', pathMatch: 'full' },
   { path: 'detail/:id', component: NeedDetailComponent },
 ];
