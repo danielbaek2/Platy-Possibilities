@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Need } from '../need';
 import { NeedService } from '../need.service';
+import { HelperService } from '../helper.service';
 
 @Component({
   selector: 'app-helper',
@@ -10,7 +11,7 @@ import { NeedService } from '../need.service';
 export class HelperComponent implements OnInit {
   needs: Need[] = [];
 
-  constructor(private needService: NeedService) { }
+  constructor(private needService: NeedService, private helperService: HelperService) { }
 
   ngOnInit(): void {
     this.getNeeds();
@@ -21,14 +22,14 @@ export class HelperComponent implements OnInit {
   }
 
   addNeedToBasket(): void{
-    //this.userService.addNeedToBasket();
+    //this.helperService.addNeedToBasket();
   }
 
   removeNeedFromBasket(): void{
-    //this.userService.removeNeedFromBasket();
+    //this.helperService.removeNeedFromBasket();
   }
 
   getBasket(): void{
-    //this.userService.getBasket();
+    this.helperService.getBasket();
   }
 }
