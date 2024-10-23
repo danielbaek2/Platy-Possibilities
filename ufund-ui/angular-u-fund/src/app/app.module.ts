@@ -22,7 +22,7 @@ import { LoginComponent } from "./login/login.component";
     HelperComponent,
     NeedSearchComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
