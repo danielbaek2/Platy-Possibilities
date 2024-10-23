@@ -20,7 +20,7 @@ export class UserService {
 
   constructor( private messageService: MessageService, private http: HttpClient) { }
 
-  /** GET heroes from the server */
+  /** GET users from the server */
   getUsers(): Observable<User[]> {
     return this.http.get<User[]>(this.usersUrl)
       .pipe(
@@ -52,14 +52,14 @@ export class UserService {
 
   //////// Save methods //////////
 
-  /** POST: add a new hero to the server */
+  /** POST: add a new user to the server */
   createUser(user: User): Observable<User> {
     return this.http.post<User>(this.usersUrl, user, this.httpOptions).pipe(
       tap((newUser: User) => console.log(`added user w/ username=${newUser.username}`)),
       catchError(this.handleError<User>('addUser'))
     );
   }
-/** DELETE: delete the hero from the server */
+/** DELETE: delete the user from the server */
   deleteUser(username: string): Observable<User> {
     const url = `${this.usersUrl}/${username}`;
 
@@ -69,7 +69,7 @@ export class UserService {
     );
   }
 
-  /** PUT: update the hero on the server */
+  /** PUT: update the user on the server */
   updateUser(user: User): Observable<User> {
     return this.http.put<User>(this.usersUrl, user, this.httpOptions).pipe(
       tap(_ => console.log(`updated user id=${user.username}`)),

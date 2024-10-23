@@ -1,8 +1,25 @@
-<div class="needs-menu">
+<!-- <div class="needs-menu">
   <a *ngFor="let need of needs"
     routerLink="/detail/{{need.id}}">
     {{need.title}}
   </a>  
+</div> -->
+<h1>{{ username | uppercase}}</h1>
+
+<div class="basket">
+  <a routerLink="/helper?{{username}}" (click)="getBasket()">
+    Funding Basket
+  </a>
 </div>
+
+<ul class="needs-menu">
+  <li *ngFor="let need of needs">
+    <a routerLink="/detail/{{need.id}}">
+      <span class="badge">{{need.id}}</span> {{need.title}}
+    </a>
+    <button type="button" class="add" title="Add to basket"
+      (click)="addNeedToBasket(need)">+</button>
+  </li>
+</ul>
 
 <app-need-search></app-need-search>

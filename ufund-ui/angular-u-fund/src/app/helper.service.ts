@@ -12,21 +12,26 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HelperService {
-  private helperURL = 'http://localhost:8080/Helper';
+  private helperURL = 'http://localhost:4200/Helper';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
   constructor(private messageService: MessageService, private http: HttpClient) { }
   fundingBasket: Need[] = [];
-
+  
+  /**
+   * GET basket given username
+   * @param username 
+   * @returns 
+   */
   getBasket(username: string): Observable<Need[]>{
     this.messageService.add('HelperService: fetched funding basket');
-    return this.http.get<Need[]>(`${this.helperURL}/${username}/basket}`); // should call the server side with this request
+    return this.http.get<Need[]>(`${this.helperURL}?${username}}`, this.httpOptions);
   } 
 
   addNeedToBasket(need: Need, username: string): Observable<Need>{
-    return this.http.post<Need>(`${this.helperURL}/${username}/basket/${need.id}`, need, this.httpOptions).pipe( // should call server side
+    return this.http.post<Need>(`${this.helperURL}?${username}`, need, this.httpOptions).pipe( // should call server side
       tap((newNeed: Need) => this.log(`added need to funding basket w/ id=${newNeed.id}`)),
       catchError(this.handleError<Need>('addNeedToBasket'))
     );
@@ -37,7 +42,7 @@ export class HelperService {
     if (index > -1){
       this.fundingBasket.splice(index, 1);
     }
-    return this.http.delete<Need>(`${this.helperURL}/${username}/basket/${need.id}`, this.httpOptions).pipe( // should call server side
+    return this.http.delete<Need>(`${this.helperURL}/${username}?basket/${need.id}`, this.httpOptions).pipe( // should call server side
       tap(_ => this.log(`removed need title=${need.title}`))
     )
   }

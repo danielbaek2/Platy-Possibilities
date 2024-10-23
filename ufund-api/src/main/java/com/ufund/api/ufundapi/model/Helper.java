@@ -3,10 +3,13 @@ package com.ufund.api.ufundapi.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+
 public class Helper extends User {
 
     private List<Need> fundingBasket;
 
+    @JsonCreator
     public Helper(String username){
         super(username);
         this.fundingBasket = new ArrayList<>();

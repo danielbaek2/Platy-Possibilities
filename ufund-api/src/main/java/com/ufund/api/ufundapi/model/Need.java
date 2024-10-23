@@ -1,5 +1,6 @@
 package com.ufund.api.ufundapi.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -22,6 +23,7 @@ public class Need {
      * @param title the title of the need
      * 
      */
+    @JsonCreator
     public Need(@JsonProperty("id") int id, @JsonProperty("title") String title){
         this.id = id;
         this.title = title;
