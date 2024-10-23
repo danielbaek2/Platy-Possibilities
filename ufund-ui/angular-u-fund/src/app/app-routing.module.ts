@@ -9,7 +9,7 @@ const routes: Routes = [
   { path: 'needs', component: NeedComponent },
   { path: 'helper', component: HelperComponent },
   { path: 'helper?username=', component: HelperComponent },
-  { path: '', redirectTo: '/helper', pathMatch: 'full' },
+  { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'detail/:id', component: NeedDetailComponent },
   { path: 'login', component: LoginComponent},
 ];
