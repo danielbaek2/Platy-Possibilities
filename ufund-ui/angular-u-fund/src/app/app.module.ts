@@ -12,6 +12,7 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { InMemoryDataService } from './in-memory-data.service';
 import { NeedSearchComponent } from './need-search/need-search.component';
 import { AdminComponent } from './admin/admin.component';
+import { LoginComponent } from "./login/login.component";
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { AdminComponent } from './admin/admin.component';
     HelperComponent,
     NeedSearchComponent,
     AdminComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
