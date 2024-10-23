@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { Need } from '../need';
 import { NeedService } from '../need.service';
 import { HelperService } from '../helper.service';
+import { ActivatedRoute } from '@angular/router';
+import { NEEDS } from '../mock-needs';
 
 @Component({
   selector: 'app-helper',
@@ -10,20 +12,22 @@ import { HelperService } from '../helper.service';
 })
 export class HelperComponent implements OnInit {
   needs: Need[] = [];
-  fundingBasket: Need[] = [];
-  username: string = "helper"
+  fundingBasket: Need[] = NEEDS;
+  username: string = "helper" // temporary hardcoded value 
 
-  constructor(private needService: NeedService, private helperService: HelperService) { }
+  constructor(private needService: NeedService, private helperService: HelperService,
+    private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.getNeeds();
   }
 
   getNeeds(): void {
-    this.needService.getNeeds().subscribe(needs => this.needs = needs.slice(1, 5));
+    this.needService.getNeeds().subscribe(needs => this.needs = needs);
   }
 
   addNeedToBasket(need: Need): void{
+    // username = this.route.snapshot.paramMap.get('username');
     this.helperService.addNeedToBasket(need, this.username).subscribe(need => {this.fundingBasket.push(need);});
   }
 
