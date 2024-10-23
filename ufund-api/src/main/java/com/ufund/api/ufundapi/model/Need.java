@@ -1,5 +1,6 @@
 package com.ufund.api.ufundapi.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 /**
@@ -26,6 +27,7 @@ public class Need {
      * @param cost the cost of each unit
      * 
      */
+    @JsonCreator
     public Need(@JsonProperty("id") int id, @JsonProperty("title") String title, @JsonProperty("quantity") int quantity, @JsonProperty("cost") int cost){
         this.id = id;
         this.title = title;
