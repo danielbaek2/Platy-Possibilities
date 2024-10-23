@@ -60,7 +60,7 @@ public class UserFileDAOTest {
     void testAddNeedToBasket() throws IOException{
         boolean expected = true;
         int expectedNum = 1;
-        boolean actual = helperFileDAO.addNeedToBasket(testNeeds, "Steve Iwrin");
+        boolean actual = helperFileDAO.addNeedToBasket(testNeeds, "Steve Irwin");
         int actualNum = helperFileDAO.getBasket("Steve Irwin").size();
 
         assertEquals(expected, actual);
@@ -71,8 +71,8 @@ public class UserFileDAOTest {
     void testAddNeedToBasketDupelicate() throws  IOException{
         boolean expected = false;
         int expectedNum = 1;
-        helperFileDAO.addNeedToBasket(testNeeds, "Steve Iwrin");
-        boolean actual = helperFileDAO.addNeedToBasket(testNeeds, "Steve Iwrin");
+        helperFileDAO.addNeedToBasket(testNeeds, "Steve Irwin");
+        boolean actual = helperFileDAO.addNeedToBasket(testNeeds, "Steve Irwin");
         int actualNum = helperFileDAO.getBasket("Steve Irwin").size();
 
         assertEquals(expected, actual);
