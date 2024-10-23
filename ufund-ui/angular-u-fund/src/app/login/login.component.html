@@ -1,11 +1,17 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta charset="UTF-8">
-  <title>Title</title>
-</head>
-<body>
+<h2>Login</h2>
+<form class="login-card" [formGroup]="loginForm" (ngSubmit)="login()">
+  <label for="username"> Username</label>
+  <input id="username"
+         class="form-control"
+         [ngClass]="{
+  'is-invalid':
+  loginForm.get('username')!.invalid &&
+  loginForm.get('username')!.touched
+  }" formControlName="username" />
 
-</body>
-</html>
+  <span class="invalid"> Username cannot be left blank.</span>
+
+  <button class="btn btn-primary btn-block" [disabled]="loginForm.invalid">
+    Login
+  </button>
+</form>
