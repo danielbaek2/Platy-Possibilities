@@ -9,7 +9,7 @@ import { catchError, map, switchMap, tap } from 'rxjs/operators';
   providedIn: 'root'
 })
 export class NeedService {
-  private needsUrl = 'api/needs';  // URL to web api http://localhost:8080/Cupboard
+  private needsUrl = 'http://localhost:8080/Cupboard';  // URL to web api http://localhost:8080/Cupboard
 
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
