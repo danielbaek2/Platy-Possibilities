@@ -94,7 +94,7 @@ export class UserService {
   private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
 
-      // TODO: send the error to remote logging infrastructure
+      // TODO: send the error to remote logging infrastructure:)
       console.error(error); // log to console instead
 
       // TODO: better job of transforming error for user consumption
