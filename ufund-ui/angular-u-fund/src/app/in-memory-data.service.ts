@@ -23,7 +23,7 @@ export class InMemoryDataService implements InMemoryDbService {
       {id: 22, title: "Protect Moo Deng", description: "Moo Deng, the rightful heir of Thailand, must be protected from blood-thirsty predators and disrespectful tourists.", total_funding: 150}
     ];
 
-    const helper = {fundingBasket: [], user: new User('JaneDoe', false)}
+    const helper = {fundingBasket: [], user: new User('JaneDoe')}
     return {needs, helper};
   }
 

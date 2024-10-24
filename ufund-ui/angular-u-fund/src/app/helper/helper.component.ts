@@ -3,10 +3,8 @@ import { Need } from '../need';
 import { NeedService } from '../need.service';
 import { HelperService } from '../helper.service';
 import { ActivatedRoute } from '@angular/router';
-import { NEEDS } from '../mock-needs';
 import { HELPER } from '../mock-helper';
 import { User } from '../user';
-import { Helper } from '../helper';
 
 @Component({
   selector: 'app-helper',
@@ -15,7 +13,7 @@ import { Helper } from '../helper';
 })
 export class HelperComponent implements OnInit {
   needs: Need[] = [];
-  fundingBasket: Need[] = NEEDS;
+  fundingBasket: Need[] = [];
   user: User = HELPER.user // temporary hardcoded value 
 
   constructor(private needService: NeedService, private helperService: HelperService,
