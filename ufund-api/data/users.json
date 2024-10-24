@@ -1,2 +1,1 @@
-[{"username": "john_doe", "basket": []},{"username": "jane_doe","basket": []}]
-  
+[{"username": "johndoe", "admin": false},{"username": "janedoe", "admin": false},{"username": "admin", "admin": true}]

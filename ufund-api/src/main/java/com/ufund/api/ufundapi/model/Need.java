@@ -35,11 +35,6 @@ public class Need {
         this.cost = cost;
     }
 
-    public Need(@JsonProperty("id") int id, @JsonProperty("title") String title){
-        this.id = id;
-        this.title = title;
-    }
-
     /**
      * Acquire the int id of the need object
      * @return the id of the need
