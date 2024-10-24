@@ -86,11 +86,24 @@ public class Need {
      * @param amount the int unit amount to fund, default is 1
      */
     public void fundNeed(int amount){
-        quantity_funded += amount;
+        if(fundable()){
+            quantity_funded += amount;
+        
+            if(quantity_funded > quantity){
+                quantity_funded = quantity;
+            }
+        }
     }
 
     public void fundNeed(){
-        quantity_funded ++;
+        if(fundable()){
+            quantity_funded ++;
+        
+            if(quantity_funded > quantity){
+                quantity_funded = quantity;
+            }
+        }
+        
     }
 
     /**
@@ -100,6 +113,14 @@ public class Need {
      */
     public int amountFunded(){
         return quantity_funded * cost;
+    }
+
+    public boolean fundable(){
+        if(quantity_funded >= quantity){
+            return false;
+        }
+
+        return true;
     }
 
     /**
