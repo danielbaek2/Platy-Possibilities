@@ -9,7 +9,7 @@ import { AdminComponent } from './admin/admin.component';
 const routes: Routes = [
   { path: 'needs', component: NeedComponent },
   { path: 'helper', component: HelperComponent },
-  { path: 'helper?username=', component: HelperComponent },
+  { path: 'helper/:username/basket', component: HelperComponent },
   { path: '', redirectTo: '/login', pathMatch: 'full' },
   { path: 'detail/:id', component: NeedDetailComponent },
   { path: 'login', component: LoginComponent },

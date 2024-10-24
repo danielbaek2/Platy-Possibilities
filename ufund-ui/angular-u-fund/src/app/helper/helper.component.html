@@ -4,10 +4,10 @@
     {{need.title}}
   </a>  
 </div> -->
-<h1>{{ username | uppercase}}</h1>
+<h1>{{ user.username | uppercase}}</h1>
 
 <div class="basket">
-  <a routerLink="/helper?{{username}}" (click)="getBasket()">
+  <a routerLink="/helper/{{user.username}}/basket" (click)="getBasket()">
     Funding Basket
   </a>
 </div>

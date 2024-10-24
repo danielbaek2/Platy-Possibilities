@@ -12,7 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HelperService {
-  private helperURL = 'http://localhost:4200/Helper';
+  private helperURL = 'http://localhost:8080/Helper';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
@@ -26,12 +26,13 @@ export class HelperService {
    * @returns 
    */
   getBasket(username: string): Observable<Need[]>{
-    this.messageService.add('HelperService: fetched funding basket');
-    return this.http.get<Need[]>(`${this.helperURL}?${username}}`, this.httpOptions);
+    return this.http.get<Need[]>(`${this.helperURL}/${username}/basket`).pipe(
+      tap(_ => this.log('fetched basket' )), 
+      catchError(this.handleError<Need[]>('getBasket', [])));
   } 
 
   addNeedToBasket(need: Need, username: string): Observable<Need>{
-    return this.http.post<Need>(`${this.helperURL}?${username}`, need, this.httpOptions).pipe( // should call server side
+    return this.http.post<Need>(`${this.helperURL}/${username}`, need, this.httpOptions).pipe( // should call server side
       tap((newNeed: Need) => this.log(`added need to funding basket w/ id=${newNeed.id}`)),
       catchError(this.handleError<Need>('addNeedToBasket'))
     );

@@ -74,12 +74,12 @@ export class NeedService {
   }
 
   /* GET Needs whose title contains search term */
-  searchNeeds(term: string): Observable<Need[]> {
+  searchNeeds(term: String): Observable<Need[]> {
     if (!term.trim()) {
       // if not search term, return empty need array.
       return of([]);
     }
-    return this.http.get<Need[]>(`${this.needsUrl}/?title=${term}`).pipe(tap(x => x.length ?
+    return this.http.get<Need[]>(`${this.needsUrl}/?need_title=${term}`).pipe(tap(x => x.length ?
         this.log(`found needs matching "${term}"`) :
         this.log(`no needs matching "${term}"`)), catchError(this.handleError<Need[]>('searchNeeds', [])));
   }

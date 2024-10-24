@@ -9,22 +9,24 @@
   <button>Login as Admin</button>
 </a>
 
+<!--
 <h2>Login</h2>
 <form class="login-card" [formGroup]="loginForm" (ngSubmit)="login()">
-
-  <div class="form-group">
-  <label for="username"> Username</label>
-  <input id="username"
-         class="form-control"
-         [ngClass]="{
+<div class="form-group">
+<label for="username"> Username</label>
+<input id="username"
+      class="form-control"
+        [ngClass]="{
   'is-invalid':
   loginForm.get('username')!.invalid &&
-  loginForm.get('username')!.touched
-  }" formControlName="username" />
+ loginForm.get('username')!.touched
+ }" formControlName="username" />
 
-  <span class="invalid-feedback"> Username cannot be left blank.</span>
-  </div>
-    <button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">Login</button>
-
+<span class="invalid-feedback"> Username cannot be left blank.</span>
+</div>
+<button type="submit" class="btn btn-primary btn-block" [disabled]="loginForm.invalid">
+Login
+</button>
 </form>
+-->
 

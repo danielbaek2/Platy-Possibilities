@@ -9,8 +9,6 @@ import { NeedDetailComponent } from './need-detail/need-detail.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HelperComponent } from './helper/helper.component';
 import { HttpClientModule } from '@angular/common/http';
-import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
-import { InMemoryDataService } from './in-memory-data.service';
 import { NeedSearchComponent } from './need-search/need-search.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from "./login/login.component";
@@ -22,7 +20,7 @@ import { LoginComponent } from "./login/login.component";
     HelperComponent,
     NeedSearchComponent,
     AdminComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -31,7 +29,6 @@ import { LoginComponent } from "./login/login.component";
     NeedComponent,
     HttpClientModule,
     ReactiveFormsModule,
-    HttpClientInMemoryWebApiModule.forRoot(InMemoryDataService, { dataEncapsulation: false })
   ],
   providers: [],
   bootstrap: [AppComponent]
