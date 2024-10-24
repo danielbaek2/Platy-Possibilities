@@ -32,6 +32,10 @@ export class LoginComponent implements  OnInit {
                   });
   }
   login(){
+    if (this.loginForm.invalid) {
+      console.log('Form invalid');
+      return;
+    }
     let username: string = this.loginForm.value.username;
 
     this.userService.searchUsers(username).subscribe((usernameInfo: any) => {
@@ -47,7 +51,7 @@ export class LoginComponent implements  OnInit {
             this.userService.loginUser(this.currentUser).subscribe((userData: any) => {
               this.currentUser = userData;
               this.currentUserService.saveCurrentUser(this.currentUser);
-              if (this.currentUser.username == "admin") {
+              if (this.currentUser.username === "admin") {
                 this.router.navigate(['/admin']);
               } else {
                 this.router.navigate(['/helper']);

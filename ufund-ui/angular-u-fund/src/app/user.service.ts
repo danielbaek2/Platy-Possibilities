@@ -44,7 +44,7 @@ export class UserService {
     if (!username.trim()) {
       return of([]);
     }
-    return this.http.get<User[]>(`${this.usersUrl}/?name=${username}`).pipe(
+    return this.http.get<User[]>(`${this.usersUrl}/?username=${username}`).pipe(
       tap((_) => console.log(`found users matching "${username}"`)),
       catchError(this.handleError<User[]>('searchUsers', []))
     );
