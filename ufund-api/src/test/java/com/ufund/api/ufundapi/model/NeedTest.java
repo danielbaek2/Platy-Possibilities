@@ -2,7 +2,6 @@ package com.ufund.api.ufundapi.model;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import com.ufund.api.ufundapi.model.Need;
 
 
 public class NeedTest {
@@ -70,7 +69,7 @@ public class NeedTest {
 
     @Test
     void testEquals(){
-        Need DuckSaving = new Need(saveDucks.getId(), saveDucks.getTitle());
+        Need DuckSaving = new Need(saveDucks.getId(), saveDucks.getTitle(), saveDucks.getQuantity(), saveDucks.getCost());
 
         Boolean expectedResult = true;
 
