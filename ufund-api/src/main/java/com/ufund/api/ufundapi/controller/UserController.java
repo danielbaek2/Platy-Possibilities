@@ -122,7 +122,7 @@ public class UserController {
         }
     }
 
-    @GetMapping("{/username}")
+    @GetMapping("/{username}")
     public ResponseEntity<String> login(@PathVariable String username) {
         LOG.info("GET /User" + username);
 
@@ -143,5 +143,8 @@ public class UserController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    // curl.exe -X GET 'http://localhost:8080/Helper/johndoe/basket' //getBasket
+    // curl.exe -X PUT -H 'Content-Type:application/json' 'http://localhost:8080/Helper/johndoe/basket' -d '{\"id\": 1,\"title\": \"Red panda Helping\",\"quantity\": 0,\"cost\": 0,\"quantityFunded\": 0,\"description\": null,\"quantity_funded\": 0}' //addNeedtoBasket
+    // curl.exe -X DELETE -H 'Content-Type:application/json' 'http://localhost:8080/Helper/johndoe/basket' -d '{\"id\": 1,\"title\": \"Red panda Helping\",\"quantity\": 0,\"cost\": 0,\"quantityFunded\": 0,\"description\": null,\"quantity_funded\": 0}' //removeNeedtoBasket
+    // LOGIN DOES NOT CURRENTLY WORK
 }
