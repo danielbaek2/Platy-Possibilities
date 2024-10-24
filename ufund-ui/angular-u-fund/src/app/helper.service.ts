@@ -12,7 +12,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root'
 })
 export class HelperService {
-  private helperURL = 'http://localhost:4200/Helper';
+  private helperURL = 'http://localhost:8080/Helper';
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
