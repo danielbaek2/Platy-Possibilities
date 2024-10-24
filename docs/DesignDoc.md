@@ -60,7 +60,7 @@ The Minimum Viable Product involves a basic login system, in which a user only n
 
 This section describes the application domain.
 
-![Domain Model](domain analysis.png)
+![Domain Model](domain_analysis.png)
 
 Everyone who signs into the application is a User. Most Users are Helpers who each have a Funding Basket where they can place the Needs that they want to fund and remove the ones that they do not. The Needs are stored in the Cupboard, where the Helpers can search for Needs they want and select Needs to move to their Basket. The other kind of User is the U-Fund Maneger, or Admin, who can create, modify, and remove Needs from the Cupboard. The Admin does not have a Funding Basket.
 
@@ -127,7 +127,7 @@ The classes supporting the ViewModel tier of the model would be the CupboardCont
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
 > 
-![Replace with your ViewModel Tier class diagram 1, etc.](viewmodel sprint 2.png)
+![Replace with your ViewModel Tier class diagram 1, etc.](viewmodel_sprint_2.png)
 
 ### Model Tier
 > _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
@@ -143,7 +143,7 @@ The Need class details every responsibility directly correlated with a Need, whe
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
 > 
-![Replace with your Model Tier class diagram 1, etc.](model sprint 2.png)
+![Replace with your Model Tier class diagram 1, etc.](model_sprint_2.png)
 
 ## OO Design Principles
 
