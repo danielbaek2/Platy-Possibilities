@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.io.IOException;
@@ -58,10 +59,11 @@ public class UserController {
      */
     @GetMapping("/{username}/basket")
     public ResponseEntity<List<Need>> getBasket(@PathVariable String username) {
-        LOG.info("GET /Helper" + username + "/basket");
+        LOG.info("GET /Helper/" + username + "/basket");
 
         try {
             List<Need> basket = this.helperDAO.getBasket(username);
+            System.out.println(basket); // Temporary; display basket to monitor changes to it on the backend
             return serviceClass(basket, HttpStatus.NOT_FOUND);
         }
         catch(IOException e) {
@@ -80,13 +82,13 @@ public class UserController {
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{username}/basket")
-    public ResponseEntity<Need> removeNeedFromBasket(@PathVariable String username, @RequestBody Need need) {
-        LOG.info("/Helper/" + username + "/DELETE" + need);
+    public ResponseEntity<Need> removeNeedFromBasket(@PathVariable String username, Need need) {
+        LOG.info("DELETE /Helper/" + username + "/basket?id=" + need.getId());
 
         try {
             boolean delete = helperDAO.removeNeedFromBasket(need, username);
             if (delete) {
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<Need>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
@@ -105,14 +107,14 @@ public class UserController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PutMapping("/{username}/basket")
+    @PutMapping("/{username}")
     public ResponseEntity<Need> addNeedToBasket(@PathVariable String username, @RequestBody Need need) {
-        LOG.info("/Helper/" + username + "/DELETE" + need);
+        LOG.info("PUT /Helper/" + username + "?id=" + need.getId());
 
         try {
             boolean add = helperDAO.addNeedToBasket(need, username);
             if (add) {
-                return new ResponseEntity<>(HttpStatus.OK);
+                return new ResponseEntity<Need>(need, HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }

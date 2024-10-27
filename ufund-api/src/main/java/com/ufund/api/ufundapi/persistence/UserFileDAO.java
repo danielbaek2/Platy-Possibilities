@@ -28,8 +28,8 @@ public class UserFileDAO implements UserDAO{
      * @param objectmapper - The object mapper.
      */
     // not sure how to recieve file name.
-
-    public UserFileDAO(@Value("data/users.json") String filename, ObjectMapper objectmapper) throws IOException{
+    // changed file to helpers.json for debugging purposes
+    public UserFileDAO(@Value("data/helpers.json") String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
         this.helpers = new HashMap<>();
@@ -82,6 +82,7 @@ public class UserFileDAO implements UserDAO{
                     return false;
                 } else {
                     helper.addNeedToBasket(need);
+                    saveFile();
                     return true;
                 }
             }

@@ -1,7 +1,5 @@
-import { Component, Input } from '@angular/core';
+import { Component} from '@angular/core';
 import { Need } from '../need';
-import { Helper } from '../helper';
-import { NEEDS } from '../mock-needs';
 import { MessageService } from '../message.service';
 import { HelperService } from '../helper.service';
 import { ActivatedRoute } from '@angular/router';
@@ -12,8 +10,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './basket.component.css'
 })
 export class BasketComponent {
-  @Input() fundingBasket: Need[] = []
-  @Input() username!: string // reecive username as an input from the helper component
+  fundingBasket!: Need[];
+  // @Output() newNeedEvent = new EventEmitter<Need>();
+  username!: string;
   constructor(private helperService: HelperService, private route: ActivatedRoute){}
 
   ngOnInit(): void {
@@ -21,10 +20,11 @@ export class BasketComponent {
     if (result != null){
       this.username = result
     }
+    this.helperService.getBasket(this.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket);
   }
   
   removeNeedFromBasket(need: Need): void{
     this.fundingBasket = this.fundingBasket.filter(n => n !== need)
-    this.helperService.removeNeedFromBasket(need.id, this.username).subscribe();
+    this.helperService.removeNeedFromBasket(need, this.username).subscribe();
   }
 }
