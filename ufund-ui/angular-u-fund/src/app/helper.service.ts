@@ -21,8 +21,8 @@ export class HelperService {
   fundingBasket: Need[] = [];
   
   /**
-   * GET basket given username
-   * @param username 
+   * GET basket from the server based on a username
+   * @param username The username of the user
    * @returns 
    */
   getBasket(username: string): Observable<Need[]>{
@@ -32,19 +32,19 @@ export class HelperService {
   } 
 
   addNeedToBasket(need: Need, username: string): Observable<Need>{
-    return this.http.post<Need>(`${this.helperURL}/${username}`, need, this.httpOptions).pipe( // should call server side
+    return this.http.put<Need>(`${this.helperURL}/${username}?${need}`, need, this.httpOptions).pipe( // should call server side
       tap((newNeed: Need) => this.log(`added need to funding basket w/ id=${newNeed.id}`)),
       catchError(this.handleError<Need>('addNeedToBasket'))
     );
   }
 
-  removeNeedFromBasket(need: Need, username: string): Observable<Need>{
-    const index = this.fundingBasket.indexOf(need)
-    if (index > -1){
-      this.fundingBasket.splice(index, 1);
-    }
-    return this.http.delete<Need>(`${this.helperURL}/${username}?basket/${need.id}`, this.httpOptions).pipe( // should call server side
-      tap(_ => this.log(`removed need title=${need.title}`))
+  removeNeedFromBasket(needID: number, username: string): Observable<Need>{
+    // const index = this.fundingBasket.indexOf(need)
+    // if (index > -1){
+    //   this.fundingBasket.splice(index, 1);
+    // }
+    return this.http.delete<Need>(`${this.helperURL}/${username}/basket?need=${needID}`, this.httpOptions).pipe( // should call server side
+      tap(_ => this.log(`removed need id=${needID}`))
     )
   }
 

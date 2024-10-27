@@ -4,10 +4,10 @@
     {{need.title}}
   </a>  
 </div> -->
-<h1>{{ user.username | uppercase}}</h1>
+<h1>{{ username }}</h1>
 
 <div class="basket">
-  <a routerLink="/helper/{{user.username}}/basket" (click)="getBasket()">
+  <a routerLink="/helper/{{username}}/basket" (click)="getBasket()">
     Funding Basket
   </a>
 </div>
@@ -23,6 +23,7 @@
 </ul>
 
 <app-need-search></app-need-search>
+<app-basket *ngIf="username" [username]="username" [fundingBasket]="fundingBasket"></app-basket> <!-- send username to basket component -->
 
 <a href= "/login">
   <button>Logout</button>

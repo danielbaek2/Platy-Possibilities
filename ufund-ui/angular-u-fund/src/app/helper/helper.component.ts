@@ -5,6 +5,7 @@ import { HelperService } from '../helper.service';
 import { ActivatedRoute } from '@angular/router';
 import { HELPER } from '../mock-helper';
 import { User } from '../user';
+import { NEEDS } from '../mock-needs';
 
 @Component({
   selector: 'app-helper',
@@ -13,8 +14,9 @@ import { User } from '../user';
 })
 export class HelperComponent implements OnInit {
   needs: Need[] = [];
-  fundingBasket: Need[] = [];
-  user: User = HELPER.user // temporary hardcoded value 
+  fundingBasket: Need[] = NEEDS;
+  // user: User = HELPER.user // temporary hardcoded value 
+  username: string = "janedoe"
 
   constructor(private needService: NeedService, private helperService: HelperService,
     private route: ActivatedRoute) { }
@@ -28,16 +30,23 @@ export class HelperComponent implements OnInit {
   }
 
   addNeedToBasket(need: Need): void{
-    // username = this.route.snapshot.paramMap.get('username');
-    this.helperService.addNeedToBasket(need, this.user.username).subscribe(need => {this.fundingBasket.push(need);});
+    const result = this.route.snapshot.paramMap.get('username')?.toString();
+    if (result != null){
+      this.username = result
+      this.helperService.addNeedToBasket(need, this.username).subscribe(need => {this.fundingBasket.push(need);}); 
+    }
   }
 
   removeNeedFromBasket(need: Need): void{
     this.fundingBasket = this.fundingBasket.filter(n => n !== need)
-    this.helperService.removeNeedFromBasket(need, this.user.username).subscribe();
+    // if (this.username != null){
+      this.helperService.removeNeedFromBasket(need.id, this.username).subscribe();
+    // }
   }
 
   getBasket(): void{
-    this.helperService.getBasket(this.user.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket);
+    if (this.username != null){
+      this.helperService.getBasket(this.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket);
+    }
   }
 }
