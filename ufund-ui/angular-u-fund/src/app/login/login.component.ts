@@ -15,10 +15,10 @@ export class LoginComponent {
   constructor(private userService: UserService, private router: Router) {}
 
   login(): void {
-    if (this.username.trim().toLowerCase() === 'admin') {
+    /*if (this.username.trim().toLowerCase() === 'admin') {
       this.router.navigate(['/admin']);
       return;
-    }
+    }*/
     this.userService.searchUsers(this.username).subscribe(
       (users) => {
         if (users.length === 0) {
@@ -26,8 +26,12 @@ export class LoginComponent {
         } else {
           const user = new User(this.username);
           this.userService.loginUser(user).subscribe(
-            (response) => {
-              this.router.navigate(['/helper']);
+            (response: string) => {
+              if (response === 'Admin') {
+                this.router.navigate(['/admin']);
+              } else {
+                this.router.navigate(['/helper']);
+              }
             },
           );
         }

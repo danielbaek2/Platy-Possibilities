@@ -11,7 +11,7 @@ import { MessageService } from './message.service';
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-  private usersUrl = 'http://localhost:8080/Users';  // URL to web api
+  private usersUrl = 'http://localhost:8080/Helper';  // URL to web api
   message: string = '';
 
   httpOptions = {
