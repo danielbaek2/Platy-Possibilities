@@ -22,18 +22,14 @@ export class LoginComponent {
     this.userService.searchUsers(this.username).subscribe(
       (users) => {
         if (users.length === 0) {
-          this.message = 'No username';
+          this.message = 'No username: '+users;
         } else {
           const user = new User(this.username);
-          this.userService.loginUser(user).subscribe(
-            (response: string) => {
-              if (response === 'Admin') {
-                this.router.navigate(['/admin']);
-              } else {
-                this.router.navigate(['/helper']);
-              }
-            },
-          );
+          if (user.username == 'Admin'){
+            this.router.navigate(['/admin']);
+          }else{
+            this.router.navigate(['/helper']);
+          }
         }
       },
       (error) => {console.error('Error during user search:', error);

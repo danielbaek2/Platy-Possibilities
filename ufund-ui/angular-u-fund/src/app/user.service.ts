@@ -77,12 +77,6 @@ export class UserService {
     );
   }
 
-  loginUser(user: User): Observable<User> {
-    return this.http.post<User>(this.usersUrl, user, this.httpOptions).pipe(
-      tap(_ => console.log(`login user username= ${user.username}`)),
-        catchError(this.handleError<User>('loginUser'))
-    );
-  }
 
   /**
    * Handle Http operation that failed.
