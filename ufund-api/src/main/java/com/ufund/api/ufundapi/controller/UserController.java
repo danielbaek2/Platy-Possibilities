@@ -117,27 +117,6 @@ public class UserController {
         }
     }
 
-    @PostMapping("/{username}")
-    public ResponseEntity<String> login(@PathVariable String username) {
-        LOG.info("GET /User" + username);
-
-        try {
-            boolean exists = helperDAO.verifyUser(username);
-            if (exists) {
-                boolean admin = helperDAO.isAdmin(username);
-                if (admin) {
-                    return new ResponseEntity<String>("Admin", HttpStatus.OK);
-                } else {
-                    return new ResponseEntity<String>("Not Admin", HttpStatus.OK);
-                }
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            LOG.log(Level.SEVERE, e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
     @GetMapping
     public ResponseEntity<List<Helper>> searchUsers(@RequestParam String username) {
         LOG.info("GET /Users/?username=" + username);
