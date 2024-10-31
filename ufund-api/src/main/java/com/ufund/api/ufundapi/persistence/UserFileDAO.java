@@ -2,6 +2,7 @@ package com.ufund.api.ufundapi.persistence;
 
 import java.io.IOException;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -118,6 +119,19 @@ public class UserFileDAO implements UserDAO{
         synchronized(helpers){
             return !helpers.containsKey(username);
         }
+    }
+
+    public List<Helper> userSearch(String username) throws IOException {
+        List<Helper> matchingUsers = new ArrayList<>();
+
+        synchronized (helpers) {
+            for (Helper helper : helpers.values()) {
+                if (helper.getUsername().toLowerCase().contains(username.toLowerCase())) {
+                    matchingUsers.add(helper);
+                }
+            }
+        }
+        return matchingUsers;
     }
 }
 

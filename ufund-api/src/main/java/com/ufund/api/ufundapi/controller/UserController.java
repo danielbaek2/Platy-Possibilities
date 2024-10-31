@@ -1,16 +1,11 @@
 package com.ufund.api.ufundapi.controller;
 
+import com.ufund.api.ufundapi.model.Helper;
 import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.persistence.UserDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.io.IOException;
 import java.util.logging.Level;
@@ -122,23 +117,18 @@ public class UserController {
         }
     }
 
-    @GetMapping("/{username}")
-    public ResponseEntity<String> login(@PathVariable String username) {
-        LOG.info("GET /User" + username);
+    @GetMapping
+    public ResponseEntity<List<Helper>> searchUsers(@RequestParam String username) {
+        LOG.info("GET /Users/?username=" + username);
 
         try {
-            boolean exists = helperDAO.verifyUser(username);
-            if (exists) {
-                boolean admin = helperDAO.isAdmin(username);
-                if (admin) {
-                    return new ResponseEntity<String>("Admin", HttpStatus.OK);
-                } else {
-                    return new ResponseEntity<String>("Not Admin", HttpStatus.OK);
-                }
-            } else {
+            List<Helper> matchingUsers = helperDAO.userSearch(username);
+            if (matchingUsers.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<>(matchingUsers, HttpStatus.OK);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }

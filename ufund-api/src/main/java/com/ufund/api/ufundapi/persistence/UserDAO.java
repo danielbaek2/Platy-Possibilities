@@ -3,6 +3,7 @@ package com.ufund.api.ufundapi.persistence;
 import java.io.IOException;
 import java.util.List;
 
+import com.ufund.api.ufundapi.model.Helper;
 import com.ufund.api.ufundapi.model.Need;
 
 public interface UserDAO {
@@ -15,5 +16,7 @@ public interface UserDAO {
     public boolean verifyUser(String username);
 
     public boolean isAdmin(String username);
+
+    public List<Helper> userSearch(String username) throws IOException;
 }
 
