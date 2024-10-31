@@ -30,6 +30,12 @@ export class HelperService {
       catchError(this.handleError<Need[]>('getBasket', [])));
   } 
 
+  /**
+   * PUT a need in the basket in the server based on the username
+   * @param need The need to add to the basket
+   * @param username The username of the user
+   * @returns 
+   */
   addNeedToBasket(need: Need, username: string): Observable<Need>{
     return this.http.put<Need>(`${this.helperURL}/${username}?id=${need.id}`, need, this.httpOptions).pipe( // should call server side
       tap((newNeed: Need) => this.log(`added need to funding basket w/ id=${newNeed.id}`)),
@@ -37,7 +43,15 @@ export class HelperService {
     );
   }
 
+  /**
+   * DELETE (remove) a need from the basket on the server
+   * @param need The need to remove from the basket
+   * @param username The username of the user
+   * @returns 
+   */
   removeNeedFromBasket(need: Need, username: string): Observable<Need>{
+    this.httpOptions.headers.append('Need', `${need}`)
+    console.log(this.httpOptions)
     return this.http.delete<Need>(`${this.helperURL}/${username}/basket?id=${need.id}`, this.httpOptions).pipe( // should call server side
       tap(_ => this.log(`removed need id=${need.id}`))
     )

@@ -3,12 +3,10 @@ package com.ufund.api.ufundapi.persistence;
 import java.io.IOException;
 import java.io.File;
 import java.util.HashMap;
-import java.util.List;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.model.Helper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -29,7 +27,7 @@ public class UserFileDAO implements UserDAO{
      */
     // not sure how to recieve file name.
     // changed file to helpers.json for debugging purposes
-    public UserFileDAO(@Value("data/helpers.json") String filename, ObjectMapper objectmapper) throws IOException{
+    public UserFileDAO(@Value("data/users.json") String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
         this.helpers = new HashMap<>();
@@ -56,51 +54,51 @@ public class UserFileDAO implements UserDAO{
         objectMapper.writeValue(new File(this.filename),helpers);
     }
 
-    public boolean removeNeedFromBasket(Need need,String username) throws IOException {
-        synchronized(helpers) {
-            Helper helper = helpers.get(username);
-            if (helper != null){
-                List<Need> basket = helper.getBasket();
-                if (basket.contains(need)) {
-                    helper.removeNeedFromBasket(need);
-                    saveFile();
-                    return true;
-                }else{
-                    return false;
-                }
-            }
-            return false;
-        }
-    }
+    // public boolean removeNeedFromBasket(Need need,String username) throws IOException {
+    //     synchronized(helpers) {
+    //         Helper helper = helpers.get(username);
+    //         if (helper != null){
+    //             List<Need> basket = helper.getBasket();
+    //             if (basket.contains(need)) {
+    //                 helper.removeNeedFromBasket(need);
+    //                 saveFile();
+    //                 return true;
+    //             }else{
+    //                 return false;
+    //             }
+    //         }
+    //         return false;
+    //     }
+    // }
 
-    public boolean addNeedToBasket(Need need, String username) throws IOException {
-        synchronized (helpers) {
-            Helper helper = helpers.get(username);
-            if (helper != null) {
-                List<Need> basket = helper.getBasket();
-                if (basket.contains(need)) {
-                    return false;
-                } else {
-                    helper.addNeedToBasket(need);
-                    saveFile();
-                    return true;
-                }
-            }
-            return false;
-        }
-    }
+    // public boolean addNeedToBasket(Need need, String username) throws IOException {
+    //     synchronized (helpers) {
+    //         Helper helper = helpers.get(username);
+    //         if (helper != null) {
+    //             List<Need> basket = helper.getBasket();
+    //             if (basket.contains(need)) {
+    //                 return false;
+    //             } else {
+    //                 helper.addNeedToBasket(need);
+    //                 saveFile();
+    //                 return true;
+    //             }
+    //         }
+    //         return false;
+    //     }
+    // }
 
-    public List<Need> getBasket(String username) throws IOException {
-        synchronized(helpers) {
-            Helper helper = helpers.get(username);
-            if (helper != null){
-                return helper.getBasket();
-            }
-            else{
-                return null;
-            }
-        }
-    }
+    // public List<Need> getBasket(String username) throws IOException {
+    //     synchronized(helpers) {
+    //         Helper helper = helpers.get(username);
+    //         if (helper != null){
+    //             return helper.getBasket();
+    //         }
+    //         else{
+    //             return null;
+    //         }
+    //     }
+    // }
 
     
     // User Login Functionality

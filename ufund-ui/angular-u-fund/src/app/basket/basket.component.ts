@@ -11,7 +11,6 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class BasketComponent {
   fundingBasket!: Need[];
-  // @Output() newNeedEvent = new EventEmitter<Need>();
   username!: string;
   constructor(private helperService: HelperService, private route: ActivatedRoute){}
 
