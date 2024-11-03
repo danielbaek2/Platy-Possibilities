@@ -27,7 +27,7 @@ public class UserFileDAO implements UserDAO{
      */
     // not sure how to recieve file name.
     // changed file to helpers.json for debugging purposes
-    public UserFileDAO(@Value("data/users.json") String filename, ObjectMapper objectmapper) throws IOException{
+    public UserFileDAO(@Value("ufund-api/data/users.json") String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
         this.helpers = new HashMap<>();
