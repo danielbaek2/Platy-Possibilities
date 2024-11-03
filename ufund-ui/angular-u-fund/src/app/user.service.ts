@@ -11,7 +11,7 @@ import { MessageService } from './message.service';
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-  private usersUrl = 'http://localhost:8080/Users';  // URL to web api
+  private usersUrl = 'http://localhost:8080/Helper';  // URL to web api
   message: string = '';
 
   httpOptions = {
@@ -72,17 +72,11 @@ export class UserService {
   /** PUT: update the user on the server */
   updateUser(user: User): Observable<User> {
     return this.http.put<User>(this.usersUrl, user, this.httpOptions).pipe(
-      tap(_ => console.log(`updated user id=${user.username}`)),
+      tap(_ => console.log(`updated user username=${user.username}`)),
       catchError(this.handleError<User>('updateUser'))
     );
   }
 
-  loginUser(user: User): Observable<User> {
-    return this.http.post<User>(this.usersUrl, user, this.httpOptions).pipe(
-      tap(_ => console.log(`login user username= ${user.username}`)),
-        catchError(this.handleError<User>('loginUser'))
-    );
-  }
 
   /**
    * Handle Http operation that failed.

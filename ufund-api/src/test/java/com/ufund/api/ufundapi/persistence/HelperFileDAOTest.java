@@ -29,7 +29,7 @@ public class HelperFileDAOTest {
         testHelperList[0] = new Helper("Steve Irwin");
         testHelperList[1] = new Helper("Uncle Ben");
 
-        testNeeds = new Need(1,"this could be a test");
+        testNeeds = new Need(1,"this could be a test",5,50);
 
         when(mockObjectMapper.readValue(new File("test_file.txt"), Helper[].class)).thenReturn(testHelperList);
 		helperFileDAO = new HelperFileDAO("test_file.txt", mockObjectMapper);

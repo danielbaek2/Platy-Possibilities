@@ -1,12 +1,11 @@
 package com.ufund.api.ufundapi.controller;
 
+import com.ufund.api.ufundapi.model.Helper;
+import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.persistence.UserDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -104,26 +103,24 @@ public abstract class UserController {
     //     }
     // }
 
-    @GetMapping("{/username}")
-    public ResponseEntity<String> login(@PathVariable String username) {
-        LOG.info("GET /User" + username);
+    @GetMapping
+    public ResponseEntity<List<Helper>> searchUsers(@RequestParam String username) {
+        LOG.info("GET /Users/?username=" + username);
 
         try {
-            boolean exists = userDAO.verifyUser(username);
-            if (exists) {
-                boolean admin = userDAO.isAdmin(username);
-                if (admin) {
-                    return new ResponseEntity<String>("Admin", HttpStatus.OK);
-                } else {
-                    return new ResponseEntity<String>("Not Admin", HttpStatus.OK);
-                }
-            } else {
+            List<Helper> matchingUsers = helperDAO.userSearch(username);
+            if (matchingUsers.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            } else {
+                return new ResponseEntity<>(matchingUsers, HttpStatus.OK);
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
+    // curl.exe -X GET 'http://localhost:8080/Helper/johndoe/basket' //getBasket
+    // curl.exe -X PUT -H 'Content-Type:application/json' 'http://localhost:8080/Helper/johndoe/basket' -d '{\"id\": 1,\"title\": \"Red panda Helping\",\"quantity\": 0,\"cost\": 0,\"quantityFunded\": 0,\"description\": null,\"quantity_funded\": 0}' //addNeedtoBasket
+    // curl.exe -X DELETE -H 'Content-Type:application/json' 'http://localhost:8080/Helper/johndoe/basket' -d '{\"id\": 1,\"title\": \"Red panda Helping\",\"quantity\": 0,\"cost\": 0,\"quantityFunded\": 0,\"description\": null,\"quantity_funded\": 0}' //removeNeedtoBasket
+    // LOGIN DOES NOT CURRENTLY WORK
 }
