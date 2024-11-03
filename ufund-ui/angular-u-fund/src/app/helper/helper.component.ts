@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Need } from '../need';
 import { NeedService } from '../need.service';
 import { HelperService } from '../helper.service';
 import { ActivatedRoute } from '@angular/router';
 import { HELPER } from '../mock-helper';
 import { User } from '../user';
+import { CurrentUserService } from '../current-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-helper',
@@ -14,10 +16,17 @@ import { User } from '../user';
 export class HelperComponent implements OnInit {
   needs: Need[] = [];
   fundingBasket: Need[] = [];
-  user: User = HELPER.user // temporary hardcoded value 
+  user: User = HELPER.user; // temporary hardcoded value 
+  currentUserService = inject(CurrentUserService);
+  router = new Router;
 
   constructor(private needService: NeedService, private helperService: HelperService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) {
+
+    this.currentUserService.onButtonClick.subscribe(()=>{
+      this.user = new User("NONE");
+    });
+    }
 
   ngOnInit(): void {
     this.getNeeds();
@@ -39,5 +48,9 @@ export class HelperComponent implements OnInit {
 
   getBasket(): void{
     this.helperService.getBasket(this.user.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket);
+  }
+
+  setUser(new_user: User): void{
+    this.user = new_user;
   }
 }
