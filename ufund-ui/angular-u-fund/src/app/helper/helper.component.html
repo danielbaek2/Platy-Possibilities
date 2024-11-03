@@ -1,16 +1,12 @@
-<!-- <div class="needs-menu">
-  <a *ngFor="let need of needs"
-    routerLink="/detail/{{need.id}}">
-    {{need.title}}
-  </a>  
-</div> -->
-<h1>{{ user.username | uppercase}}</h1>
+<h1>{{ user.username }}</h1>
 
 <div class="basket">
   <a routerLink="/helper/{{user.username}}/basket" (click)="getBasket()">
-    Funding Basket
+    Basket
   </a>
 </div>
+
+<app-need-search></app-need-search>
 
 <ul class="needs-menu">
   <li *ngFor="let need of needs">
@@ -21,8 +17,6 @@
       (click)="addNeedToBasket(need)">+</button>
   </li>
 </ul>
-
-<app-need-search></app-need-search>
 
 <a href= "/login">
   <button>Logout</button>

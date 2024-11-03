@@ -20,7 +20,8 @@ public class Helper extends User {
      * @param index The id of the need to be removed from the basket
      */
     public void removeNeedFromBasket(Need need){
-        fundingBasket.remove(need);
+        boolean removed = fundingBasket.remove(need);
+        System.out.println(removed);
     }
 
     public void addNeedToBasket(Need need){
