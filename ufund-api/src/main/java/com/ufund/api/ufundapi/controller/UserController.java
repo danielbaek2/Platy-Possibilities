@@ -7,6 +7,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.io.IOException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -108,7 +110,7 @@ public abstract class UserController {
         LOG.info("GET /Users/?username=" + username);
 
         try {
-            List<Helper> matchingUsers = helperDAO.userSearch(username);
+            List<Helper> matchingUsers = userDAO.userSearch(username);
             if (matchingUsers.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             } else {
