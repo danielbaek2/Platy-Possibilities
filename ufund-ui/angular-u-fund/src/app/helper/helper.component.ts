@@ -16,7 +16,7 @@ import { Router } from '@angular/router';
 export class HelperComponent implements OnInit {
   needs: Need[] = [];
   fundingBasket: Need[] = [];
-  user: User = HELPER.user; // temporary hardcoded value 
+  user: User = HELPER.user; // temporary hardcoded value
   currentUserService = inject(CurrentUserService);
   router = new Router;
 
@@ -30,6 +30,12 @@ export class HelperComponent implements OnInit {
 
   ngOnInit(): void {
     this.getNeeds();
+    // this.currentUserService.currentUser$.subscribe((user) => {
+    //   if (user) {
+    //     this.user = user;
+    //     this.getBasket(); // Load the basket for the user
+    //   }
+    // });
   }
 
   getNeeds(): void {

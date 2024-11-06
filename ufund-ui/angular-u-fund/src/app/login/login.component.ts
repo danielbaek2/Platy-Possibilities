@@ -32,6 +32,7 @@ export class LoginComponent {
           this.message = 'No username: '+users;
         } else {
           const user = new User(this.username);
+          this.currentUserService.updateCurrentUser(user); // to set the current user.
           if (user.username == 'Admin'){
             this.router.navigate(['/admin']);
           }else{
