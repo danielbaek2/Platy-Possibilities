@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 @RestController
 @RequestMapping("User")
-public abstract class UserController {
+public class UserController {
     private static final Logger LOG = Logger.getLogger(com.ufund.api.ufundapi.controller.UserController.class.getName());
     private UserDAO userDAO;
 
