@@ -21,21 +21,16 @@ export class HelperComponent implements OnInit {
   router = new Router;
 
   constructor(private needService: NeedService, private helperService: HelperService,
-    private route: ActivatedRoute) {
-
-    this.currentUserService.onButtonClick.subscribe(()=>{
-      this.user = new User("NONE");
-    });
-    }
+    private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.getNeeds();
-    // this.currentUserService.currentUser$.subscribe((user) => {
-    //   if (user) {
-    //     this.user = user;
-    //     this.getBasket(); // Load the basket for the user
-    //   }
-    // });
+     this.currentUserService.currentUser$.subscribe((user) => {
+       if (user) {
+        this.user = user;
+         this.getBasket(); // Load the basket for the user
+     }
+    });
   }
 
   getNeeds(): void {

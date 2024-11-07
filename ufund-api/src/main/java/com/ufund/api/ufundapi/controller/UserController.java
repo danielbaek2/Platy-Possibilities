@@ -100,9 +100,9 @@ public class UserController {
      * ResponseEntity with HTTP status of NOT_FOUND if not found
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
-    @PutMapping("/{username}/basket")
+    @PostMapping("/{username}")
     public ResponseEntity<Need> addNeedToBasket(@PathVariable String username, @RequestBody Need need) {
-        LOG.info("/Helper/" + username + "/DELETE" + need);
+        LOG.info("/Helper/" + username + "/add" + need);
 
         try {
             boolean add = helperDAO.addNeedToBasket(need, username);
