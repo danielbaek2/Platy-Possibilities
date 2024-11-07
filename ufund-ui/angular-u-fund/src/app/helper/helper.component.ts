@@ -39,10 +39,6 @@ export class HelperComponent implements OnInit {
     this.needService.getNeeds().subscribe(needs => this.needs = needs);
   }
 
-  getBasket(): void{
-    this.helperService.getBasket(this.user.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket);
-  }
-
   addNeedToBasket(need: Need): void{
       this.helperService.addNeedToBasket(need, this.user.username).subscribe(need => {this.fundingBasket.push(need);}); 
   }
