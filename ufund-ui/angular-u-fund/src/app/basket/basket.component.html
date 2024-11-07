@@ -14,11 +14,13 @@
       </a>
       <button type="button" class="remove" title="Remove from basket"
         (click)="removeNeedFromBasket(need)">Remove</button>
+      <label><input type="checkbox" (click)="selectMultiple(need)">.</label>
     </li>
 </ul>
-
 <div>
   <button type="button" title="Checkout" (click)="checkoutBasket()">
     Checkout
   </button>
 </div>
+<button type="button" class="remove-selected"  title="Remove selected from basket" (click)="removeMultipleFromBasket()">Remove from basket</button>
+<hr>
