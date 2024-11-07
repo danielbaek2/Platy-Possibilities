@@ -29,7 +29,7 @@ public class CupboardFileDAO implements CupboardDAO{
      */
     // not sure how to recieve file name.
     
-    public CupboardFileDAO(@Value("ufund-api/data/needs.json") String filename, ObjectMapper objectmapper) throws IOException{
+    public CupboardFileDAO(@Value("data/needs.json") String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
         this.needs = new HashMap<>();
