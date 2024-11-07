@@ -11,7 +11,7 @@ import { MessageService } from './message.service';
 @Injectable({ providedIn: 'root' })
 export class UserService {
 
-  private usersUrl = 'http://localhost:8080/Helper';  // URL to web api
+  private usersUrl = 'http://localhost:8080/User/';  // URL to web api
   message: string = '';
 
   httpOptions = {
@@ -30,7 +30,7 @@ export class UserService {
 
   /** GET user by id. Return `undefined` when id not found */
   getUser(username: string): Observable<User> {
-    const url = `${this.usersUrl}/?username=${username}`;
+    const url = `${this.usersUrl}?username=${username}`;
     return this.http.get<User>(url)
       .pipe(
         tap((_) =>
@@ -44,7 +44,7 @@ export class UserService {
     if (!username.trim()) {
       return of([]);
     }
-    return this.http.get<User[]>(`${this.usersUrl}/?username=${username}`).pipe(
+    return this.http.get<User[]>(`${this.usersUrl}?username=${username}`).pipe(
       tap((_) => console.log(`found users matching "${username}"`)),
       catchError(this.handleError<User[]>('searchUsers', []))
     );

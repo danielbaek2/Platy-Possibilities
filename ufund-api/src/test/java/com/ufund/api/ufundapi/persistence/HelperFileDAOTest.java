@@ -16,8 +16,8 @@ import com.ufund.api.ufundapi.model.Helper;
 import com.ufund.api.ufundapi.model.Need;
 
 @Tag("Persistence-Tier")
-public class UserFileDAOTest {
-    UserFileDAO helperFileDAO;
+public class HelperFileDAOTest {
+    HelperFileDAO helperFileDAO;
     Helper[] testHelperList;
     Need testNeeds;
     ObjectMapper mockObjectMapper;
@@ -32,7 +32,7 @@ public class UserFileDAOTest {
         testNeeds = new Need(1,"this could be a test",5,50);
 
         when(mockObjectMapper.readValue(new File("test_file.txt"), Helper[].class)).thenReturn(testHelperList);
-		helperFileDAO = new UserFileDAO("test_file.txt", mockObjectMapper);
+		helperFileDAO = new HelperFileDAO("test_file.txt", mockObjectMapper);
     }
 
     @Test

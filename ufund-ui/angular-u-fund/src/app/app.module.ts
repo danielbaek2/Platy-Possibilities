@@ -12,6 +12,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { NeedSearchComponent } from './need-search/need-search.component';
 import { AdminComponent } from './admin/admin.component';
 import { LoginComponent } from "./login/login.component";
+import { BasketComponent } from './basket/basket.component';
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import { LoginComponent } from "./login/login.component";
     NeedSearchComponent,
     AdminComponent,
     LoginComponent,
+    BasketComponent,
   ],
   imports: [
     BrowserModule,

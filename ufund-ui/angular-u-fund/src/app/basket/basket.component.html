@@ -1,0 +1,18 @@
+<h1>{{username}}'s Funding Basket</h1>
+
+<div class="helper">
+    <a routerLink="/helper/{{username}}">
+      Back
+    </a>
+</div>
+
+<p>Needs:</p>
+<ul class="funding-menu">
+    <li *ngFor="let need of fundingBasket">
+      <a routerLink="/detail/{{need.id}}">
+        <span class="badge">{{need.id}}</span> {{need.title}}
+      </a>
+      <button type="button" class="remove" title="Remove from basket"
+        (click)="removeNeedFromBasket(need)">Remove</button>
+    </li>
+</ul>

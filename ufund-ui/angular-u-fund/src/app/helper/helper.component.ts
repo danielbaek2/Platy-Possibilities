@@ -16,9 +16,11 @@ import { Router } from '@angular/router';
 export class HelperComponent implements OnInit {
   needs: Need[] = [];
   fundingBasket: Need[] = [];
+  
   user: User = HELPER.user; // temporary hardcoded value
   currentUserService = inject(CurrentUserService);
   router = new Router;
+
 
   constructor(private needService: NeedService, private helperService: HelperService,
     private route: ActivatedRoute) {}
@@ -37,9 +39,12 @@ export class HelperComponent implements OnInit {
     this.needService.getNeeds().subscribe(needs => this.needs = needs);
   }
 
+  getBasket(): void{
+    this.helperService.getBasket(this.user.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket);
+  }
+
   addNeedToBasket(need: Need): void{
-    // username = this.route.snapshot.paramMap.get('username');
-    this.helperService.addNeedToBasket(need, this.user.username).subscribe(need => {this.fundingBasket.push(need);});
+      this.helperService.addNeedToBasket(need, this.user.username).subscribe(need => {this.fundingBasket.push(need);}); 
   }
 
   removeNeedFromBasket(need: Need): void{
@@ -55,3 +60,4 @@ export class HelperComponent implements OnInit {
     this.user = new_user;
   }
 }
+
