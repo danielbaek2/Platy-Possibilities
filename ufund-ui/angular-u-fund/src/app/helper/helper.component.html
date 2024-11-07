@@ -15,9 +15,18 @@
     </a>
     <button type="button" class="add" title="Add to basket"
       (click)="addNeedToBasket(need)">+</button>
+    <label><input type="checkbox" (click)="selectMultiple(need)">.</label>
   </li>
+  <button type="button" class="add-selected"  title="Add selected to basket" (click)="addMultileToBasket()">Add to basket</button>
 </ul>
 
 <a href= "/login">
-  <button>Logout</button>
+  <button type="button">Logout</button>
 </a>
+
+<!-- idea... 
+    select needs (checkbox)
+    selected needs are added to an array maybe
+    click button that says add all needs to basket'
+    loops through the array and adds each need individually using addToBasket
+-->

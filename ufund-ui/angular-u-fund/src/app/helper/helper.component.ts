@@ -13,6 +13,7 @@ import { User } from '../user';
 })
 export class HelperComponent implements OnInit {
   needs: Need[] = [];
+  selectedNeeds: Need[] = [];
   fundingBasket: Need[] = [];
   user: User = HELPER.user // temporary hardcoded value
 
@@ -33,6 +34,14 @@ export class HelperComponent implements OnInit {
 
   getBasket(): void{
     this.helperService.getBasket(this.user.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket);
+  }
+
+  selectMultiple(need: Need): void{
+    this.selectedNeeds.push(need);
+  }
+
+  addMultileToBasket(): void{
+    this.selectedNeeds.forEach(need => this.addNeedToBasket)
   }
 
   addNeedToBasket(need: Need): void{
