@@ -17,7 +17,7 @@ import java.util.logging.Logger;
  */
 @RestController
 @RequestMapping("User")
-public abstract class UserController {
+public class UserController {
     private static final Logger LOG = Logger.getLogger(com.ufund.api.ufundapi.controller.UserController.class.getName());
     private UserDAO userDAO;
 
@@ -105,17 +105,12 @@ public abstract class UserController {
     //     }
     // }
 
-    @GetMapping
+    @GetMapping("/")
     public ResponseEntity<List<Helper>> searchUsers(@RequestParam String username) {
-        LOG.info("GET /Users/?username=" + username);
-
+        LOG.info("GET /User/?username=" + username);
         try {
             List<Helper> matchingUsers = userDAO.userSearch(username);
-            if (matchingUsers.isEmpty()) {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            } else {
-                return new ResponseEntity<>(matchingUsers, HttpStatus.OK);
-            }
+            return new ResponseEntity<>(matchingUsers, HttpStatus.OK);
         } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
