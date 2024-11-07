@@ -78,18 +78,7 @@ public class UserController {
     //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     //     }
     // }
-  
-        try {
-            boolean delete = helperDAO.removeNeedFromBasket(need, username);
-            if (delete) {
-                return new ResponseEntity<>(HttpStatus.OK);
-            } else {
-                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-            }
-        } catch (Exception e) {
-            LOG.log(Level.SEVERE, e.getLocalizedMessage());
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
+
     // /**
     //  * Responds to the PUT request on the funding basket. Adds a need to the funding basket.
     //  * 
