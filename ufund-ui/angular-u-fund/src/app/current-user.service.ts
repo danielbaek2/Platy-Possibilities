@@ -14,4 +14,8 @@ export class CurrentUserService {
   updateCurrentUser(user: User) {
     this.currentUserSubject.next(user); // setting the user in this service to link helper and login
   }
+  isAdmin(): boolean {
+    const user = this.currentUserSubject.getValue();
+    return user?.username === 'Admin';
+  }
 }

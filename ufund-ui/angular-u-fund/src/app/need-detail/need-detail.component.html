@@ -3,10 +3,10 @@
     <div>id: {{need.id}}</div>
     <div>description: {{need.description}}</div>
     <div>funding: {{need.total_funding}}</div>
-    <div>
+    <div *ngIf="isAdmin">
       <label for="need-title">Need title: </label>
       <input id="need-title" [(ngModel)]="need.title" placeholder="title">
     </div>
     <button type="button" (click)="goBack()">go back</button>
-    <button type="button" (click)="save()">save</button>
+    <button *ngIf="isAdmin" type="button" (click)="save()">save</button>
   </div>
