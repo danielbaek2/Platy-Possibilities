@@ -83,17 +83,22 @@ public class HelperController{
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{username}/basket")
-    public ResponseEntity<Need> removeNeedFromBasket(@PathVariable String username, Need need) {
-        LOG.info("DELETE /Helper/" + username + "/basket?id=" + need.getId());
+    public ResponseEntity<Need> removeNeedFromBasket(@PathVariable String username, int id) {
+        LOG.info("DELETE /Helper/" + username + "/basket?id=" + id);
         try {
+            Need need = null;
             for(Need n : helperDAO.getBasket(username)){
-                if (n.getId() == need.getId()){
+                if (n.getId() == id){
                     need = n;
                 }
             }
-            boolean delete = helperDAO.removeNeedFromBasket(need, username);
-            if (delete) {
-                return new ResponseEntity<Need>(HttpStatus.OK);
+            if(need != null){
+                boolean delete = helperDAO.removeNeedFromBasket(need, username);
+                if (delete) {
+                    return new ResponseEntity<Need>(HttpStatus.OK);
+                } else {
+                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+                }
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
