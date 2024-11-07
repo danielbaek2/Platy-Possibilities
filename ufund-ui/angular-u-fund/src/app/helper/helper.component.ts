@@ -16,6 +16,7 @@ import { Router } from '@angular/router';
 })
 export class HelperComponent implements OnInit {
   needs: Need[] = [];
+  selectedNeeds: Need[] = [];
   fundingBasket: Need[] = [];
   
   user: User = HELPER.user; // temporary hardcoded value
@@ -57,8 +58,15 @@ export class HelperComponent implements OnInit {
     this.user = new_user;
   }
 
+  selectMultiple(need: Need): void{
+    this.selectedNeeds.push(need);
+  }
+
+  addMultileToBasket(): void{
+    this.selectedNeeds.forEach(need => this.addNeedToBasket)
+  }
+
   addMessage(message: String): void {
     this.messageBoardService.addMessage(message, this.user.username).subscribe();
   }
 }
-
