@@ -16,6 +16,6 @@ export class CurrentUserService {
   }
   isAdmin(): boolean {
     const user = this.currentUserSubject.getValue();
-    return user?.username === 'Admin';
+    return user?.username.toLowerCase() === 'admin';
   }
 }
