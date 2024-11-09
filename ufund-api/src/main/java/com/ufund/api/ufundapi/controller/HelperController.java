@@ -1,6 +1,7 @@
 package com.ufund.api.ufundapi.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -155,5 +156,22 @@ public class HelperController{
     //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     //     }
     // }
+
+    @DeleteMapping("/{username}/checkout")
+    public ResponseEntity<List<Need>> checkoutBasket(@PathVariable String username){
+        LOG.info("DELETE /Helper/" + username + "/checkout");
+
+        try {
+            List<Need> basket = this.helperDAO.getBasket(username); //Direct ref to the basket
+            List<Need> basketCopy = new ArrayList<Need>(basket);
+            for(Need need:basketCopy){
+                this.helperDAO.removeNeedFromBasket(need, username);
+            }
+            return new ResponseEntity<List<Need>>(basketCopy,HttpStatus.OK);
+        } catch (Exception e) {
+            LOG.log(Level.SEVERE, e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 }
