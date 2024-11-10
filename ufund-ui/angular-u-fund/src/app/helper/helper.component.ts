@@ -27,11 +27,11 @@ export class HelperComponent implements OnInit {
 
   ngOnInit(): void {
     this.getNeeds();
-     this.currentUserService.currentUser$.subscribe((user) => {
-       if (user) {
+    this.currentUserService.currentUser$.subscribe((user) => {
+      if (user) {
         this.user = user;
-         this.getBasket(); // Load the basket for the user
-     }
+        this.getBasket(); // Load the basket for the user
+      }
     });
   }
 
@@ -39,30 +39,24 @@ export class HelperComponent implements OnInit {
     this.needService.getNeeds().subscribe(needs => this.needs = needs);
   }
 
-  addNeedToBasket(need: Need): void {
-      this.helperService.addNeedToBasket(need, this.user.username).subscribe(need => {this.fundingBasket.push(need);}); 
-  }
-
-  removeNeedFromBasket(need: Need): void {
-    this.fundingBasket = this.fundingBasket.filter(n => n !== need)
-    this.helperService.removeNeedFromBasket(need, this.user.username).subscribe();
-  }
-
   getBasket(): void{
     this.helperService.getBasket(this.user.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket);
-  }
-
-  setUser(new_user: User): void{
-    this.user = new_user;
   }
 
   selectMultiple(need: Need): void{
     this.selectedNeeds.push(need);
   }
 
-
   addMultileToBasket(): void{
     this.selectedNeeds.forEach(need => this.addNeedToBasket(need))
+  }
+
+  addNeedToBasket(need: Need): void{
+      this.helperService.addNeedToBasket(need, this.user.username).subscribe(need => {this.fundingBasket.push(need);}); 
+  }
+
+  setUser(new_user: User): void{
+    this.user = new_user;
   }
 
   addMessage(message: String): void {
