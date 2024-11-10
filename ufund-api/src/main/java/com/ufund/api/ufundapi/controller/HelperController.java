@@ -165,6 +165,7 @@ public class HelperController{
             List<Need> basket = this.helperDAO.getBasket(username); //Direct ref to the basket
             List<Need> basketCopy = new ArrayList<Need>(basket);
             for(Need need:basketCopy){
+                need.fundNeed();
                 this.helperDAO.removeNeedFromBasket(need, username);
             }
             return new ResponseEntity<List<Need>>(basketCopy,HttpStatus.OK);
