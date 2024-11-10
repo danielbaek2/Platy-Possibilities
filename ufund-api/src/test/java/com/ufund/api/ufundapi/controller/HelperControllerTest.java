@@ -18,7 +18,6 @@ import org.springframework.http.ResponseEntity;
 import com.ufund.api.ufundapi.model.MessageBoard;
 import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.persistence.HelperDAO;
-import com.ufund.api.ufundapi.persistence.HelperDAO;
 
 /**
  * Test the Helper Controller class
