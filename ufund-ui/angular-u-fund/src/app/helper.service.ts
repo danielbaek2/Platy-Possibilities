@@ -82,4 +82,10 @@ export class HelperService {
   private log(message: string) {
     this.messageService.add(`HelperService: ${message}`);
   }
+
+  checkoutBasket(username:string): Observable<Need[]>{
+    return this.http.delete<Need[]>(`${this.helperURL}/${username}/checkout`, this.httpOptions).pipe(
+      tap(_ => this.log(`Checked out basket`))
+    )
+  }
 }
