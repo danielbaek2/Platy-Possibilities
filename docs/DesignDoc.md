@@ -60,7 +60,7 @@ The Minimum Viable Product involves a basic login system, in which a user only n
 
 This section describes the application domain.
 
-![Domain Model](domain_analysis.png)
+![Domain Model](domain model sprint 3.png)
 
 Everyone who signs into the application is a User. Most Users are Helpers who each have a Funding Basket where they can place the Needs that they want to fund and remove the ones that they do not. The Needs are stored in the Cupboard, where the Helpers can search for Needs they want and select Needs to move to their Basket. The other kind of User is the U-Fund Maneger, or Admin, who can create, modify, and remove Needs from the Cupboard. The Admin does not have a Funding Basket.
 
@@ -127,7 +127,7 @@ The classes supporting the ViewModel tier of the model would be the CupboardCont
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
 > 
-![Replace with your ViewModel Tier class diagram 1, etc.](viewmodel_sprint_2.png)
+![Replace with your ViewModel Tier class diagram 1, etc.](viewmodel sprint 3.png)
 
 ### Model Tier
 > _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
@@ -143,7 +143,7 @@ The Need class details every responsibility directly correlated with a Need, whe
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
 > 
-![Replace with your Model Tier class diagram 1, etc.](model_sprint_2.png)
+![Replace with your Model Tier class diagram 1, etc.](model sprint 3.png)
 
 ## OO Design Principles
 
@@ -154,6 +154,14 @@ The initial OO Principles that the team has considered for this first Sprint are
 > _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
 Encapsulation, Inheritance, Abstraction, Polymorphism
+
+Encapsulation: The MessageBoard class encapsulates the overall board and exposes the methods so that the Helper and Admin classes can use its methods.
+
+Inheritance: The two different users, the helpers and admin, inherit from a more generalized user class.
+
+Abstraction: The overall User class is abstract, as it serves as a base class for the Helper and Admin classes.
+
+Polymorphism: The MessageBoard class, in a sense, showcases polymorphism, as it treats the Helper and Admin classes as User objects.
 
 > _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
 
@@ -197,3 +205,5 @@ One anomaly for this code coverage is that the CupboardController tests do not t
 2024/09/29 Sprint 1: The team worked on and implemented the functionality of the CupboardController, while also implementing the routine formatting for the code. 
 
 2024/10/09 Sprint 2: The team decided that, for the helpers and admin, there would be a more generalized user class that the other two classes inherit from.
+
+2024/11/06 Sprint 3: The team made a new class in the model, MessageBoard, so that the helper can access message board and add new messages.
