@@ -8,6 +8,7 @@
 
 <app-need-search></app-need-search>
 
+<p *ngIf="needs.length == 0">No needs to fund at this moment. Please come back again later.</p>
 <ul class="needs-menu">
   <li *ngFor="let need of needs">
     <a routerLink="/detail/{{need.id}}">
@@ -23,10 +24,3 @@
 <a href= "/login">
   <button type="button">Logout</button>
 </a>
-
-<!-- idea... 
-    select needs (checkbox)
-    selected needs are added to an array maybe
-    click button that says add all needs to basket'
-    loops through the array and adds each need individually using addToBasket
--->

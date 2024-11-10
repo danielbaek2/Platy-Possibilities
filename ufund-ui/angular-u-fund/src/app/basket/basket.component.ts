@@ -23,6 +23,31 @@ export class BasketComponent {
     this.helperService.getBasket(this.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket);
   }
   
+  clicked = true;
+  buttonText = 'Select all'
+  onClick(element: any): void{
+    const checkboxes = document.querySelectorAll('ul li label input[type="checkbox"]') as NodeListOf<HTMLInputElement>;
+    this.buttonText = this.buttonText === 'Select all' ? 'Deselect all' : 'Select all';
+
+    if (this.clicked){
+        this.clicked = false;
+        this.selectAll(checkboxes);
+      } else{
+        this.clicked = true;
+        this.deselectAll(checkboxes);
+      }
+  }
+
+  selectAll(checkboxes: NodeListOf<HTMLInputElement>): void{
+    this.selectedNeeds = this.fundingBasket;
+    checkboxes.forEach(checkbox => checkbox.checked = true)
+  }
+
+  deselectAll(checkboxes: NodeListOf<HTMLInputElement>): void{
+    this.selectedNeeds = [];    
+    checkboxes.forEach(checkbox => checkbox.checked = false)
+  }
+
   selectMultiple(need: Need): void{
     this.selectedNeeds.push(need);
   }

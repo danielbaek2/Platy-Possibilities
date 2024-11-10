@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component,inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../user';
 import { UserService } from '../user.service';
+import { CurrentUserService } from '../current-user.service';
 
 @Component({
   selector: 'app-login',
@@ -12,7 +13,13 @@ export class LoginComponent {
   username: string = '';
   message: string = '';
 
-  constructor(private userService: UserService, private router: Router) {}
+  currentUserService = inject(CurrentUserService);
+
+  constructor(private userService: UserService, private router: Router) {
+    this.currentUserService.onButtonClick.subscribe(()=>{
+      this.login();
+    });
+  }
 
   login(): void {
     /*if (this.username.trim().toLowerCase() === 'admin') {
@@ -25,6 +32,7 @@ export class LoginComponent {
           this.message = 'No username: '+users;
         } else {
           const user = new User(this.username);
+          this.currentUserService.updateCurrentUser(user); // to set the current user.
           if (user.username == 'Admin'){
             this.router.navigate(['/admin']);
           }else{

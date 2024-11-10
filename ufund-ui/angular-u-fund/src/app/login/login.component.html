@@ -9,7 +9,7 @@
       placeholder="Enter your username"
       class="form-control"
     />
-    <button (click)="login()" class="btn btn-primary">Check & Login</button>
+    <button (click)="currentUserService.onButtonClick.next('')" class="btn btn-primary">Check & Login</button>
   </div>
   <p *ngIf="message" class="status-message">{{ message }}</p>
 </div>

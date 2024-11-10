@@ -1,29 +1,17 @@
 import { Injectable } from "@angular/core";
-import { User } from "./user";
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { Subject } from "rxjs";
+import { BehaviorSubject } from 'rxjs';
+import { User } from './user';
+
 
 
 @Injectable({ providedIn: 'root' })
 export class CurrentUserService {
+  private currentUserSubject = new BehaviorSubject<User | null>(null);
+  currentUser$ = this.currentUserSubject.asObservable();
+  onButtonClick = new Subject();
 
-  user: string = "currentUser"
-
-  constructor() { }
-    public saveCurrentUser(user: User) {
-      localStorage.setItem(this.user, JSON.stringify(user));}
-
-  public alreadyCurrentUser(): boolean {
-    return localStorage.getItem('currentUser') !== null;
-  }
-
-  public getCurrentUser():User | null {
-    const user = localStorage.getItem(this.user);
-    if (user) {
-      return JSON.parse(this.user);
-    }
-    return null;
-  }
-  public clearCurrentUser():void {
-    localStorage.removeItem(this.user);
+  updateCurrentUser(user: User) {
+    this.currentUserSubject.next(user); // setting the user in this service to link helper and login
   }
 }

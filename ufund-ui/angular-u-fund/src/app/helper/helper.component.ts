@@ -1,10 +1,12 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { Need } from '../need';
 import { NeedService } from '../need.service';
 import { HelperService } from '../helper.service';
 import { ActivatedRoute } from '@angular/router';
 import { HELPER } from '../mock-helper';
 import { User } from '../user';
+import { CurrentUserService } from '../current-user.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-helper',
@@ -15,17 +17,23 @@ export class HelperComponent implements OnInit {
   needs: Need[] = [];
   selectedNeeds: Need[] = [];
   fundingBasket: Need[] = [];
-  user: User = HELPER.user // temporary hardcoded value
+  
+  user: User = HELPER.user; // temporary hardcoded value
+  currentUserService = inject(CurrentUserService);
+  router = new Router;
+
 
   constructor(private needService: NeedService, private helperService: HelperService,
-    private route: ActivatedRoute) { }
+    private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.getNeeds();
-    const result = this.route.snapshot.paramMap.get('username')?.toString();
-    if (result != null){
-      this.user.username = result
-    }
+    this.currentUserService.currentUser$.subscribe((user) => {
+      if (user) {
+        this.user = user;
+        this.getBasket(); // Load the basket for the user
+      }
+    });
   }
 
   getNeeds(): void {
@@ -40,7 +48,6 @@ export class HelperComponent implements OnInit {
     this.selectedNeeds.push(need);
   }
 
-
   addMultileToBasket(): void{
     this.selectedNeeds.forEach(need => this.addNeedToBasket(need))
   }
@@ -53,4 +60,9 @@ export class HelperComponent implements OnInit {
     this.fundingBasket = this.fundingBasket.filter(n => n !== need)
     this.helperService.removeNeedFromBasket(need, this.user.username).subscribe();
   }
+
+  setUser(new_user: User): void{
+    this.user = new_user;
+  }
 }
+
