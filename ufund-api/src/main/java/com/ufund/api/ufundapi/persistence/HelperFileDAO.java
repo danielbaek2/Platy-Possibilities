@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 
 import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.model.Helper;
+import com.ufund.api.ufundapi.model.MessageBoard;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -21,6 +22,7 @@ public class HelperFileDAO implements HelperDAO {
     private String filename;
     private ObjectMapper objectMapper = null;
     private HashMap<String, Helper> helpers;
+    private MessageBoard messageBoard;
     
     /**
      * HelperFileDao -  Current instance of the helper data access object.
@@ -28,10 +30,11 @@ public class HelperFileDAO implements HelperDAO {
      * @param filename - The name of the file to be loaded.
      * @param objectmapper - The object mapper.
      */
-    public HelperFileDAO(@Value("ufund-api/data/helpers.json") String filename, ObjectMapper objectmapper) throws IOException{
+    public HelperFileDAO(@Value("ufund-api/data/helpers.json") String filename, ObjectMapper objectmapper, MessageBoard messageBoard) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
         this.helpers = new HashMap<>();
+        this.messageBoard = messageBoard;
         loadFile();
     }
 
@@ -98,6 +101,22 @@ public class HelperFileDAO implements HelperDAO {
             else{
                 return null;
             }
+        }
+    }
+
+    public boolean addMessage(String message, String username) throws IOException {
+        synchronized(helpers) {
+            Helper helper = helpers.get(username);
+            if (helper != null) {
+                if (messageBoard.getMessageBoard().contains(message)) {
+                    return false;
+                } else {
+                    helper.addMessage(messageBoard, message);
+                    saveFile();
+                    return true;
+                }
+            }
+            return false;
         }
     }
 }

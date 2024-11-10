@@ -5,6 +5,7 @@ import { HelperService } from '../helper.service';
 import { ActivatedRoute } from '@angular/router';
 import { HELPER } from '../mock-helper';
 import { User } from '../user';
+import { MessageBoardService } from '../message-board.service';
 import { CurrentUserService } from '../current-user.service';
 import { Router } from '@angular/router';
 
@@ -23,7 +24,7 @@ export class HelperComponent implements OnInit {
 
 
   constructor(private needService: NeedService, private helperService: HelperService,
-    private route: ActivatedRoute) {}
+    private route: ActivatedRoute, private messageBoardService: MessageBoardService) {}
 
   ngOnInit(): void {
     this.getNeeds();
@@ -39,11 +40,11 @@ export class HelperComponent implements OnInit {
     this.needService.getNeeds().subscribe(needs => this.needs = needs);
   }
 
-  addNeedToBasket(need: Need): void{
+  addNeedToBasket(need: Need): void {
       this.helperService.addNeedToBasket(need, this.user.username).subscribe(need => {this.fundingBasket.push(need);}); 
   }
 
-  removeNeedFromBasket(need: Need): void{
+  removeNeedFromBasket(need: Need): void {
     this.fundingBasket = this.fundingBasket.filter(n => n !== need)
     this.helperService.removeNeedFromBasket(need, this.user.username).subscribe();
   }
@@ -54,6 +55,10 @@ export class HelperComponent implements OnInit {
 
   setUser(new_user: User): void{
     this.user = new_user;
+  }
+
+  addMessage(message: String): void {
+    this.messageBoardService.addMessage(message, this.user.username).subscribe();
   }
 }
 
