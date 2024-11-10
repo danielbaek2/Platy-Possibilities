@@ -82,7 +82,7 @@ public class HelperControllerTest {
         String username = "Jane";
 
         when(mockHelperDAO.removeNeedFromBasket(mockNeed,username)).thenReturn(true);
-        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed);
+        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed.getId());
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
@@ -95,7 +95,7 @@ public class HelperControllerTest {
         when(mockHelperDAO.removeNeedFromBasket(mockNeed, username)).thenReturn(false);
 
         // Invoke
-        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed);
+        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed.getId());
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());    
@@ -109,7 +109,7 @@ public class HelperControllerTest {
         doThrow(new IOException()).when(mockHelperDAO).removeNeedFromBasket(mockNeed, username);
 
         // Invoke
-        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed);
+        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed.getId());
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());  
