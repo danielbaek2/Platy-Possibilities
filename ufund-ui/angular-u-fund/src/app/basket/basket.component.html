@@ -1,13 +1,16 @@
 <h1>{{username}}'s Funding Basket</h1>
 
 <div class="helper">
-    <a routerLink="/helper/{{username}}">
+    <a routerLink="/helper">
       Back
     </a>
 </div>
 
-<p>Needs:</p>
-<ul class="funding-menu">
+<h3>Needs:</h3>
+<p *ngIf="isEmpty('btn-all') && isEmpty('remove') ">Your funding basket is empty.</p>
+
+<button type="button" id="btn-all" (click)="onClick()">{{buttonText}}</button>
+<ul class="funding-menu" id="needs">
     <li *ngFor="let need of fundingBasket">
       <a routerLink="/detail/{{need.id}}">
         <span class="badge">{{need.id}}</span> {{need.title}}
@@ -22,5 +25,5 @@
     Checkout
   </button>
 </div>
-<button type="button" class="remove-selected"  title="Remove selected from basket" (click)="removeMultipleFromBasket()">Remove from basket</button>
+<button id="remove" type="button" class="remove-selected" title="Remove selected from basket" (click)="removeMultipleFromBasket()">Remove from basket</button>
 <hr>

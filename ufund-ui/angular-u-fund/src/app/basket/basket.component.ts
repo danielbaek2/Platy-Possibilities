@@ -1,6 +1,5 @@
 import { Component} from '@angular/core';
 import { Need } from '../need';
-import { MessageService } from '../message.service';
 import { HelperService } from '../helper.service';
 import { ActivatedRoute } from '@angular/router';
 
@@ -23,8 +22,39 @@ export class BasketComponent {
     this.helperService.getBasket(this.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket);
   }
   
+  clicked = true;
+  buttonText = 'Select all';
+  onClick(): void{
+    const checkboxes = document.querySelectorAll('ul li label input[type="checkbox"]') as NodeListOf<HTMLInputElement>;
+    this.buttonText = this.buttonText === 'Select all' ? 'Deselect all' : 'Select all';
+
+    if (this.clicked){
+      this.clicked = false;
+      this.selectAll(checkboxes);
+    } else{
+      this.clicked = true;
+      this.deselectAll(checkboxes);
+    }
+  }
+
+  selectAll(checkboxes: NodeListOf<HTMLInputElement>): void{
+    this.selectedNeeds = this.fundingBasket;
+    checkboxes.forEach(checkbox => checkbox.checked = true)
+  }
+
+  deselectAll(checkboxes: NodeListOf<HTMLInputElement>): void{
+    this.selectedNeeds = [];    
+    checkboxes.forEach(checkbox => checkbox.checked = false)
+  }
+
   selectMultiple(need: Need): void{
     this.selectedNeeds.push(need);
+  }
+
+  isEmpty(element: string): boolean{
+    const isEmpty = this.fundingBasket.length === 0;
+    (document.getElementById(element) as HTMLInputElement).disabled = isEmpty; //disable the button if the funding basket is empty
+    return isEmpty;
   }
 
   removeNeedFromBasket(need: Need): void{

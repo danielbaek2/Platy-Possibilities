@@ -3,7 +3,6 @@ import { Need } from '../need';
 import { NeedService } from '../need.service';
 import { HelperService } from '../helper.service';
 import { ActivatedRoute } from '@angular/router';
-import { HELPER } from '../mock-helper';
 import { User } from '../user';
 import { MessageBoardService } from '../message-board.service';
 import { CurrentUserService } from '../current-user.service';
@@ -18,8 +17,7 @@ export class HelperComponent implements OnInit {
   needs: Need[] = [];
   selectedNeeds: Need[] = [];
   fundingBasket: Need[] = [];
-  
-  user: User = HELPER.user; // temporary hardcoded value
+  user!: User;
   currentUserService = inject(CurrentUserService);
   router = new Router;
 
