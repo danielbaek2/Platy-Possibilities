@@ -5,7 +5,6 @@ import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 
 import { User } from './user';
-import { MessageService } from './message.service';
 
 
 @Injectable({ providedIn: 'root' })
@@ -18,7 +17,7 @@ export class UserService {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
 
-  constructor( private messageService: MessageService, private http: HttpClient) { }
+  constructor(private http: HttpClient) { }
 
   /** GET users from the server */
   getUsers(): Observable<User[]> {

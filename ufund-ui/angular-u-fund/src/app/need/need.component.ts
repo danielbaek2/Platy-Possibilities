@@ -8,7 +8,6 @@ import {
 import { FormsModule } from '@angular/forms';
 import { NeedDetailComponent } from "../need-detail/need-detail.component";
 import { NeedService } from '../need.service';
-import { MessageService } from '../message.service';
 import { RouterModule } from '@angular/router';
 
 @Component({
@@ -31,7 +30,7 @@ export class NeedComponent implements OnInit {
   private clicked = true;
   private selectedNeeds: Need[] = [];
 
-  constructor(private needService: NeedService, private messageService: MessageService) {}
+  constructor(private needService: NeedService) {}
 
   ngOnInit(): void {
     this.getNeeds();
@@ -44,7 +43,7 @@ export class NeedComponent implements OnInit {
   add(title: string): void {
     title = title.trim();
     if (!title) { return; }
-    this.needService.addNeed({ title } as Need).subscribe({next: (need) => {this.needs.push(need);}, error: (error) => {this.messageService.add(error.message);}});
+    this.needService.addNeed({ title } as Need).subscribe({next: (need) => {this.needs.push(need)}});
   }
 
   delete(need: Need): void {
