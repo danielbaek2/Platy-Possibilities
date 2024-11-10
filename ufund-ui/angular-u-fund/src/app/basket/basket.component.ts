@@ -29,5 +29,6 @@ export class BasketComponent {
 
   checkoutBasket(): void{
     this.helperService.checkoutBasket(this.username).subscribe();
+    this.fundingBasket = []
   }
 }
