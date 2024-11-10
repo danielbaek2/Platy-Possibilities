@@ -72,4 +72,17 @@ export class HelperService {
       return of(result as T);
     };
   }
+
+
+  checkoutBasket(username:string): Observable<Need[]>{
+    let removedNeeds = this.http.delete<Need[]>(`${this.helperURL}/${username}/checkout`, this.httpOptions).pipe(
+      tap(needs => needs.forEach(need => {
+        (`need removed: ${need.title}`)
+        this.http.delete<Need>(`http://localhost:8080/Cupboard/${need.id}`,this.httpOptions).pipe(
+          tap(need => (`Removed need from cupboard: ${need.title}`))
+        );
+      })
+    ))
+    return removedNeeds
+  }
 }

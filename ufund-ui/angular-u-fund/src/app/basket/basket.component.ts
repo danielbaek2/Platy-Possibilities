@@ -25,4 +25,9 @@ export class BasketComponent {
     this.fundingBasket = this.fundingBasket.filter(n => n !== need)
     this.helperService.removeNeedFromBasket(need, this.username).subscribe();
   }
+
+  checkoutBasket(): void{
+    this.helperService.checkoutBasket(this.username).subscribe();
+    this.fundingBasket = []
+  }
 }
