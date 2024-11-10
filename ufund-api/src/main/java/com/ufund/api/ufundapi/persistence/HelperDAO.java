@@ -11,5 +11,7 @@ public interface HelperDAO {
     public boolean addNeedToBasket(Need need, String username) throws IOException;
     
     public List<Need> getBasket(String username) throws IOException;
+
+    public boolean addMessage(String message, String username) throws IOException; 
 }
 

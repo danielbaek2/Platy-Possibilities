@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.List;
 
 import com.ufund.api.ufundapi.model.Helper;
-import com.ufund.api.ufundapi.model.Need;
 
 public interface UserDAO {
     // public boolean removeNeedFromBasket(Need need, String username) throws IOException;

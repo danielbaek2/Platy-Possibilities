@@ -19,7 +19,7 @@ export class NeedService {
 
   getNeeds(): Observable<Need[]> {
     return this.http.get<Need[]>(this.needsUrl).pipe(
-      tap(_ => this.log('fetched needs' )), 
+      tap(_ => this.log('fetched needs' )),
       catchError(this.handleError<Need[]>('getNeeds', [])));
   }
 
@@ -35,15 +35,16 @@ export class NeedService {
   getNeed(id: number): Observable<Need> {
     const url = `${this.needsUrl}/${id}`;
     return this.http.get<Need>(url).pipe(
-      tap(_ => this.log(`fetched need id=${id}`)), 
+      tap(_ => this.log(`fetched need id=${id}`)),
       catchError(this.handleError<Need>(`getNeed id=${id}`)));
   }
 
   /** PUT: update the Need on the server */
   updateNeed(need: Need): Observable<any> {
     return this.http.put(this.needsUrl, need, this.httpOptions).pipe(
-      tap(_ => this.log(`updated need id=${need.id}`)), 
-      catchError(this.handleError<any>('updateNeed')));
+      tap(_ => this.log(`updated need id=${need.id}`)),
+      catchError(this.handleError<any>('updateNeed'))
+    );
   }
 
   /** POST: add a new Need to the server */
@@ -56,7 +57,7 @@ export class NeedService {
         }
         return need;
       }),
-      switchMap(needToAdd => 
+      switchMap(needToAdd =>
         this.http.post<Need>(this.needsUrl, needToAdd, this.httpOptions).pipe(
           tap((newNeed: Need) => this.log(`added need w/ id=${newNeed.id}`)),
           catchError(this.handleError<Need>('addNeed'))
@@ -69,7 +70,7 @@ export class NeedService {
   deleteNeed(id: number): Observable<Need> {
     const url = `${this.needsUrl}/${id}`;
     return this.http.delete<Need>(url, this.httpOptions).pipe(
-      tap(_ => this.log(`deleted need id=${id}`)), 
+      tap(_ => this.log(`deleted need id=${id}`)),
       catchError(this.handleError<Need>('deleteNeed')));
   }
 
@@ -82,6 +83,13 @@ export class NeedService {
     return this.http.get<Need[]>(`${this.needsUrl}/?need_title=${term}`).pipe(tap(x => x.length ?
         this.log(`found needs matching "${term}"`) :
         this.log(`no needs matching "${term}"`)), catchError(this.handleError<Need[]>('searchNeeds', [])));
+  }
+
+  checkNeedIdExists(id: number): Observable<boolean> {
+    return this.getNeed(id).pipe(
+      map((need) => !!need),
+      catchError(() => of(false))
+    );
   }
 
   private log(message: string) {
@@ -107,5 +115,5 @@ export class NeedService {
       // Let the app keep running by returning an empty result.
       return of(result as T);
     };
-  }  
+  }
 }

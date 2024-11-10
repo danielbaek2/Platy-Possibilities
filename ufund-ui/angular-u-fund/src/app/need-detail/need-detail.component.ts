@@ -5,6 +5,7 @@ import { NgIf, UpperCasePipe } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 import { NeedService } from '../need.service';
+import { CurrentUserService} from "../current-user.service";
 
 @Component({
   standalone: true,
@@ -15,15 +16,18 @@ import { NeedService } from '../need.service';
 })
 export class NeedDetailComponent implements OnInit {
   need: Need | undefined;
+  isAdmin: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
     private needService: NeedService,
     private location: Location,
+    private currentUserService: CurrentUserService
   ) {}
 
   ngOnInit(): void {
-      this.getNeed();
+    this.getNeed();
+    this.isAdmin = this.currentUserService.isAdmin();
   }
 
   getNeed(): void {
@@ -42,5 +46,5 @@ export class NeedDetailComponent implements OnInit {
         .subscribe(() => this.goBack());
     }
   }
-  
+
 }

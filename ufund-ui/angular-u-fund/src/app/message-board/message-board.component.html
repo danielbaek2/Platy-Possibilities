@@ -1,0 +1,15 @@
+<h3>Message Board</h3>
+
+<div *ngIf="messages.length === 0" class="no-messages-message">No messages are on the message board.</div>
+
+<ul *ngIf="messages.length > 0" class="messages">
+  <ul class="message board">
+    <li *ngFor="let message of messages">
+      <a>
+        <span class="badge">{{message}}</span>
+        <button type="button" class="delete" title="delete message"
+      (click)="deleteMessage(message)">x</button>
+      </a>
+    </li>
+  </ul>
+</ul>

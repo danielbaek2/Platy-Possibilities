@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.ufund.api.ufundapi.model.MessageBoard;
 import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.persistence.HelperDAO;
 
@@ -26,14 +27,16 @@ import com.ufund.api.ufundapi.persistence.HelperDAO;
 public class HelperController{
     private static final Logger LOG = Logger.getLogger(com.ufund.api.ufundapi.controller.UserController.class.getName());
     private HelperDAO helperDAO;
+    private MessageBoard messageBoard;
 
     /**
      * Creates a REST API controller for the Helper Requests
      *
      * @param helperDAO The Helper Data Access Object which will perform CRUD operations
      */
-    public HelperController(HelperDAO helperDAO) {
+    public HelperController(HelperDAO helperDAO, MessageBoard messageBoard) {
         this.helperDAO = helperDAO;
+        this.messageBoard = messageBoard;
     }
 
     /**
@@ -83,22 +86,17 @@ public class HelperController{
      * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
      */
     @DeleteMapping("/{username}/basket")
-    public ResponseEntity<Need> removeNeedFromBasket(@PathVariable String username, int id) {
-        LOG.info("DELETE /Helper/" + username + "/basket?id=" + id);
+    public ResponseEntity<Need> removeNeedFromBasket(@PathVariable String username, Need need) {
+        LOG.info("DELETE /Helper/" + username + "/basket?id=" + need.getId());
         try {
-            Need need = null;
             for(Need n : helperDAO.getBasket(username)){
-                if (n.getId() == id){
+                if (n.getId() == need.getId()){
                     need = n;
                 }
             }
-            if(need != null){
-                boolean delete = helperDAO.removeNeedFromBasket(need, username);
-                if (delete) {
-                    return new ResponseEntity<Need>(HttpStatus.OK);
-                } else {
-                    return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-                }
+            boolean delete = helperDAO.removeNeedFromBasket(need, username);
+            if (delete) {
+                return new ResponseEntity<Need>(HttpStatus.OK);
             } else {
                 return new ResponseEntity<>(HttpStatus.NOT_FOUND);
             }
@@ -133,6 +131,26 @@ public class HelperController{
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PutMapping("/{username}/board")
+    public ResponseEntity<String> addMessage(@RequestBody String message, @PathVariable String username) {
+        LOG.info("PUT /Helper/board/" + message);
+        try {
+            boolean get = messageBoard.addMessage(message);
+            if (get) {
+                return new ResponseEntity<String>(message, HttpStatus.OK);
+            } else {
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+            }
+        }
+        catch (IOException e) {
+            LOG.log(Level.SEVERE,e.getLocalizedMessage());
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    //curl.exe -X PUT "http://localhost:8080/Helper/janedoe/board" -H "Content-Type: application/json" -d "Hello, this is a test message"
+
 
     // @GetMapping("{/username}")
     // public ResponseEntity<String> login(@PathVariable String username) {

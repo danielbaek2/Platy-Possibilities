@@ -8,7 +8,7 @@
 
 <app-need-search></app-need-search>
 
-<p *ngIf="needs.length == 0">No needs to fund at this moment. Please come back again later.</p>
+<div *ngIf="needs.length == 0">No needs to fund at this moment. Please come back again later.</div>
 <ul class="needs-menu">
   <li *ngFor="let need of needs">
     <a routerLink="/detail/{{need.id}}">
@@ -19,8 +19,16 @@
     <label><input type="checkbox" (click)="selectMultiple(need)">.</label>
   </li>
 </ul>
-<button type="button" class="add-selected"  title="Add selected to basket" (click)="addMultileToBasket()">Add to basket</button>
+<button class="add-selected"  title="Add selected to basket" (click)="addMultileToBasket()">Add to basket</button>
 <hr>
+
+<ul class="add-message">
+  <label for="add-message-box">Add Message</label>
+  <input #messageBox id="add-message-box"/>
+  <button type="button" class="add" title="Add to message board"
+      (click)="addMessage(messageBox.value); messageBox.value=''">+</button>
+</ul>
+
 <a href= "/login">
-  <button type="button">Logout</button>
+  <button>Logout</button>
 </a>

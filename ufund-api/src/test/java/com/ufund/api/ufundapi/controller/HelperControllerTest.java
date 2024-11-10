@@ -15,6 +15,7 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
+import com.ufund.api.ufundapi.model.MessageBoard;
 import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.persistence.HelperDAO;
 
@@ -34,7 +35,7 @@ public class HelperControllerTest {
     void setUpHelperController() {
         mockHelperDAO = mock(HelperDAO.class);
         mockNeed = mock(Need.class);
-        helperController = new HelperController(mockHelperDAO);
+        helperController = new HelperController(mockHelperDAO, new MessageBoard(null));
     }
 
     @Test
@@ -81,7 +82,7 @@ public class HelperControllerTest {
         String username = "Jane";
 
         when(mockHelperDAO.removeNeedFromBasket(mockNeed,username)).thenReturn(true);
-        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed.getId());
+        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
@@ -94,7 +95,7 @@ public class HelperControllerTest {
         when(mockHelperDAO.removeNeedFromBasket(mockNeed, username)).thenReturn(false);
 
         // Invoke
-        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed.getId());
+        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed);
 
         // Analyze
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());    
@@ -108,7 +109,7 @@ public class HelperControllerTest {
         doThrow(new IOException()).when(mockHelperDAO).removeNeedFromBasket(mockNeed, username);
 
         // Invoke
-        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed.getId());
+        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed);
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());  

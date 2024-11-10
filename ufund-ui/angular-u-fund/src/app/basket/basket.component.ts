@@ -9,9 +9,12 @@ import { ActivatedRoute } from '@angular/router';
   styleUrl: './basket.component.css'
 })
 export class BasketComponent {
+  private selectedNeeds: Need[] = [];
+  private clicked = true;
   fundingBasket!: Need[];
   username!: string;
-  selectedNeeds: Need[] = [];
+  buttonText = 'Select all';
+
   constructor(private helperService: HelperService, private route: ActivatedRoute){}
 
   ngOnInit(): void {
@@ -22,8 +25,7 @@ export class BasketComponent {
     this.helperService.getBasket(this.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket);
   }
   
-  clicked = true;
-  buttonText = 'Select all';
+ 
   onClick(): void{
     const checkboxes = document.querySelectorAll('ul li label input[type="checkbox"]') as NodeListOf<HTMLInputElement>;
     this.buttonText = this.buttonText === 'Select all' ? 'Deselect all' : 'Select all';

@@ -1,5 +1,6 @@
 package com.ufund.api.ufundapi.model;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,5 +31,9 @@ public class Helper extends User {
 
     public List<Need> getBasket(){
         return fundingBasket;
+    }
+
+    public void addMessage(MessageBoard messageBoard, String message) throws IOException {
+        messageBoard.addMessage(message);
     }
 }

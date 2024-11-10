@@ -1,7 +1,6 @@
 package com.ufund.api.ufundapi.controller;
 
 import com.ufund.api.ufundapi.model.Helper;
-import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.persistence.UserDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
