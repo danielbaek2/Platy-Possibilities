@@ -42,13 +42,8 @@ export class NeedDetailComponent implements OnInit {
 
   save(): void {
     if (this.need) {
-      this.needService.checkNeedIdExists(this.need.id).subscribe((exists) => {
-        if (exists) {
-          alert(`A need with ID ${this.need?.id} already exists. Please choose a different ID.`);
-        } else {
-          this.needService.updateNeed(this.need!).subscribe(() => this.goBack());
-        }
-      });
+      this.needService.updateNeed(this.need)
+        .subscribe(() => this.goBack());
     }
   }
 
