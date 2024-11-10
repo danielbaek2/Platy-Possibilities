@@ -47,7 +47,7 @@ export class HelperComponent implements OnInit {
     this.selectedNeeds.push(need);
   }
 
-  addMultileToBasket(): void{
+  addMultipleToBasket(): void{
     this.selectedNeeds.forEach(need => this.addNeedToBasket(need))
   }
 
