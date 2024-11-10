@@ -23,21 +23,14 @@
   </li>
 </ul>
 
-<ul class="add-message">
-  <label for="add-message-box">Add Message</label>
-  <input #messageBox id="add-message-box"/>
-  <button type="button" class="add" title="Add to message board"
-      (click)="addMessage(messageBox.value); messageBox.value=''">+</button>
-</ul>
-
-<ul class="add-message">
-  <label for="add-message-box">Add Message</label>
-  <input #messageBox id="add-message-box"/>
-  <button type="button" class="add" title="Add to message board"
-      (click)="addMessage(messageBox.value); messageBox.value=''">+</button>
-</ul>
 <button type="button" class="add-selected" title="Add selected to basket" (click)="addMultileToBasket()">Add to basket</button>
 <hr>
+<ul class="add-message">
+  <label for="add-message-box">Add Message</label>
+  <input #messageBox id="add-message-box"/>
+  <button type="button" class="add" title="Add to message board"
+      (click)="addMessage(messageBox.value); messageBox.value=''">+</button>
+</ul>
 <a href= "/login">
   <button>Logout</button>
 </a>
