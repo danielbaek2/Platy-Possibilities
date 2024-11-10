@@ -83,9 +83,12 @@ public class HelperFileDAO implements HelperDAO {
                 if (basket.contains(need)) {
                     return false;
                 } else {
-                    helper.addNeedToBasket(need);
-                    saveFile();
-                    return true;
+                    if (need.fundable()){
+                        helper.addNeedToBasket(need);
+                        saveFile();
+                        return true;
+                    }
+                    return false;
                 }
             }
             return false;
