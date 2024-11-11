@@ -116,11 +116,13 @@ public class Need {
     }
 
     public boolean fundable(){
-        if(quantity_funded >= quantity){
-            return false;
+        if(quantity_funded <= quantity){
+            return true;
         }
 
-        return true;
+        else{
+            return false;
+        }
     }
 
     /**

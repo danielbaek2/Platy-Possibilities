@@ -3,7 +3,6 @@ import { Need } from '../need';
 import { NeedService } from '../need.service';
 import { HelperService } from '../helper.service';
 import { ActivatedRoute } from '@angular/router';
-import { HELPER } from '../mock-helper';
 import { User } from '../user';
 import { MessageBoardService } from '../message-board.service';
 import { CurrentUserService } from '../current-user.service';
@@ -16,9 +15,9 @@ import { Router } from '@angular/router';
 })
 export class HelperComponent implements OnInit {
   needs: Need[] = [];
+  selectedNeeds: Need[] = [];
   fundingBasket: Need[] = [];
-  
-  user: User = HELPER.user; // temporary hardcoded value
+  user!: User;
   currentUserService = inject(CurrentUserService);
   router = new Router;
 
@@ -28,11 +27,11 @@ export class HelperComponent implements OnInit {
 
   ngOnInit(): void {
     this.getNeeds();
-     this.currentUserService.currentUser$.subscribe((user) => {
-       if (user) {
+    this.currentUserService.currentUser$.subscribe((user) => {
+      if (user) {
         this.user = user;
-         this.getBasket(); // Load the basket for the user
-     }
+        this.getBasket(); // Load the basket for the user
+      }
     });
   }
 
@@ -40,17 +39,20 @@ export class HelperComponent implements OnInit {
     this.needService.getNeeds().subscribe(needs => this.needs = needs);
   }
 
-  addNeedToBasket(need: Need): void {
-      this.helperService.addNeedToBasket(need, this.user.username).subscribe(need => {this.fundingBasket.push(need);}); 
-  }
-
-  removeNeedFromBasket(need: Need): void {
-    this.fundingBasket = this.fundingBasket.filter(n => n !== need)
-    this.helperService.removeNeedFromBasket(need, this.user.username).subscribe();
-  }
-
   getBasket(): void{
     this.helperService.getBasket(this.user.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket);
+  }
+
+  selectMultiple(need: Need): void{
+    this.selectedNeeds.push(need);
+  }
+
+  addMultipleToBasket(): void{
+    this.selectedNeeds.forEach(need => this.addNeedToBasket(need))
+  }
+
+  addNeedToBasket(need: Need): void{
+      this.helperService.addNeedToBasket(need, this.user.username).subscribe(need => {this.fundingBasket.push(need);}); 
   }
 
   setUser(new_user: User): void{
@@ -61,4 +63,3 @@ export class HelperComponent implements OnInit {
     this.messageBoardService.addMessage(message, this.user.username).subscribe();
   }
 }
-

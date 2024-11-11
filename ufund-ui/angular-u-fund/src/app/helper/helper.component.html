@@ -8,10 +8,7 @@
 
 <app-need-search></app-need-search>
 
-<div *ngIf="needs.length === 0" class="no-needs-message">
-  No needs available to fund
-</div>
-
+<div *ngIf="needs.length == 0">No needs to fund at this moment. Please come back again later.</div>
 <ul class="needs-menu">
   <li *ngFor="let need of needs">
     <a routerLink="/detail/{{need.id}}">
@@ -19,16 +16,17 @@
     </a>
     <button type="button" class="add" title="Add to basket"
       (click)="addNeedToBasket(need)">+</button>
+    <label><input type="checkbox" (click)="selectMultiple(need)">.</label>
   </li>
 </ul>
-
+<button class="add-selected"  title="Add selected to basket" (click)="addMultipleToBasket()">Add to basket</button>
+<hr>
 <ul class="add-message">
   <label for="add-message-box">Add Message</label>
   <input #messageBox id="add-message-box"/>
   <button type="button" class="add" title="Add to message board"
       (click)="addMessage(messageBox.value); messageBox.value=''">+</button>
 </ul>
-
 <a href= "/login">
   <button>Logout</button>
 </a>
