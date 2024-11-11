@@ -18,6 +18,7 @@ export class HelperComponent implements OnInit {
   selectedNeeds: Need[] = [];
   fundingBasket: Need[] = [];
   user!: User;
+  addedNeedMessage: String = "";
   currentUserService = inject(CurrentUserService);
   router = new Router;
 
@@ -48,11 +49,13 @@ export class HelperComponent implements OnInit {
   }
 
   addMultipleToBasket(): void{
-    this.selectedNeeds.forEach(need => this.addNeedToBasket(need))
+    this.selectedNeeds.forEach(need => this.addNeedToBasket(need));
+    this.addedNeedMessage = 'Item(s) have been added to the basket!';
   }
 
   addNeedToBasket(need: Need): void{
       this.helperService.addNeedToBasket(need, this.user.username).subscribe(need => {this.fundingBasket.push(need);}); 
+      this.addedNeedMessage = 'Item(s) have been added to the basket!';
   }
 
   setUser(new_user: User): void{

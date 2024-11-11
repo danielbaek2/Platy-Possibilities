@@ -20,6 +20,7 @@
   </li>
 </ul>
 <button class="add-selected"  title="Add selected to basket" (click)="addMultipleToBasket()">Add to basket</button>
+<div class="added-need-message" *ngIf="addedNeedMessage">{{addedNeedMessage}}</div>
 <hr>
 
 <ul class="add-message">
