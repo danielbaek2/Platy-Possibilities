@@ -15,13 +15,14 @@ input[type=text], input[type=password] {
 
 /* Set a style for all buttons */
 button {
-  background-color: #04AA6D;
+  background-color: #078a5a;
   color: white;
-  padding: 14px 20px;
-  margin: 20px 0;
+  padding: 6px;
+  margin: 200px 0;
   border: black;
   cursor: pointer;
-  width: 25%;
+  width: 10%;
+  font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
 /* Add a hover effect for buttons */
@@ -68,4 +69,24 @@ span.psw {
   .cancelbtn {
     width: 100%;
   }
+}
+
+h2 {
+  text-align: center;
+}
+
+.input-group {
+  text-align: center;
+}
+
+.status-message {
+  text-align: center;
+  margin-top: -180px;
+  font-family: Georgia, 'Times New Roman', Times, serif;
+  font-size: 13px;
+  font-weight: bold;
+}
+
+body {
+  background-color: #078a5a;
 }

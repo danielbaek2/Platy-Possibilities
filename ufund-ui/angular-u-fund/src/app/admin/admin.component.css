@@ -1,0 +1,28 @@
+h2 {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    font-size: 30px;
+    margin: 0 auto;
+    margin-top: 50px;
+    padding: 10px;
+    width: 150px;
+    background-color: #078a5a;
+    color:  antiquewhite;
+}
+
+.logout-button {
+    text-align: center;
+}
+
+button {
+    background-color: #078a5a;
+    color: white;
+    padding: 6px;
+    margin: 5px 0;
+    margin-left: 5px;
+    margin-top: 10px;
+    border: black;
+    cursor: pointer;
+    width: 5%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}

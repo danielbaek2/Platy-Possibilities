@@ -1,6 +1,4 @@
 <div class="login-form">
-  <h2>Login</h2>
-  <label for="username">Username:</label>
   <div class="input-group">
     <input
       id="username"
@@ -9,7 +7,7 @@
       placeholder="Enter your username"
       class="form-control"
     />
-    <button (click)="currentUserService.onButtonClick.next('')" class="btn btn-primary">Check & Login</button>
+    <button (click)="currentUserService.onButtonClick.next('')" class="btn btn-primary">Login</button>
   </div>
   <p *ngIf="message" class="status-message">{{ message }}</p>
 </div>

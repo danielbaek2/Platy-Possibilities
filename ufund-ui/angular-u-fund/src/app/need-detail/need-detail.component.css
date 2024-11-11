@@ -1,0 +1,33 @@
+div {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #376e53;
+    margin: 0 auto;
+    width: 600px;
+}
+
+.need-title {
+    margin-top: 100px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+input {
+    text-align: center;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    background-color: #ccf5e6;
+}
+
+button {
+    background-color: #078a5a;
+    color: white;
+    padding: 6px;
+    margin: 10px 0;
+    margin-left: 5px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+    border: black;
+    cursor: pointer;
+    width: 10%;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}

@@ -29,7 +29,7 @@ export class LoginComponent {
     this.userService.searchUsers(this.username).subscribe(
       (users) => {
         if (users.length === 0) {
-          this.message = 'No username: '+users;
+          this.message = 'User not found.'+users;
         } else {
           const user = new User(this.username);
           this.currentUserService.updateCurrentUser(user); // to set the current user.
