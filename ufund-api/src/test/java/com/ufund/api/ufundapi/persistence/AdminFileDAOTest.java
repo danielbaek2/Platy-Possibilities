@@ -22,6 +22,7 @@ public class AdminFileDAOTest {
 
     @BeforeEach
     void setupAdminFileDAO() throws IOException {
+        testAdmin = new Admin("Test");
         mockObjectMapper = mock(ObjectMapper.class);
         when(mockObjectMapper.readValue(new File("test_file.txt"), Admin.class)).thenReturn(testAdmin);
         adminFileDAO = new AdminFileDAO("test_file.txt", mockObjectMapper);
