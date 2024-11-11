@@ -8,6 +8,7 @@ h2 {
     width: 150px;
     background-color: #078a5a;
     color:  antiquewhite;
+    border-radius: 5px;
 }
 
 .logout-button {
@@ -25,4 +26,9 @@ button {
     cursor: pointer;
     width: 5%;
     font-family: Georgia, 'Times New Roman', Times, serif;
+    border-radius: 5px;
+}
+
+button:hover {
+    opacity: 0.8;
 }

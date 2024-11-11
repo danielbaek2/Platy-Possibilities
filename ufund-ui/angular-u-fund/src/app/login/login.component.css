@@ -19,10 +19,12 @@ button {
   color: white;
   padding: 6px;
   margin: 200px 0;
+  margin-left: 5px;
   border: black;
   cursor: pointer;
   width: 10%;
   font-family: Georgia, 'Times New Roman', Times, serif;
+  border-radius: 5px;
 }
 
 /* Add a hover effect for buttons */
