@@ -16,7 +16,7 @@ public class AdminFileDAO implements AdminDAO {
     private ObjectMapper objectMapper = null;
     private Admin admin;    
 
-    public AdminFileDAO(@Value("data/admin.json") String filename, ObjectMapper objectmapper) throws IOException {
+    public AdminFileDAO(@Value("ufund-api/data/admin.json") String filename, ObjectMapper objectmapper) throws IOException {
         this.filename = filename;
         this.objectMapper = objectmapper;
         loadFile();
