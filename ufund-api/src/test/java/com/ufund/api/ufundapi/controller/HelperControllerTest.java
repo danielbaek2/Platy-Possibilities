@@ -82,6 +82,8 @@ public class HelperControllerTest {
         String username = "Jane";
 
         when(mockHelperDAO.removeNeedFromBasket(mockNeed,username)).thenReturn(true);
+        List<Need> mockBasket = Arrays.asList(mockNeed);
+        when(mockHelperDAO.getBasket(username)).thenReturn(mockBasket);
         ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed.getId());
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
@@ -107,6 +109,8 @@ public class HelperControllerTest {
         String username = "Jane";
         // when removeNeedFromBasket is called, throw an IOException
         doThrow(new IOException()).when(mockHelperDAO).removeNeedFromBasket(mockNeed, username);
+        List<Need> mockBasket = Arrays.asList(mockNeed);
+        when(mockHelperDAO.getBasket(username)).thenReturn(mockBasket);
 
         // Invoke
         ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed.getId());
@@ -151,5 +155,19 @@ public class HelperControllerTest {
 
         // Analyze
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());  
+    }
+
+    @Test
+    void testCheckout() throws IOException {
+        String username = "Jane";
+
+        when(mockHelperDAO.removeNeedFromBasket(mockNeed,username)).thenReturn(true);
+        List<Need> mockBasket = Arrays.asList(mockNeed);
+        when(mockHelperDAO.getBasket(username)).thenReturn(mockBasket);
+
+        ResponseEntity<List<Need>> response = helperController.checkoutBasket(username);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+
     }
 }
