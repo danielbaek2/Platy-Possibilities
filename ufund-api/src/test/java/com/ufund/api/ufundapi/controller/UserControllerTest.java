@@ -40,4 +40,15 @@ public class UserControllerTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
+
+    @Test
+    void testSearchException() throws IOException {
+        String username = "Jane";
+
+        when(mockUserDAO.userSearch(username)).thenThrow(new IOException());
+
+        ResponseEntity<List<Helper>> response = userController.searchUsers(username);
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
 }

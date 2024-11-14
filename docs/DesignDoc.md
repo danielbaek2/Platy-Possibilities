@@ -60,7 +60,7 @@ The Minimum Viable Product involves a basic login system, in which a user only n
 
 This section describes the application domain.
 
-![Domain Model](domain model sprint 3.png)
+![Domain Model](domain-model-sprint-3.png)
 
 Everyone who signs into the application is a User. Most Users are Helpers who each have a Funding Basket where they can place the Needs that they want to fund and remove the ones that they do not. The Needs are stored in the Cupboard, where the Helpers can search for Needs they want and select Needs to move to their Basket. The other kind of User is the U-Fund Maneger, or Admin, who can create, modify, and remove Needs from the Cupboard. The Admin does not have a Funding Basket.
 
@@ -96,6 +96,13 @@ This section describes the web interface flow; this is how the user views and in
 
 > _Provide a summary of the application's user interface.  Describe, from the user's perspective, the flow of the pages in the web application._
 
+The user starts off on the login screen and, depending on which username they input, they will be routed to either the "helper" or "admin" page. Generally speaking, if the username is anything other than "admin," the user will be routed to the helper page; however, this will not work if the username is not already in the users.json, which only houses the usernames: johndoe, janedoe, and admin. 
+
+If they input either johndoe or janedoe, they will be taken to the helper page, which shows their username at the top of the page, a router link to the basket page, a "need search" portion so the user can look for a specific Need, a list of the Needs, and an "add message" portion so that the helper can send a message to the admin about a certain issue that needs to be addressed. The user can click on the Needs to see overall details such as id, description, cost, quantity, and quantity funded. They can also either add Needs one by one into their funding baskets or select multiple to be added via the checkboxes next to each. They then would click the "add to basket" button to add the multiple selected Needs. Lastly, there is a logout button to be brought back to the login screen.
+
+The basket page will show the individual Needs in the user's funding basket. If there are none, there will be a message stating this. If there are, it will list the Needs similarly to the helper page, in which the helper can either remove or select Needs to be removed from the basket or checked out respectively. 
+
+The admin page will show the admin username up top, an input box to add a new Need to the cupboard, a list of all the Needs in the cupboard, and a message board of the messages the admin receives from the helpers. Here, the admin can choose to remove individual Needs via the remove button next to the Needs, or they can remove multiple via the checkboxes next to each as well as the "remove from cupboard" button. This works similarly with the message board, as the admin can remove messages that they've read. Lastly, a logout button is also available for the admin to be brought back to the login page.
 
 ### View Tier
 > _**[Sprint 4]** Provide a summary of the View Tier UI of your architecture.
@@ -127,7 +134,7 @@ The classes supporting the ViewModel tier of the model would be the CupboardCont
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
 > 
-![Replace with your ViewModel Tier class diagram 1, etc.](viewmodel sprint 3.png)
+![Replace with your ViewModel Tier class diagram 1, etc.](viewmodel-sprint-3.png)
 
 ### Model Tier
 > _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
@@ -143,7 +150,7 @@ The Need class details every responsibility directly correlated with a Need, whe
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
 > 
-![Replace with your Model Tier class diagram 1, etc.](model sprint 3.png)
+![Replace with your Model Tier class diagram 1, etc.](model-sprint-3.png)
 
 ## OO Design Principles
 
@@ -197,6 +204,9 @@ Polymorphism: The MessageBoard class, in a sense, showcases polymorphism, as it 
 
 ![Sprint 2 Code Coverage](CodeCoverageSprint2.png)
 One anomaly for this code coverage is that the CupboardController tests do not test for when the DAO may throw an IOException. This makes it appear that it is missing more coverage than it actually is.
+
+![Sprint 3 Code Coverage](CodeCoverageSprint3.png)
+Many tests do not test for the situation where the DAO would throw an IOException, but considering they should behave in the same way in that scenario, it should be fine.
 
 
 ## Ongoing Rationale

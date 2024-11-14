@@ -4,5 +4,5 @@ export interface Need {
   description: string | null;
   quantity: number;
   cost: number;
-  quantityFunded: number;
+  quantity_funded: number;
 }

@@ -32,6 +32,18 @@ public class CupboardControllerTest {
     }
 
     @Test
+    void testGetNeedsException() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        CupboardController controller = new CupboardController(mockDAO);
+
+        when(mockDAO.getNeeds()).thenThrow(new IOException());
+
+        ResponseEntity<Need[]> response = controller.getNeeds();
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR,response.getStatusCode());
+    }
+
+    @Test
     void testCreateNeedSuccess() throws IOException {
         CupboardDAO mockDAO = mock(CupboardDAO.class);
         Need mockNeed = mock(Need.class);
@@ -58,6 +70,20 @@ public class CupboardControllerTest {
     }
 
     @Test
+    void testCreateNeedsException() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        Need mockNeed = mock(Need.class);
+        CupboardController controller = new CupboardController(mockDAO);
+
+        when(mockDAO.searchNeeds(mockNeed.getTitle())).thenThrow(new IOException());
+        Need newMockNeed = mock(Need.class);
+        when(mockDAO.createNeed(mockNeed)).thenThrow(new IOException());
+        ResponseEntity<Need> response = controller.createNeed(newMockNeed);
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
+
+    @Test
     void testDeleteNeedSucess() throws IOException {
         CupboardDAO mockDAO = mock(CupboardDAO.class);
         CupboardController controller = new CupboardController(mockDAO);
@@ -77,6 +103,17 @@ public class CupboardControllerTest {
         ResponseEntity<Object> expected = new ResponseEntity<>(HttpStatus.NOT_FOUND);
 
         assertEquals(expected, controller.deleteNeed(0));
+    }
+
+    @Test
+    void testDeleteNeedException() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        CupboardController controller = new CupboardController(mockDAO);
+
+        when(mockDAO.deleteNeed(0)).thenThrow(new IOException());
+        ResponseEntity<Need> response = controller.deleteNeed(0);
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
     @Test
@@ -100,6 +137,17 @@ public class CupboardControllerTest {
         ResponseEntity<Object> expected = new ResponseEntity<Object>(HttpStatus.NOT_FOUND);
 
         assertEquals(expected, controller.getNeed(0));
+    }
+
+    @Test
+    void testGetNeedException() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        CupboardController controller = new CupboardController(mockDAO);
+
+        when(mockDAO.getNeed(0)).thenThrow(new IOException());
+        ResponseEntity<Need> response = controller.getNeed(0);
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 
     @Test
@@ -129,6 +177,17 @@ public class CupboardControllerTest {
     }
 
     @Test
+    void testSearchNeedsException() throws IOException {
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        CupboardController controller = new CupboardController(mockDAO);
+
+        when(mockDAO.getNeed(0)).thenThrow(new IOException());
+
+        ResponseEntity<Need> response = controller.getNeed(0);
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+    }
+
+    @Test
     void testUpdateNeedSuccess() throws IOException{
         CupboardDAO mockDAO = mock(CupboardDAO.class);
         Need mockNeed =  mock(Need.class);
@@ -153,5 +212,18 @@ public class CupboardControllerTest {
 
         assertEquals(expected, controller.updateNeed(mockNeed));
 
+    }
+
+    @Test
+    void testUpdateNeedException() throws IOException{
+        CupboardDAO mockDAO = mock(CupboardDAO.class);
+        Need mockNeed =  mock(Need.class);
+        CupboardController controller = new CupboardController(mockDAO);
+
+        when(mockDAO.updateNeed(mockNeed)).thenThrow(new IOException());
+
+        ResponseEntity<Need> response = controller.updateNeed(mockNeed);
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 }

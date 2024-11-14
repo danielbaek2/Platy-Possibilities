@@ -30,7 +30,7 @@ public class HelperFileDAO implements HelperDAO {
      * @param filename - The name of the file to be loaded.
      * @param objectmapper - The object mapper.
      */
-    public HelperFileDAO(@Value("data/helpers.json") String filename, ObjectMapper objectmapper, MessageBoard messageBoard) throws IOException{
+    public HelperFileDAO(@Value("ufund-api/data/helpers.json") String filename, ObjectMapper objectmapper, MessageBoard messageBoard) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
         this.helpers = new HashMap<>();
