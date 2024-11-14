@@ -27,6 +27,7 @@ public class HelperControllerTest {
     private HelperController helperController;
     private HelperDAO mockHelperDAO;
     private Need mockNeed;
+    private MessageBoard mockMessageBoard;
 
     /**
      * Before each test, create a new HelperController object and inject a mock Helper DAO
@@ -34,8 +35,9 @@ public class HelperControllerTest {
     @BeforeEach
     void setUpHelperController() {
         mockHelperDAO = mock(HelperDAO.class);
+        mockMessageBoard = mock(MessageBoard.class);
         mockNeed = mock(Need.class);
-        helperController = new HelperController(mockHelperDAO, new MessageBoard(null));
+        helperController = new HelperController(mockHelperDAO, mockMessageBoard);
     }
 
     @Test
@@ -120,6 +122,18 @@ public class HelperControllerTest {
     }
 
     @Test
+    void testRemoveNeedRemoveFail() throws IOException{
+        String username = "Jane";
+
+        when(mockHelperDAO.removeNeedFromBasket(mockNeed,username)).thenReturn(false);
+        List<Need> mockBasket = Arrays.asList(mockNeed);
+        when(mockHelperDAO.getBasket(username)).thenReturn(mockBasket);
+        ResponseEntity<Need> response = helperController.removeNeedFromBasket(username, mockNeed.getId());
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
     void testAddNeedToBasket() throws  IOException{
         String username = "Jane";
 
@@ -169,5 +183,55 @@ public class HelperControllerTest {
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
 
+    }
+
+    @Test
+    void testCheckoutException() throws IOException {
+        String username = "Jane";
+
+        when(mockHelperDAO.removeNeedFromBasket(mockNeed,username)).thenReturn(true);
+
+        when(mockHelperDAO.getBasket(username)).thenThrow(new IOException());
+
+        ResponseEntity<List<Need>> response = helperController.checkoutBasket(username);
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
+
+    }
+
+    @Test
+    void testAddMessage() throws IOException{
+        String username = "Jane";
+        String message = "Test Message";
+
+        when(mockMessageBoard.addMessage(message)).thenReturn(true);
+
+        ResponseEntity<String> response = helperController.addMessage(message, username);
+
+        assertEquals(HttpStatus.OK, response.getStatusCode());
+    }
+
+    @Test
+    void testAddMessageNotFound() throws IOException{
+        String username = "Jane";
+        String message = "Test Message";
+
+        when(mockMessageBoard.addMessage(message)).thenReturn(false);
+
+        ResponseEntity<String> response = helperController.addMessage(message, username);
+
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+    }
+
+    @Test
+    void testAddMessageException() throws IOException{
+        String username = "Jane";
+        String message = "Test Message";
+
+        when(mockMessageBoard.addMessage(message)).thenThrow(new IOException());
+
+        ResponseEntity<String> response = helperController.addMessage(message, username);
+
+        assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
 }
