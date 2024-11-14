@@ -25,10 +25,28 @@ ul {
 .needs {
     border: 2.5px solid black;
     padding: 10px;
-    margin: 0 auto;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    max-width: 400px;
+    margin: 10px auto;
+    max-width: 300px;
+    list-style-type: none;
+}
+
+.funding-menu {
+    width: fit-content;
+}
+
+.needs li{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    padding: 0.5rem 0;
+}
+
+.needs li a{
+    color: black;
+}
+
+.delete{
+    width: fit-content;
 }
 
 .no-needs-message {
