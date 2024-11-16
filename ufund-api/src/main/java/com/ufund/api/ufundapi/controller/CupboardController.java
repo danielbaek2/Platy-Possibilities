@@ -20,7 +20,9 @@ import java.util.logging.Logger;
 import com.ufund.api.ufundapi.persistence.CupboardDAO;
 import com.ufund.api.ufundapi.model.Need;
 
-
+/**
+ * Handles the REST API requests for the Need resource
+ */
 @RestController
 @RequestMapping("Cupboard")
 public class CupboardController {
@@ -35,22 +37,6 @@ public class CupboardController {
      */
     public CupboardController(CupboardDAO boardDAO) {
         this.boardDAO = boardDAO;
-    }
-
-    /**
-     * Helper method to return the correct object and HTTP status
-     *
-     * @param <T> Generic parameter, allowing method to work with Need objects and arrays
-     * @param input Need object/array to be returned
-     * @param errorStatus The HTTP Status to be returned if the object is null
-     * @return ResponseEntity with the {@linkplain Need need} object or array and 
-     * HTTP status of OK if found, HTTP status of error_status if not found or if there is a conflict
-     */
-    private <T> ResponseEntity<T> serviceClass(T input, HttpStatus errorStatus){
-        if (input != null)
-            return new ResponseEntity<T>(input,HttpStatus.OK);
-        else
-            return new ResponseEntity<>(errorStatus);
     }
 
     /**
@@ -79,9 +65,9 @@ public class CupboardController {
      *
      * @param need The need to update
      *
-     * @return ResponseEntity with updated need object and HTTP status of OK if updated
-     * ResponseEntity with HTTP status of NOT_FOUND if not found
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @return ResponseEntity with updated need object and HTTP Status of OK if updated
+     * ResponseEntity with HTTP Status of NOT_FOUND if not found
+     * ResponseEntity with HTTP Status of INTERNAL_SERVER_ERROR otherwise
      */
     @PutMapping("")
     public ResponseEntity<Need> updateNeed(@RequestBody Need need) {
@@ -104,8 +90,8 @@ public class CupboardController {
      *
      * @param need_title needs containing this text are returned
      *
-     * @return ResponseEntity with array of {@link Need needs} objects and HTTP OK status
-     * HTTP INTERNAL_SERVER_ERROR if there is a problem
+     * @return ResponseEntity with array of {@link Need needs} objects and HTTP Status of OK if found,
+     * ResponseEntity with HTTP Status of INTERNAL_SERVER_ERROR if there is a problem
      */
     @GetMapping("/")
     public ResponseEntity<Need[]> searchNeeds(@RequestParam String need_title) {
@@ -123,15 +109,19 @@ public class CupboardController {
     /**
      * Responds to the GET request for all {@linkplain Need needs}
      *
-     * @return ResponseEntity with array of {@linkplain Need need} objects and 
-     * HTTP status of OK if found, HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @return ResponseEntity with array of {@linkplain Need need} objects and HTTP Status of OK if found, 
+     * ResponseEntity with HTTP Status of NOT_FOUND if not found, or 
+     * ResponseEntity with HTTP Status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("")
     public ResponseEntity<Need[]> getNeeds() {
         LOG.info("GET /Cupboard");
         try {
             Need[] needs = boardDAO.getNeeds();
-            return serviceClass(needs, HttpStatus.OK);
+            if (needs != null)
+                return new ResponseEntity<Need[]>(needs, HttpStatus.OK);
+            else
+                return new ResponseEntity<>(HttpStatus.NOT_FOUND);
         }
         catch(IOException e) {
             LOG.log(Level.SEVERE,e.getLocalizedMessage());
@@ -143,9 +133,9 @@ public class CupboardController {
      * Deletes the Need with the provided int ID, if it exists
      * 
      * @param id The ID of the Need to delete
-     * @return ResponseEntity with HTTP status of OK if deleted
-     * ResponseEntity with HTTP status of NOT_FOUND if not found
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise 
+     * @return ResponseEntity with HTTP Status of OK if deleted
+     * ResponseEntity with HTTP Status of NOT_FOUND if not found
+     * ResponseEntity with HTTP Status of INTERNAL_SERVER_ERROR otherwise 
      */
     @DeleteMapping("/{id}")
     public ResponseEntity<Need> deleteNeed(@PathVariable int id) {
@@ -168,9 +158,9 @@ public class CupboardController {
      *
      * @param id The ID of the Need to get
      *
-     * @return ResponseEntity with gotten need object and HTTP status of OK if updated<br>
-     * ResponseEntity with HTTP status of NOT_FOUND if not found<br>
-     * ResponseEntity with HTTP status of INTERNAL_SERVER_ERROR otherwise
+     * @return ResponseEntity with the retrieved need object and HTTP Status of OK if updated
+     * ResponseEntity with HTTP Status of NOT_FOUND if not found
+     * ResponseEntity with HTTP Status of INTERNAL_SERVER_ERROR otherwise
      */
     @GetMapping("/{id}")
     public ResponseEntity<Need> getNeed(@PathVariable int id) {

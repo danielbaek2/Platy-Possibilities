@@ -12,6 +12,9 @@ import org.springframework.stereotype.Component;
 import com.ufund.api.ufundapi.model.Helper;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+/**
+ * Implements the functionality for JSON file-based persistence for Users
+ */
 @Component
 public class UserFileDAO implements UserDAO{
 
@@ -22,13 +25,11 @@ public class UserFileDAO implements UserDAO{
     private HashMap<String, Helper> helpers;
     
     /**
-     * CupboardFileDao -  Current instance of the cupboard data access.
+     * UserFileDAO -  Current instance of the user data access object.
      *
      * @param filename - The name of the file to be loaded.
      * @param objectmapper - The object mapper.
      */
-    // not sure how to recieve file name.
-
     public UserFileDAO(@Value("ufund-api/data/users.json") String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
@@ -37,12 +38,12 @@ public class UserFileDAO implements UserDAO{
     }
 
     /**
-     * loadFile - Loads the needs into a hashmap, where the key is the ID, the value is the full need structure.
+     * Loads the needs into a hashmap, where the key is the username, the value is the full helper structure.
      * @throws IOException
      */
     private void loadFile() throws IOException{
         Helper[] helperList = objectMapper.readValue(new File(filename), Helper[].class);
-        for (Helper currHelper : helperList){ // for each need, load hashmap of needs with ID and need structure.
+        for (Helper currHelper : helperList){
             helpers.put(currHelper.getUsername(), currHelper);
         }
     }
@@ -55,55 +56,10 @@ public class UserFileDAO implements UserDAO{
         Helper[] helpers = this.helpers.values().toArray(new Helper[0]);
         objectMapper.writeValue(new File(this.filename),helpers);
     }
-
-    // public boolean removeNeedFromBasket(Need need,String username) throws IOException {
-    //     synchronized(helpers) {
-    //         Helper helper = helpers.get(username);
-    //         if (helper != null){
-    //             List<Need> basket = helper.getBasket();
-    //             if (basket.contains(need)) {
-    //                 helper.removeNeedFromBasket(need);
-    //                 saveFile();
-    //                 return true;
-    //             }else{
-    //                 return false;
-    //             }
-    //         }
-    //         return false;
-    //     }
-    // }
-
-    // public boolean addNeedToBasket(Need need, String username) throws IOException {
-    //     synchronized (helpers) {
-    //         Helper helper = helpers.get(username);
-    //         if (helper != null) {
-    //             List<Need> basket = helper.getBasket();
-    //             if (basket.contains(need)) {
-    //                 return false;
-    //             } else {
-    //                 helper.addNeedToBasket(need);
-    //                 saveFile();
-    //                 return true;
-    //             }
-    //         }
-    //         return false;
-    //     }
-    // }
-
-    // public List<Need> getBasket(String username) throws IOException {
-    //     synchronized(helpers) {
-    //         Helper helper = helpers.get(username);
-    //         if (helper != null){
-    //             return helper.getBasket();
-    //         }
-    //         else{
-    //             return null;
-    //         }
-    //     }
-    // }
-
     
-    // User Login Functionality
+    /**
+     * User Login Functionality
+     */
     @Override
     public boolean verifyUser(String username) {
         synchronized(helpers){
@@ -114,6 +70,12 @@ public class UserFileDAO implements UserDAO{
         }
     }
 
+    /**
+     * Checks if the user is admin
+     * 
+     * @param username - The username to check
+     * @return - True if the user is an admin, false otherwise
+     */
     @Override
     public boolean isAdmin(String username) {
         synchronized(helpers){
@@ -121,6 +83,13 @@ public class UserFileDAO implements UserDAO{
         }
     }
 
+    /**
+     * Searches a list of helpers for helpers that match the given username.
+     * 
+     * @param username - The username to search for
+     * @return - The list of helpers with the given username, could be null.
+     * @throws IOException if there is an issue with the data storage
+     */
     public List<Helper> userSearch(String username) throws IOException {
         List<Helper> matchingUsers = new ArrayList<>();
 
@@ -134,4 +103,3 @@ public class UserFileDAO implements UserDAO{
         return matchingUsers;
     }
 }
-

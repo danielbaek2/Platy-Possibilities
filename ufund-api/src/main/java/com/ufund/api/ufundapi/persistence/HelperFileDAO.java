@@ -39,7 +39,7 @@ public class HelperFileDAO implements HelperDAO {
     }
 
     /**
-     * loadFile - Loads the needs into a hashmap, where the key is the ID, the value is the full need structure.
+     * loadFile - Loads the needs into a hashmap, where the key is the username, the value is the full helper structure.
      * @throws IOException
      */
     private void loadFile() throws IOException{
@@ -58,6 +58,13 @@ public class HelperFileDAO implements HelperDAO {
         objectMapper.writeValue(new File(this.filename),helpers);
     }
 
+    /**
+     * Removes the need if the helper exists and if the need is in the funding basket.
+     * @param need - The need to remove from the basket
+     * @param username - The username of the helper
+     * @return - True if helper exists and need is removed from the basket, false otherwise.
+     * @throws IOException if there is an issue with the data storage
+     */
     public boolean removeNeedFromBasket(Need need,String username) throws IOException {
         synchronized(helpers) {
             Helper helper = helpers.get(username);
@@ -75,6 +82,13 @@ public class HelperFileDAO implements HelperDAO {
         }
     }
 
+    /**
+     * Adds the need if the helper exists and if the need is not in the funding basket.
+     * @param need - The need to add from the basket
+     * @param username - The username of the helper
+     * @return - True if helper exists and the need is added to the basket, false otherwise.
+     * @throws IOException if there is an issue with the data storage
+     */
     public boolean addNeedToBasket(Need need, String username) throws IOException {
         synchronized (helpers) {
             Helper helper = helpers.get(username);
@@ -95,6 +109,12 @@ public class HelperFileDAO implements HelperDAO {
         }
     }
 
+    /**
+     * Gets the funding basket if the helper exists.
+     * @param username - The username of the helper
+     * @return - The funding basket (list of needs), could be null.
+     * @throws IOException if there is an issue with the data storage
+     */
     public List<Need> getBasket(String username) throws IOException {
         synchronized(helpers) {
             Helper helper = helpers.get(username);
@@ -107,6 +127,13 @@ public class HelperFileDAO implements HelperDAO {
         }
     }
 
+    /**
+     * Adds a message to the message board if the helper exists and the message is not on the message board.
+     * @param message - The message to add to the board
+     * @param username - The username of the helper
+     * @return - True if the helper exists and the message was added, False otherwise.
+     * @throws IOException if there is an issue with the data storage
+     */
     public boolean addMessage(String message, String username) throws IOException {
         synchronized(helpers) {
             Helper helper = helpers.get(username);

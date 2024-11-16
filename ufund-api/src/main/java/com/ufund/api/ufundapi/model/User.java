@@ -8,7 +8,6 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public abstract class User {
 
     @JsonProperty("username") private String username;
-    //@JsonProperty("password") private String password;
 
     //To string format
     static final String STRING_FORMAT = "User [Username = %s]";
@@ -17,11 +16,9 @@ public abstract class User {
      * Constructor for creating a new user
      *
      * @param username the username of user
-     *
      */
     public User(@JsonProperty("username") String username){
         this.username = username;
-     //   this.password = password;
     }
 
     /**
