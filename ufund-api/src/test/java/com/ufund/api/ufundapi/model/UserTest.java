@@ -57,4 +57,14 @@ public class UserTest {
 
         assertEquals(expectedBasket, helper.getBasket());
     }
+
+    @Test
+    void testToString() {
+        String username = "TestUsername";
+        Helper helper = new Helper(username);
+
+        String expected = "User [Username = TestUsername]";
+
+        assertEquals(expected, helper.toString());
+    }
 }
