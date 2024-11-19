@@ -3,11 +3,6 @@ geometry: margin=1in
 ---
 # PROJECT Design Documentation
 
-> _The following template provides the headings for your Design
-> Documentation.  As you edit each section make sure you remove these
-> commentary 'blockquotes'; the lines that start with a > character
-> and appear in the generated PDF in italics but do so only **after** all team members agree that the requirements for that section and current Sprint have been met. **Do not** delete future Sprint expectations._
-
 ## Team Information
 * Team name: Platy Possibilities
 * Team members
@@ -94,8 +89,6 @@ Both the ViewModel and Model are built using Java and Spring Framework. Details 
 
 This section describes the web interface flow; this is how the user views and interacts with the web application.
 
-> _Provide a summary of the application's user interface.  Describe, from the user's perspective, the flow of the pages in the web application._
-
 The user starts off on the login screen and, depending on which username they input, they will be routed to either the "helper" or "admin" page. Generally speaking, if the username is anything other than "admin," the user will be routed to the helper page; however, this will not work if the username is not already in the users.json, which only houses the usernames: johndoe, janedoe, and admin. 
 
 If they input either johndoe or janedoe, they will be taken to the helper page, which shows their username at the top of the page, a router link to the basket page, a "need search" portion so the user can look for a specific Need, a list of the Needs, and an "add message" portion so that the helper can send a message to the admin about a certain issue that needs to be addressed. The user can click on the Needs to see overall details such as id, description, cost, quantity, and quantity funded. They can also either add Needs one by one into their funding baskets or select multiple to be added via the checkboxes next to each. They then would click the "add to basket" button to add the multiple selected Needs. Lastly, there is a logout button to be brought back to the login screen.
@@ -123,7 +116,6 @@ The admin page will show the admin username up top, an input box to add a new Ne
  >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
 
 ### ViewModel Tier
-> _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
 
 The classes supporting the ViewModel tier of the model would be the CupboardController public class, which houses the functions pertaining the needs, whether it be creating a need, deleting a need, get a need or needs, etc.
 
@@ -137,7 +129,6 @@ The classes supporting the ViewModel tier of the model would be the CupboardCont
 ![Replace with your ViewModel Tier class diagram 1, etc.](viewmodel-sprint-3.png)
 
 ### Model Tier
-> _**[Sprint 1]** List the classes supporting this tier and provide a description of there purpose._
 
 The class supporting the Model tier would be the Need, Admin, Helper, and User public classes. The Need class houses the ID, title, description, and total funding of the specific need, while defining the functions connected to that class. The Admin class extends the User class, housing only a username. The Helper class, which also extends the User class, houses a username as well as a funding basket, which is an array list. The User class only houses the username.
 
@@ -153,8 +144,6 @@ The Need class details every responsibility directly correlated with a Need, whe
 ![Replace with your Model Tier class diagram 1, etc.](model-sprint-3.png)
 
 ## OO Design Principles
-
-> _**[Sprint 1]** Name and describe the initial OO Principles that your team has considered in support of your design (and implementation) for this first Sprint._
 
 The initial OO Principles that the team has considered for this first Sprint are the Single Responsibility and Controller principles. For the Single Responsibility, we have each class assigned to a specific portion of the project, whether it be having a class for the Cupboard or for the Need itself. For the Controller principle, we are implementing a CupboardController that allows for the manipulation of the needs, whether it be deleting a need, getting a need, or updating a need.
 
