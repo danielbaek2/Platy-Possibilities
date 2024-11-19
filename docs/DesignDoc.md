@@ -199,15 +199,15 @@ Polymorphism: The MessageBoard class, in a sense, showcases polymorphism, as it 
 > coverage targets, why you selected those values, and how well your
 > code coverage met your targets._
 
->_**[Sprint 2, 3 & 4]** **Include images of your code coverage report.** If there are any anomalies, discuss
-> those._
-
 ![Sprint 2 Code Coverage](CodeCoverageSprint2.png)
 One anomaly for this code coverage is that the CupboardController tests do not test for when the DAO may throw an IOException. This makes it appear that it is missing more coverage than it actually is.
 
 ![Sprint 3 Code Coverage](CodeCoverageSprint3.png)
 Many tests do not test for the situation where the DAO would throw an IOException, but considering they should behave in the same way in that scenario, it should be fine.
 
+![Sprint 4 Code Coverage](CodeCoverageSprint4.png)
+
+The strategy for unit testing was to look at each significant function and determine the different paths that the code could take, creating a test for each different output. By the end of the project we wanted each element to have around 80% code coverage. That would mean that we would be covering most important functions while not necessitating unecessary tests such as tests for toString functions. In this regard we met our goal quite well.  
 
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
