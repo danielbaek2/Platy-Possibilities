@@ -41,10 +41,17 @@ export class NeedComponent implements OnInit {
   }
 
   add(title: string, description: string, cost: number, quantity: number): void {
-    console.log('Adding need:', { title, description, cost, quantity });
     title = title.trim(); description = description.trim();
     if (!title || !description || !cost || !quantity) { return; }
-    this.needService.addNeed({ title, description } as Need).subscribe({next: (need) => {this.needs.push(need)}});
+    const newNeed: Need = {
+      id: 0,
+      title,
+      description,
+      cost,
+      quantity,
+      quantity_funded: 0
+    };
+    this.needService.addNeed(newNeed).subscribe({next: (need) => {this.needs.push(need)}});
   }
 
   delete(need: Need): void {
