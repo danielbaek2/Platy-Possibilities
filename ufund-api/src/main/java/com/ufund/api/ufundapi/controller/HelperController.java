@@ -181,8 +181,4 @@ public class HelperController{
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    //curl -i -X DELETE http://localhost:8080/Helper/johndoe/checkout
-    //curl.exe -X PUT "http://localhost:8080/Helper/janedoe/board" -H "Content-Type: application/json" -d "Hello, this is a test message"
-
 }

@@ -80,7 +80,4 @@ public class AdminController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    // getMessageBoard(): curl.exe -X GET 'http://localhost:8080/Admin/board'
-    // getMessage(): curl.exe -i -X PUT -H 'Content-Type:application/json' 'http://localhost:8080/Admin/board' -d "Add message here."
-    // deleteMessage: curl.exe -i -X DELETE 'http://localhost:8080/Admin/board' -d "Add message here."
 }

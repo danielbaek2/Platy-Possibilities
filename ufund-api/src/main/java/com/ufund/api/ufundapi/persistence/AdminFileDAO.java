@@ -1,22 +1,20 @@
 package com.ufund.api.ufundapi.persistence;
 
 import java.io.IOException;
-import java.io.File;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.ufund.api.ufundapi.model.Admin;
+import com.ufund.api.ufundapi.model.UserExperiement.Admin;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * Implements the functionality for JSON file-based persistence for Admin
  */
-@Component
-public class AdminFileDAO implements AdminDAO {
-    private String filename;
-    private ObjectMapper objectMapper = null;
+@Component("adminFileDAO")
+public class AdminFileDAO extends UserFileDAO implements AdminDAO {
     private Admin admin;    
 
     /**
@@ -25,26 +23,16 @@ public class AdminFileDAO implements AdminDAO {
      * @param filename - The name of the file to be loaded.
      * @param objectmapper - The object mapper.
      */
-    public AdminFileDAO(@Value("ufund-api/data/admin.json") String filename, ObjectMapper objectmapper) throws IOException {
-        this.filename = filename;
-        this.objectMapper = objectmapper;
-        loadFile();
-    }
-
-    /**
-     *  
-     * @throws IOException if there is an issue with the data storage
-     */
-    private void loadFile() throws IOException {
-        this.admin = objectMapper.readValue(new File(filename), Admin.class);
-    }
-
-    /**
-     * Saves the file to the hashmap
-     * @throws IOException if there is an issue with the data storage
-     */
-    private void saveFile() throws IOException {
-        objectMapper.writeValue(new File(this.filename), admin);
+    public AdminFileDAO(@Value("data/usersexperiment.json") String filename, ObjectMapper objectmapper) throws IOException {
+        super(filename, objectmapper);
+        List<Admin> admins = users.values().stream()
+                .filter(user -> user instanceof Admin)
+                .map(user -> (Admin) user)
+                .collect(Collectors.toList());
+            
+                if (!admins.isEmpty()) {
+                    this.admin = admins.get(0);
+                }
     }
 
     /**
@@ -54,7 +42,8 @@ public class AdminFileDAO implements AdminDAO {
      * @throws IOException if there is an issue with the data storage
      */
     public boolean deleteMessage(String message) throws IOException {
-        synchronized (admin) {
+        synchronized (users) {
+            
             List<String> messageBoard = admin.getMessageBoard();
             if (messageBoard.contains(message)) {
                 admin.deleteMessage(message);

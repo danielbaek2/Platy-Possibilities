@@ -34,7 +34,7 @@ public class Admin extends User {
     }
 
     /**
-     * Add the string message to the message board
+     * Add the message to the message board
      * @param message the message to add
      */
     public void getMessage(String message) {

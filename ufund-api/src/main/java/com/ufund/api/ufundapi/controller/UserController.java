@@ -1,7 +1,9 @@
 package com.ufund.api.ufundapi.controller;
 
-import com.ufund.api.ufundapi.model.Helper;
+import com.ufund.api.ufundapi.model.UserExperiement;
 import com.ufund.api.ufundapi.persistence.UserDAO;
+
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +27,7 @@ public class UserController {
      *
      * @param userDAO The Helper Data Access Object which will perform CRUD operations
      */
-    public UserController(UserDAO userDAO) {
+    public UserController(@Qualifier("adminFileDAO") UserDAO userDAO) {
         this.userDAO = userDAO;
 
     }
@@ -39,10 +41,10 @@ public class UserController {
      * ResponseEntity with HTTP Status of INTERNAL_SERVER_ERROR if there is a problem
      */
     @GetMapping("/")
-    public ResponseEntity<List<Helper>> searchUsers(@RequestParam String username) {
+    public ResponseEntity<List<UserExperiement>> searchUsers(@RequestParam String username) {
         LOG.info("GET /User/?username=" + username);
         try {
-            List<Helper> matchingUsers = userDAO.userSearch(username);
+            List<UserExperiement> matchingUsers = userDAO.userSearch(username);
             return new ResponseEntity<>(matchingUsers, HttpStatus.OK);
         } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());

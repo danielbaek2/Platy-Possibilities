@@ -3,7 +3,7 @@ package com.ufund.api.ufundapi.persistence;
 import java.io.IOException;
 import java.util.List;
 
-import com.ufund.api.ufundapi.model.Helper;
+import com.ufund.api.ufundapi.model.UserExperiement;
 
 /**
  * The interface for the User object persistence
@@ -37,6 +37,6 @@ public interface UserDAO {
      * 
      * @throws IOException if there is an issue with the data storage
      */
-    public List<Helper> userSearch(String username) throws IOException;
+    public List<UserExperiement> userSearch(String username) throws IOException;
 }
 

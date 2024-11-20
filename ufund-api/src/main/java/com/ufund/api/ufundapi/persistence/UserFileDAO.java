@@ -1,7 +1,7 @@
 package com.ufund.api.ufundapi.persistence;
 
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,20 +9,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.ufund.api.ufundapi.model.Helper;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ufund.api.ufundapi.model.UserExperiement;
 
-/**
- * Implements the functionality for JSON file-based persistence for Users
- */
 @Component
-public class UserFileDAO implements UserDAO{
-
+public abstract class UserFileDAO implements UserDAO{
     private String filename;
-
     private ObjectMapper objectMapper = null;
-
-    private HashMap<String, Helper> helpers;
+    protected HashMap<String, UserExperiement> users;
     
     /**
      * UserFileDAO -  Current instance of the user data access object.
@@ -30,10 +24,10 @@ public class UserFileDAO implements UserDAO{
      * @param filename - The name of the file to be loaded.
      * @param objectmapper - The object mapper.
      */
-    public UserFileDAO(@Value("ufund-api/data/users.json") String filename, ObjectMapper objectmapper) throws IOException{
+    public UserFileDAO(@Value("data/usersexperiment.json") String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
-        this.helpers = new HashMap<>();
+        this.users = new HashMap<>();
         loadFile();
     }
 
@@ -42,9 +36,9 @@ public class UserFileDAO implements UserDAO{
      * @throws IOException
      */
     private void loadFile() throws IOException{
-        Helper[] helperList = objectMapper.readValue(new File(filename), Helper[].class);
-        for (Helper currHelper : helperList){
-            helpers.put(currHelper.getUsername(), currHelper);
+        UserExperiement[] userList = objectMapper.readValue(new File(filename), UserExperiement[].class);
+        for (UserExperiement currUser : userList){
+            users.put(currUser.getUsername(), currUser);
         }
     }
 
@@ -52,9 +46,9 @@ public class UserFileDAO implements UserDAO{
      * saveFile - Saves the hashmap
      * @throws IOException
      */
-    private void saveFile() throws IOException{
-        Helper[] helpers = this.helpers.values().toArray(new Helper[0]);
-        objectMapper.writeValue(new File(this.filename),helpers);
+    protected void saveFile() throws IOException{
+        UserExperiement[] users = this.users.values().toArray(new UserExperiement[0]);
+        objectMapper.writeValue(new File(this.filename),users);
     }
     
     /**
@@ -62,8 +56,8 @@ public class UserFileDAO implements UserDAO{
      */
     @Override
     public boolean verifyUser(String username) {
-        synchronized(helpers){
-            if (helpers.get(username) != null){
+        synchronized(users){
+            if (users.get(username) != null){
                 return true;
             }
             return false;
@@ -78,28 +72,29 @@ public class UserFileDAO implements UserDAO{
      */
     @Override
     public boolean isAdmin(String username) {
-        synchronized(helpers){
-            return !helpers.containsKey(username);
+        synchronized(users){
+            return username.equals("Admin");
         }
     }
 
     /**
-     * Searches a list of helpers for helpers that match the given username.
+     * Searches a list of users for users that match the given username.
      * 
      * @param username - The username to search for
-     * @return - The list of helpers with the given username, could be null.
+     * @return - The list of users with the given username, could be null.
      * @throws IOException if there is an issue with the data storage
      */
-    public List<Helper> userSearch(String username) throws IOException {
-        List<Helper> matchingUsers = new ArrayList<>();
+    public List<UserExperiement> userSearch(String username) throws IOException {
+        List<UserExperiement> matchingUsers = new ArrayList<>();
 
-        synchronized (helpers) {
-            for (Helper helper : helpers.values()) {
-                if (helper.getUsername().toLowerCase().contains(username.toLowerCase())) {
-                    matchingUsers.add(helper);
+        synchronized (users) {
+            for (UserExperiement user : users.values()) {
+                if (user.getUsername().toLowerCase().contains(username.toLowerCase())) {
+                    matchingUsers.add(user);
                 }
             }
         }
         return matchingUsers;
     }
+
 }
