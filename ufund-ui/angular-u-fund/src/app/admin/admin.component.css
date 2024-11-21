@@ -6,8 +6,8 @@ h2 {
     margin-top: 50px;
     padding: 10px;
     width: 150px;
-    background-color: #078a5a;
-    color:  antiquewhite;
+    background-color: black;
+    color:  white;
     border-radius: 5px;
 }
 
@@ -16,7 +16,7 @@ h2 {
 }
 
 button {
-    background-color: #078a5a;
+    background-color: black;
     color: white;
     padding: 6px;
     margin: 5px 0;
