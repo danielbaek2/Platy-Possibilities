@@ -1,6 +1,5 @@
 package com.ufund.api.ufundapi.controller;
 
-import com.ufund.api.ufundapi.model.Need;
 import com.ufund.api.ufundapi.persistence.AdminDAO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +14,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.List;
 
+/**
+ * Handles the REST API requests for the Admin resource
+ */
 @RestController
 @RequestMapping("Admin")
 public class AdminController {
@@ -31,6 +33,13 @@ public class AdminController {
         this.adminDAO = adminDAO;
     }
 
+    /**
+     * Retrieves the message board
+     * 
+     * @return ResponseEntity with the message board and HTTP Status of OK if successful,
+     * ResponseEntity with HTTP Status of NOT_FOUND if not found, or 
+     * ResponseEntity with HTTP Status of INTERNAL_SERVER_ERROR otherwise
+     */
     @GetMapping("/board")
     public ResponseEntity<List<String>> getMessageBoard() {
         LOG.info("GET /Admin/board");
@@ -47,23 +56,14 @@ public class AdminController {
         }
     }
 
-    // @PutMapping("/board")
-    // public ResponseEntity<String> getMessage(@RequestBody String message) {
-    //     LOG.info("PUT /Admin/board/" + message);
-    //     try {
-    //         boolean get = adminDAO.getMessage(message);
-    //         if (get) {
-    //             return new ResponseEntity<String>(message, HttpStatus.OK);
-    //         } else {
-    //             return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-    //         }
-    //     }
-    //     catch (IOException e) {
-    //         LOG.log(Level.SEVERE,e.getLocalizedMessage());
-    //         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-    //     }
-    // }
-
+    /**
+     * Deletes the given message from the message board, if it exists
+     * 
+     * @param message The message to be deleted
+     * @return ResponseEntity with HTTP Status of OK if deleted,
+     * ResponseEntity with HTTP Status of NOT_FOUND if not found, or 
+     * ResponseEntity with HTTP Status of INTERNAL_SERVER_ERROR otherwise
+     */
     @DeleteMapping("/board")
     public ResponseEntity<String> deleteMessage(@RequestBody String message) {
         LOG.info("DELETE /Admin/board/" + message);
@@ -80,7 +80,4 @@ public class AdminController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    // getMessageBoard(): curl.exe -X GET 'http://localhost:8080/Admin/board'
-    // getMessage(): curl.exe -i -X PUT -H 'Content-Type:application/json' 'http://localhost:8080/Admin/board' -d "Add message here."
-    // deleteMessage: curl.exe -i -X DELETE 'http://localhost:8080/Admin/board' -d "Add message here."
 }

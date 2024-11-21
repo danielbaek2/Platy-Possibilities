@@ -40,10 +40,18 @@ export class NeedComponent implements OnInit {
     this.needService.getNeeds().subscribe(needs => this.needs = needs);
   }
 
-  add(title: string): void {
-    title = title.trim();
-    if (!title) { return; }
-    this.needService.addNeed({ title } as Need).subscribe({next: (need) => {this.needs.push(need)}});
+  add(title: string, description: string, cost: number, quantity: number): void {
+    title = title.trim(); description = description.trim();
+    if (!title || !description || !cost || !quantity) { return; }
+    const newNeed: Need = {
+      id: 0,
+      title,
+      description,
+      cost,
+      quantity,
+      quantity_funded: 0
+    };
+    this.needService.addNeed(newNeed).subscribe({next: (need) => {this.needs.push(need)}});
   }
 
   delete(need: Need): void {

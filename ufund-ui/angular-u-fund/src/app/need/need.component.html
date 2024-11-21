@@ -1,9 +1,12 @@
 <h2>Cupboard</h2>
 
 <div class="new-need">
-  <label for="new-need">Need name: </label>
-  <input id="new-need" #needTitle />
-  <button type="button" class="add-button" (click)="add(needTitle.value); needTitle.value=''">Add need</button>
+  <label for="new-need">New Need: </label>
+  <input id="new-need" #needTitle placeholder="Title"/>
+  <input id="new-need-description" #needDescription placeholder="Description"/>
+  <input id="new-need-cost" #needCost type="number" placeholder="Cost"/>
+  <input id="new-need-quantity" #needQuantity type="number" placeholder="Quantity"/>
+  <button type="button" class="add-button" (click)="add(needTitle.value, needDescription.value, needCost.valueAsNumber, needQuantity.valueAsNumber); needTitle.value=''; needDescription.value=''; needCost.value=''; needQuantity.value=''" >Add need</button>
 </div>
 
 <div *ngIf="needs.length === 0" class="no-needs-message">No needs available to contribute to.</div>

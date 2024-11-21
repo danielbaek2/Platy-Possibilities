@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ufund.api.ufundapi.model.Helper;
+import com.ufund.api.ufundapi.model.User.Helper;
 import com.ufund.api.ufundapi.model.MessageBoard;
 import com.ufund.api.ufundapi.model.Need;
 
@@ -30,7 +30,7 @@ public class HelperFileDAOTest {
         testHelperList[0] = new Helper("Steve Irwin");
         testHelperList[1] = new Helper("Uncle Ben");
 
-        testNeeds = new Need(1,"this could be a test",5,50);
+        testNeeds = new Need(1,"this could be a test",null,5,50);
 
         when(mockObjectMapper.readValue(new File("test_file.txt"), Helper[].class)).thenReturn(testHelperList);
 		helperFileDAO = new HelperFileDAO("test_file.txt", mockObjectMapper, new MessageBoard(null));
@@ -64,7 +64,7 @@ public class HelperFileDAOTest {
     }
 
     @Test
-    void testAddNeedToBasketDupelicate() throws  IOException{
+    void testAddNeedToBasketDuplicate() throws  IOException{
         boolean expected = false;
         int expectedNum = 1;
         helperFileDAO.addNeedToBasket(testNeeds, "Steve Irwin");
