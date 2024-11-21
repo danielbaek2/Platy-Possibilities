@@ -1,1 +1,0 @@
-[{"username":"johndoe","basket":[]},{"username":"janedoe","basket":[]},{"username":"admin","basket":[]}]
