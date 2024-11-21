@@ -28,9 +28,10 @@ public class Need {
      * 
      */
     @JsonCreator
-    public Need(@JsonProperty("id") int id, @JsonProperty("title") String title, @JsonProperty("quantity") int quantity, @JsonProperty("cost") int cost){
+    public Need(@JsonProperty("id") int id, @JsonProperty("title") String title, @JsonProperty("description") String description, @JsonProperty("quantity") int quantity, @JsonProperty("cost") int cost){
         this.id = id;
         this.title = title;
+        this.description = description;
         this.quantity = quantity;
         this.cost = cost;
     }

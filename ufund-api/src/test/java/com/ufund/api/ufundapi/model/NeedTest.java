@@ -7,10 +7,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class NeedTest {
     int ID = 1;
     String Title = "Saving Ducks";
+    String Description = null;
     int Quantity = 500;
     int Cost = 25;
 
-    Need saveDucks = new Need(ID,Title,Quantity,Cost);
+    Need saveDucks = new Need(ID,Title,Description,Quantity,Cost);
 
     @Test
     void testNeedCreation(){
@@ -21,7 +22,7 @@ public class NeedTest {
         int expectedCost = 25;
         int expectedQuantityFunded = 0;
 
-        Need NaveDucks = new Need(expectedID, expectedTitle,expectedQuantity,expectedCost);
+        Need NaveDucks = new Need(expectedID, expectedTitle,expectedDescription,expectedQuantity,expectedCost);
 
         assertEquals(expectedID, NaveDucks.getId());
         assertEquals(expectedTitle, NaveDucks.getTitle());
@@ -69,7 +70,7 @@ public class NeedTest {
 
     @Test
     void testEquals(){
-        Need DuckSaving = new Need(saveDucks.getId(), saveDucks.getTitle(), saveDucks.getQuantity(), saveDucks.getCost());
+        Need DuckSaving = new Need(saveDucks.getId(), saveDucks.getTitle(), saveDucks.getDescription(), saveDucks.getQuantity(), saveDucks.getCost());
 
         Boolean expectedResult = true;
 
