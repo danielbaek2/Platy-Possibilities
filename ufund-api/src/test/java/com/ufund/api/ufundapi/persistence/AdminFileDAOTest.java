@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ufund.api.ufundapi.model.Admin;
+import com.ufund.api.ufundapi.model.User.Admin;
 
 import java.io.File;
 import java.io.IOException;

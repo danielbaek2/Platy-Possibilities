@@ -1,7 +1,7 @@
 package com.ufund.api.ufundapi.persistence;
 
-import java.io.IOException;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,41 +9,36 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.ufund.api.ufundapi.model.Helper;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ufund.api.ufundapi.model.User;
 
 @Component
-public class UserFileDAO implements UserDAO{
-
+public abstract class UserFileDAO implements UserDAO{
     private String filename;
-
     private ObjectMapper objectMapper = null;
-
-    private HashMap<String, Helper> helpers;
+    protected HashMap<String, User> users;
     
     /**
-     * CupboardFileDao -  Current instance of the cupboard data access.
+     * UserFileDAO -  Current instance of the user data access object.
      *
      * @param filename - The name of the file to be loaded.
      * @param objectmapper - The object mapper.
      */
-    // not sure how to recieve file name.
-
     public UserFileDAO(@Value("ufund-api/data/users.json") String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
-        this.helpers = new HashMap<>();
+        this.users = new HashMap<>();
         loadFile();
     }
 
     /**
-     * loadFile - Loads the needs into a hashmap, where the key is the ID, the value is the full need structure.
+     * Loads the needs into a hashmap, where the key is the username, the value is the full helper structure.
      * @throws IOException
      */
     private void loadFile() throws IOException{
-        Helper[] helperList = objectMapper.readValue(new File(filename), Helper[].class);
-        for (Helper currHelper : helperList){ // for each need, load hashmap of needs with ID and need structure.
-            helpers.put(currHelper.getUsername(), currHelper);
+        User[] userList = objectMapper.readValue(new File(filename), User[].class);
+        for (User currUser : userList){
+            users.put(currUser.getUsername(), currUser);
         }
     }
 
@@ -51,87 +46,55 @@ public class UserFileDAO implements UserDAO{
      * saveFile - Saves the hashmap
      * @throws IOException
      */
-    private void saveFile() throws IOException{
-        Helper[] helpers = this.helpers.values().toArray(new Helper[0]);
-        objectMapper.writeValue(new File(this.filename),helpers);
+    protected void saveFile() throws IOException{
+        User[] users = this.users.values().toArray(new User[0]);
+        objectMapper.writeValue(new File(this.filename),users);
     }
-
-    // public boolean removeNeedFromBasket(Need need,String username) throws IOException {
-    //     synchronized(helpers) {
-    //         Helper helper = helpers.get(username);
-    //         if (helper != null){
-    //             List<Need> basket = helper.getBasket();
-    //             if (basket.contains(need)) {
-    //                 helper.removeNeedFromBasket(need);
-    //                 saveFile();
-    //                 return true;
-    //             }else{
-    //                 return false;
-    //             }
-    //         }
-    //         return false;
-    //     }
-    // }
-
-    // public boolean addNeedToBasket(Need need, String username) throws IOException {
-    //     synchronized (helpers) {
-    //         Helper helper = helpers.get(username);
-    //         if (helper != null) {
-    //             List<Need> basket = helper.getBasket();
-    //             if (basket.contains(need)) {
-    //                 return false;
-    //             } else {
-    //                 helper.addNeedToBasket(need);
-    //                 saveFile();
-    //                 return true;
-    //             }
-    //         }
-    //         return false;
-    //     }
-    // }
-
-    // public List<Need> getBasket(String username) throws IOException {
-    //     synchronized(helpers) {
-    //         Helper helper = helpers.get(username);
-    //         if (helper != null){
-    //             return helper.getBasket();
-    //         }
-    //         else{
-    //             return null;
-    //         }
-    //     }
-    // }
-
     
-    // User Login Functionality
+    /**
+     * User Login Functionality
+     */
     @Override
     public boolean verifyUser(String username) {
-        synchronized(helpers){
-            if (helpers.get(username) != null){
+        synchronized(users){
+            if (users.get(username) != null){
                 return true;
             }
             return false;
         }
     }
 
+    /**
+     * Checks if the user is admin
+     * 
+     * @param username - The username to check
+     * @return - True if the user is an admin, false otherwise
+     */
     @Override
     public boolean isAdmin(String username) {
-        synchronized(helpers){
-            return !helpers.containsKey(username);
+        synchronized(users){
+            return username.equals("Admin");
         }
     }
 
-    public List<Helper> userSearch(String username) throws IOException {
-        List<Helper> matchingUsers = new ArrayList<>();
+    /**
+     * Searches a list of users for users that match the given username.
+     * 
+     * @param username - The username to search for
+     * @return - The list of users with the given username, could be null.
+     * @throws IOException if there is an issue with the data storage
+     */
+    public List<User> userSearch(String username) throws IOException {
+        List<User> matchingUsers = new ArrayList<>();
 
-        synchronized (helpers) {
-            for (Helper helper : helpers.values()) {
-                if (helper.getUsername().toLowerCase().contains(username.toLowerCase())) {
-                    matchingUsers.add(helper);
+        synchronized (users) {
+            for (User user : users.values()) {
+                if (user.getUsername().toLowerCase().contains(username.toLowerCase())) {
+                    matchingUsers.add(user);
                 }
             }
         }
         return matchingUsers;
     }
-}
 
+}

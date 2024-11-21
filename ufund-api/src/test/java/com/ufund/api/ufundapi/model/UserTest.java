@@ -6,6 +6,8 @@ import static org.mockito.Mockito.mock;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import com.ufund.api.ufundapi.model.User.Helper;
+
 import java.util.ArrayList;
 import java.util.List;
 
