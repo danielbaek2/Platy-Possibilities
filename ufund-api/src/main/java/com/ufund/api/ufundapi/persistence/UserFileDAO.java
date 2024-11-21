@@ -10,13 +10,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ufund.api.ufundapi.model.UserExperiement;
+import com.ufund.api.ufundapi.model.User;
 
 @Component
 public abstract class UserFileDAO implements UserDAO{
     private String filename;
     private ObjectMapper objectMapper = null;
-    protected HashMap<String, UserExperiement> users;
+    protected HashMap<String, User> users;
     
     /**
      * UserFileDAO -  Current instance of the user data access object.
@@ -24,7 +24,7 @@ public abstract class UserFileDAO implements UserDAO{
      * @param filename - The name of the file to be loaded.
      * @param objectmapper - The object mapper.
      */
-    public UserFileDAO(@Value("data/usersexperiment.json") String filename, ObjectMapper objectmapper) throws IOException{
+    public UserFileDAO(@Value("data/users.json") String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
         this.users = new HashMap<>();
@@ -36,8 +36,8 @@ public abstract class UserFileDAO implements UserDAO{
      * @throws IOException
      */
     private void loadFile() throws IOException{
-        UserExperiement[] userList = objectMapper.readValue(new File(filename), UserExperiement[].class);
-        for (UserExperiement currUser : userList){
+        User[] userList = objectMapper.readValue(new File(filename), User[].class);
+        for (User currUser : userList){
             users.put(currUser.getUsername(), currUser);
         }
     }
@@ -47,7 +47,7 @@ public abstract class UserFileDAO implements UserDAO{
      * @throws IOException
      */
     protected void saveFile() throws IOException{
-        UserExperiement[] users = this.users.values().toArray(new UserExperiement[0]);
+        User[] users = this.users.values().toArray(new User[0]);
         objectMapper.writeValue(new File(this.filename),users);
     }
     
@@ -84,11 +84,11 @@ public abstract class UserFileDAO implements UserDAO{
      * @return - The list of users with the given username, could be null.
      * @throws IOException if there is an issue with the data storage
      */
-    public List<UserExperiement> userSearch(String username) throws IOException {
-        List<UserExperiement> matchingUsers = new ArrayList<>();
+    public List<User> userSearch(String username) throws IOException {
+        List<User> matchingUsers = new ArrayList<>();
 
         synchronized (users) {
-            for (UserExperiement user : users.values()) {
+            for (User user : users.values()) {
                 if (user.getUsername().toLowerCase().contains(username.toLowerCase())) {
                     matchingUsers.add(user);
                 }

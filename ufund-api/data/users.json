@@ -1,1 +1,1 @@
-[{"username":"johndoe","basket":[]},{"username":"janedoe","basket":[]},{"username":"admin","basket":[]}]
+[{"username":"janedoe","basket":[],"type":"helper"},{"username":"johndoe","basket":[{"id":21,"title":"Protect Moo Deng","quantity":0,"cost":0,"quantityFunded":0,"description":null,"quantity_funded":0}],"type":"helper"},{"username":"Admin","messageBoard":["mjbkhjgvchfx","More needs!"],"type":"admin"}]

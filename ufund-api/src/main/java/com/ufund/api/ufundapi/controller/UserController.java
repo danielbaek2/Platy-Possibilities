@@ -1,6 +1,6 @@
 package com.ufund.api.ufundapi.controller;
 
-import com.ufund.api.ufundapi.model.UserExperiement;
+import com.ufund.api.ufundapi.model.User;
 import com.ufund.api.ufundapi.persistence.UserDAO;
 
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -41,10 +41,10 @@ public class UserController {
      * ResponseEntity with HTTP Status of INTERNAL_SERVER_ERROR if there is a problem
      */
     @GetMapping("/")
-    public ResponseEntity<List<UserExperiement>> searchUsers(@RequestParam String username) {
+    public ResponseEntity<List<User>> searchUsers(@RequestParam String username) {
         LOG.info("GET /User/?username=" + username);
         try {
-            List<UserExperiement> matchingUsers = userDAO.userSearch(username);
+            List<User> matchingUsers = userDAO.userSearch(username);
             return new ResponseEntity<>(matchingUsers, HttpStatus.OK);
         } catch (IOException e) {
             LOG.log(Level.SEVERE, e.getLocalizedMessage());

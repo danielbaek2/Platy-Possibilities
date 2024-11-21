@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import com.ufund.api.ufundapi.model.Need;
-import com.ufund.api.ufundapi.model.UserExperiement.Helper;
+import com.ufund.api.ufundapi.model.User.Helper;
 import com.ufund.api.ufundapi.model.MessageBoard;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
@@ -25,7 +25,7 @@ public class HelperFileDAO extends UserFileDAO implements HelperDAO {
      * @param filename - The name of the file to be loaded.
      * @param objectmapper - The object mapper.
      */
-    public HelperFileDAO(@Value("data/usersexperiment.json") String filename, ObjectMapper objectmapper, MessageBoard messageBoard) throws IOException{
+    public HelperFileDAO(@Value("data/users.json") String filename, ObjectMapper objectmapper, MessageBoard messageBoard) throws IOException{
         super(filename, objectmapper);
         this.messageBoard = messageBoard;
     }

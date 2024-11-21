@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import com.ufund.api.ufundapi.model.UserExperiement.Admin;
+import com.ufund.api.ufundapi.model.User.Admin;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
@@ -23,7 +23,7 @@ public class AdminFileDAO extends UserFileDAO implements AdminDAO {
      * @param filename - The name of the file to be loaded.
      * @param objectmapper - The object mapper.
      */
-    public AdminFileDAO(@Value("data/usersexperiment.json") String filename, ObjectMapper objectmapper) throws IOException {
+    public AdminFileDAO(@Value("data/users.json") String filename, ObjectMapper objectmapper) throws IOException {
         super(filename, objectmapper);
         List<Admin> admins = users.values().stream()
                 .filter(user -> user instanceof Admin)

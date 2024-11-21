@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
+import com.ufund.api.ufundapi.model.User.Admin;
+
 import java.util.List;
 
 @Tag("Model-Tier")

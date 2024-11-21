@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ufund.api.ufundapi.model.Helper;
+import com.ufund.api.ufundapi.model.User.Helper;
 import com.ufund.api.ufundapi.model.MessageBoard;
 import com.ufund.api.ufundapi.model.Need;
 
@@ -64,7 +64,7 @@ public class HelperFileDAOTest {
     }
 
     @Test
-    void testAddNeedToBasketDupelicate() throws  IOException{
+    void testAddNeedToBasketDuplicate() throws  IOException{
         boolean expected = false;
         int expectedNum = 1;
         helperFileDAO.addNeedToBasket(testNeeds, "Steve Irwin");

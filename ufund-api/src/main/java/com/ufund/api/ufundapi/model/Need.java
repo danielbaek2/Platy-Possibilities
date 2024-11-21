@@ -15,7 +15,6 @@ public class Need {
     @JsonProperty("cost") private int cost; //cost per need unit
     @JsonProperty("quantity_funded") private int quantity_funded = 0;
 
-    //To string format
     static final String STRING_FORMAT = "Need [id = %d, title = %s]";
 
     /**
@@ -72,6 +71,10 @@ public class Need {
      */
     public String getDescription() {return description;}
 
+    /**
+     * Set the description of the need object
+     * @param description the new description of the need
+     */
     public void setDescription(String description){this.description = description;}
 
     /**

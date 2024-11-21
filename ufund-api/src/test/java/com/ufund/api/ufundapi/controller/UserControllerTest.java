@@ -14,7 +14,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 
-import com.ufund.api.ufundapi.model.Helper;
+import com.ufund.api.ufundapi.model.User;
+import com.ufund.api.ufundapi.model.User.Helper;
 import com.ufund.api.ufundapi.persistence.UserDAO;
 
 @Tag("Controller-Tier")
@@ -36,7 +37,7 @@ public class UserControllerTest {
 
         when(mockUserDAO.userSearch(username)).thenReturn(Arrays.asList(mockHelper));
 
-        ResponseEntity<List<Helper>> response = userController.searchUsers(username);
+        ResponseEntity<List<User>> response = userController.searchUsers(username);
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
     }
@@ -47,7 +48,7 @@ public class UserControllerTest {
 
         when(mockUserDAO.userSearch(username)).thenThrow(new IOException());
 
-        ResponseEntity<List<Helper>> response = userController.searchUsers(username);
+        ResponseEntity<List<User>> response = userController.searchUsers(username);
 
         assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, response.getStatusCode());
     }
