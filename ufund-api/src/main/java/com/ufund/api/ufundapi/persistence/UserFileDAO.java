@@ -24,7 +24,7 @@ public abstract class UserFileDAO implements UserDAO{
      * @param filename - The name of the file to be loaded.
      * @param objectmapper - The object mapper.
      */
-    public UserFileDAO(@Value("data/users.json") String filename, ObjectMapper objectmapper) throws IOException{
+    public UserFileDAO(@Value("ufund-api/data/users.json") String filename, ObjectMapper objectmapper) throws IOException{
         this.filename = filename;
         this.objectMapper = objectmapper;
         this.users = new HashMap<>();

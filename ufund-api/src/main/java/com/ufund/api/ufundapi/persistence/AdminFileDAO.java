@@ -23,7 +23,7 @@ public class AdminFileDAO extends UserFileDAO implements AdminDAO {
      * @param filename - The name of the file to be loaded.
      * @param objectmapper - The object mapper.
      */
-    public AdminFileDAO(@Value("data/users.json") String filename, ObjectMapper objectmapper) throws IOException {
+    public AdminFileDAO(@Value("ufund-api/data/users.json") String filename, ObjectMapper objectmapper) throws IOException {
         super(filename, objectmapper);
         List<Admin> admins = users.values().stream()
                 .filter(user -> user instanceof Admin)
