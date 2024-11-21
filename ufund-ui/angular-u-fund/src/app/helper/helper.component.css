@@ -1,19 +1,19 @@
-h1 {
+*{
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+h1 {
     font-size: 30px;
-    margin: 0 auto;
-    margin-top: 50px;
+    margin: 50px auto 0;
     padding: 10px;
     width: 150px;
-    background-color: #078a5a;
-    color: antiquewhite;
+    background-color: black;
+    color: white;
     border-radius: 5px;
 }
 
 .basket {
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
     font-size: 25px;
     font-weight: bold;
     margin-top: 25px;
@@ -22,20 +22,30 @@ h1 {
 
 .needs-menu {
     list-style-position: inside; 
-    text-align: center;   
+    margin: auto;
+    width: fit-content;
+}
+
+.needs-menu li{
+    display: flex;
+    align-items: center;
+    justify-content:space-between;
+    gap: 15px;
+    padding: 0.5rem calc(1.25rem + 2px) 0.5rem 0;
+}
+
+.needs-menu li a{
+    color: black;
 }
 
 button {
-    background-color: #078a5a;
+    background-color: black;
     color: white;
     padding: 6px;
-    margin: 10px 0;
-    margin-left: 5px;
+    margin: 10px 0 10px 5px;
     border: black;
     cursor: pointer;
     width: 10%;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    text-align: center;
     border-radius: 5px;
 }
 
@@ -44,15 +54,12 @@ button:hover {
 }
 
 .add {
-    width: 30px;
-    text-align: center;
+    width: fit-content;
     margin-left: 10px;
-    font-family: Georgia, 'Times New Roman', Times, serif;
 }
 
-.add-message {
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+.add-message input {
+    text-align: left;
 }
 
 .add-selected {
@@ -60,32 +67,11 @@ button:hover {
     margin: 20px auto;
 }
 
-.logout-button {
-    text-align: center;
-}
-
-.no-needs-message {
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+.no-needs-message, .added-need-message {
     font-size: 13px;
-    margin: 0 auto;
+    margin: 25px auto;
     font-weight: bold;
     border: 2.5px solid black;
     padding: 10px;
-    margin-top: 25px;
-    margin-bottom: 25px;
-    max-width: 300px;
-}
-
-.added-need-message {
-    text-align: center;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    font-size: 13px;
-    margin: 0 auto;
-    font-weight: bold;
-    border: 2.5px solid black;
-    padding: 10px;
-    margin-top: 25px;
-    margin-bottom: 25px;
     max-width: 300px;
 }

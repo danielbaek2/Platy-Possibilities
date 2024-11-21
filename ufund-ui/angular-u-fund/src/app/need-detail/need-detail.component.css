@@ -1,7 +1,7 @@
 div {
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    background-color: #376e53;
+    background-color: coral;
     margin: 0 auto;
     width: 600px;
 }
@@ -15,11 +15,11 @@ div {
 input {
     text-align: center;
     font-family: Georgia, 'Times New Roman', Times, serif;
-    background-color: #ccf5e6;
+    background-color: white;
 }
 
 button {
-    background-color: #078a5a;
+    background-color: black;
     color: white;
     padding: 6px;
     margin: 10px 0;
