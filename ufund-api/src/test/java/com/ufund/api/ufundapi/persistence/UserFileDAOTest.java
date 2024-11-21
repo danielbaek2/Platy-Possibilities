@@ -12,7 +12,11 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.ufund.api.ufundapi.model.Helper;
+import com.ufund.api.ufundapi.model.User;
+import com.ufund.api.ufundapi.model.User.Helper;
+
+
+
 
 @Tag("Persistence-Tier")
 public class UserFileDAOTest {
@@ -29,7 +33,7 @@ public class UserFileDAOTest {
 
         when(mockObjectMapper.readValue(new File("test_file.txt"), Helper[].class)).thenReturn(testHelperList);
 
-        userFileDAO = new UserFileDAO("test_file.txt", mockObjectMapper);
+        userFileDAO = new TestFileDao("test_file.txt", mockObjectMapper);
     }
 
     @Test
