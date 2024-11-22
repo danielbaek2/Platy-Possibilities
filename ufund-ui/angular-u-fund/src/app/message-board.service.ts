@@ -16,12 +16,21 @@ export class MessageBoardService {
   
   constructor(private http: HttpClient) { }
 
+  /**
+   * GET message board from the server
+   * @returns An observable to the list of strings (message board) retrieved
+   */
   getMessageBoard(): Observable<String[]> {
     return this.http.get<String[]>(`${this.adminUrl}/board`).pipe(
       tap(_ => ('fetched messages' )), 
       catchError(this.handleError<String[]>('getMessageBoard', [])));
   }
 
+  /**
+   * DELETE a message from the message board on the server
+   * @param message The message to be deleted
+   * @returns An Observable of the string object (message) removed
+   */
   deleteMessage(message: String): Observable<String> {
     const url = `${this.adminUrl}/board`;
     return this.http.delete<String>(url, { ...this.httpOptions, body: message }).pipe(
@@ -30,6 +39,12 @@ export class MessageBoardService {
     );
   }  
 
+  /**
+   * DELETE a message to the message board on the server
+   * @param message The message to add to the message board
+   * @param username The username of the user
+   * @returns An observable to the string message retrieved
+   */
   addMessage(message: String, username: String): Observable<String> {
     const url = `${this.helperURL}/${username}/board`;
     return this.http.put<String>(url, message, this.httpOptions).pipe(

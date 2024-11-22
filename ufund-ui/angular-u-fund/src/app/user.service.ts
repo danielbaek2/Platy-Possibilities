@@ -49,7 +49,6 @@ export class UserService {
     );
   }
 
-  //////// Save methods //////////
 
   /** POST: add a new user to the server */
   createUser(user: User): Observable<User> {

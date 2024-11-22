@@ -16,12 +16,22 @@ export class NeedService {
 
   constructor(private http: HttpClient) { }
 
+  /**
+   * Gets list of needs
+   * @param id The id of a need
+   * @returns Observable to the need object retrieved
+   */
   getNeeds(): Observable<Need[]> {
     return this.http.get<Need[]>(this.needsUrl).pipe(
       tap(_ => ('fetched needs' )),
       catchError(this.handleError<Need[]>('getNeeds', [])));
   }
 
+  /**
+   * Gets a need based on the id
+   * @param id The id of a need
+   * @returns Observable to the need object retrieved
+   */
   getNeedNo404<Data>(id: number): Observable<Need> {
     const url = `${this.needsUrl}/?id=${id}`;
     return this.http.get<Need[]>(url).pipe(map(needs => needs[0]),tap(h => {
@@ -31,6 +41,11 @@ export class NeedService {
       );
   }
 
+  /**
+   * Gets a need based on the id
+   * @param id The id of a need
+   * @returns Observable to the need object retrieved
+   */
   getNeed(id: number): Observable<Need> {
     const url = `${this.needsUrl}/${id}`;
     return this.http.get<Need>(url).pipe(
@@ -84,6 +99,11 @@ export class NeedService {
         (`no needs matching "${term}"`)), catchError(this.handleError<Need[]>('searchNeeds', [])));
   }
 
+  /**
+   * Checks if the id of a need exists
+   * @param id The id of a need
+   * @returns Observable with true if it exists, false otherwise
+   */
   checkNeedIdExists(id: number): Observable<boolean> {
     return this.getNeed(id).pipe(
       map((need) => !!need),
