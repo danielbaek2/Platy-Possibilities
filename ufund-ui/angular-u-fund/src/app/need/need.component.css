@@ -45,8 +45,10 @@ ul {
     color: black;
 }
 
-.delete{
-    width: fit-content;
+label{
+    color: rgba(0, 0, 0, 0);
+    padding: 10px;
+
 }
 
 .no-needs-message {
@@ -66,8 +68,7 @@ button {
     background-color: black;
     color: white;
     padding: 6px;
-    margin: 5px 0;
-    margin-left: 5px;
+    margin: 5px 0 5px 5px;
     border: black;
     cursor: pointer;
     width: 10%;
@@ -84,4 +85,5 @@ button:hover {
     border-radius: 5px;
     height: 25px;
     text-align: center;
+    width: fit-content;
 }

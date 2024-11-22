@@ -5,7 +5,9 @@
 </div>
 
 <h3>Needs:</h3>
+<!-- Display message and disable buttons when basket is empty -->
 <p *ngIf="isEmpty('btn-all') && isEmpty('remove')" class="no-needs">Your funding basket is empty.</p>
+
 
 <div class="button-container">
   <button type="button" id="btn-all" (click)="onClick()">{{buttonText}}</button>
@@ -13,12 +15,16 @@
   <button type="button" title="Checkout" (click)="checkoutBasket()">Checkout</button>
 </div>
 
+<!-- Funding Basket display -->
 <ul class="funding-menu" id="needs">
+  <!-- List all needs -->
     <li *ngFor="let need of fundingBasket">
       <a routerLink="/detail/{{need.id}}">
         <span class="badge">{{need.id}}</span> {{need.title}}
       </a>
+      <!-- Remove a single need from basket -->
       <button type="button" class="remove" title="Remove from basket" (click)="removeNeedFromBasket(need)">Remove</button>
+      <!-- Select multiple needs -->
       <label><input type="checkbox" (click)="selectMultiple(need)">.</label>
     </li>
 </ul>

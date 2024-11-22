@@ -4,6 +4,9 @@ import { User } from '../user';
 import { UserService } from '../user.service';
 import { CurrentUserService } from '../current-user.service';
 
+/**
+ * Login component that handles functionality for logging in
+ */
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
@@ -21,11 +24,11 @@ export class LoginComponent {
     });
   }
 
+  /**
+   * Searches for the entered username and navigates to the appropriate page based on user type
+   * Displays message if user is not found
+   */
   login(): void {
-    /*if (this.username.trim().toLowerCase() === 'admin') {
-      this.router.navigate(['/admin']);
-      return;
-    }*/
     this.userService.searchUsers(this.username).subscribe(
       (users) => {
         if (users.length === 0) {

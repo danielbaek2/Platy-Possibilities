@@ -2,44 +2,52 @@
   <div class="need-title">
     <h2>{{need.title | uppercase}} Details</h2>
   </div>
-  <!--<div>
-    <label for="need-id">ID: </label>
-    <input id="need-id" [(ngModel)]="need.id" placeholder="id" [readonly]="!isAdmin">
-  </div> -->
+
+  <!-- Need Details -->
   <div class="characteristics">
-    <div>id: {{need.id}}</div>
+    <div>ID: {{need.id}}</div>
+    
+    <!-- Editable Description for Admin  -->
     <div *ngIf="isAdmin; else viewDescription">
       <label for="need-description">Description: </label>
       <input id="need-description" [(ngModel)]="need.description" placeholder="Description">
     </div>
+    <!-- Helper View -->
     <ng-template #viewDescription>
       <div>description: {{ need.description }}</div>
     </ng-template>
 
+    <!-- Editable Description for Admin  -->
     <div *ngIf="isAdmin; else viewCost">
       <label for="need-cost">Cost: </label>
       <input id="need-cost" type="number" [(ngModel)]="need.cost" placeholder="cost">
     </div>
+    <!-- Helper View -->
     <ng-template #viewCost>
       <div>cost: {{ need.cost }}</div>
     </ng-template>
 
+    <!-- Editable Description for Admin  -->
     <div *ngIf="isAdmin; else viewQuantity">
       <label for="need-quantity">Quantity: </label>
       <input id="need-quantity" type="number" [(ngModel)]="need.quantity" placeholder="quantity">
     </div>
+    <!-- Helper View -->
     <ng-template #viewQuantity>
       <div>quantity: {{ need.quantity }}</div>
     </ng-template>
 
+    <!-- Editable Description for Admin  -->
     <div *ngIf="isAdmin; else viewQuantityFunded">
       <label for="need-quantity-funded">Quantity Funded: </label>
       <input id="need-quantity-funded" type="number" [(ngModel)]="need.quantity_funded" placeholder="quantity funded">
     </div>
+    <!-- Helper View -->
     <ng-template #viewQuantityFunded>
       <div>quantity funded: {{ need.quantity_funded }}</div>
     </ng-template>
 
+    <!-- Editable Description for Admin  -->
     <div *ngIf="isAdmin">
       <label for="need-title">Need title: </label>
       <input id="need-title" [(ngModel)]="need.title" placeholder="title">

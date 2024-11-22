@@ -1,5 +1,6 @@
 <h2>Cupboard</h2>
 
+<!-- Add New Need Section -->
 <div class="new-need">
   <label for="new-need">New Need: </label>
   <input id="new-need" #needTitle placeholder="Title"/>
@@ -9,6 +10,7 @@
   <button type="button" class="add-button" (click)="add(needTitle.value, needDescription.value, needCost.valueAsNumber, needQuantity.valueAsNumber); needTitle.value=''; needDescription.value=''; needCost.value=''; needQuantity.value=''" >Add need</button>
 </div>
 
+<!-- Display message if cupboard is empty -->
 <div *ngIf="needs.length === 0" class="no-needs-message">No needs available to contribute to.</div>
 
 <!-- Centered button container -->
@@ -17,6 +19,7 @@
   <button id="remove" type="button" class="remove-selected" title="Remove selected from basket" (click)="deleteMultiple()">Remove from Cupboard</button>
 </div>
 
+<!-- Needs Display -->
 <ul *ngIf="needs.length > 0" class="needs">
   <li *ngFor="let need of needs">
     <a routerLink="/detail/{{need.id}}">

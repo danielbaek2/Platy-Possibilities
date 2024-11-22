@@ -53,6 +53,10 @@ button:hover {
     opacity: 0.8;
 }
 
+label[id=select-multiple]{
+    color: rgba(0, 0, 0, 0);
+}
+
 .add {
     width: fit-content;
     margin-left: 10px;

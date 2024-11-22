@@ -12,7 +12,7 @@ form {
 }
 
 .eye1, .eye2{
-  animation: shifty-eyes 2.5s 4s infinite; /*added something if the user stays on the page for too long */
+  animation: shifty-eyes 2.5s 4s infinite; /*added animation when the user stays on the page for too long */
 }
 
 .eye1{

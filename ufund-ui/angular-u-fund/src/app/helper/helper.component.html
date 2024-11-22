@@ -1,35 +1,50 @@
 <h1>{{ user.username }}</h1>
 
+<!-- Link to funding basket -->
 <div class="basket">
   <a routerLink="/helper/{{user.username}}/basket" (click)="getBasket()">
     Basket
   </a>
 </div>
 
+<!-- Search for needs -->
 <app-need-search></app-need-search>
 
-<div class="no-needs-message" *ngIf="needs.length == 0">No needs to fund at this moment. Please come back again later.</div>
+<!-- Display message when no needs are available -->
+<div class="no-needs-message" *ngIf="needs.length == 0">
+  No needs to fund at this moment. Please come back again later.
+</div>
+
+<!-- Need Cupboard display -->
 <ul class="needs-menu">
+  <!-- List all needs in the cupboard -->
   <li *ngFor="let need of needs">
     <a routerLink="/detail/{{need.id}}">
       <span class="badge">{{need.id}}</span> {{need.title}}
     </a>
-    <button type="button" class="add" title="Add to basket"
-      (click)="addNeedToBasket(need)">Add</button>
-    <label><input type="checkbox" (click)="selectMultiple(need)">.</label>
+    <!-- Add a single need to basket -->
+    <button type="button" class="add" title="Add to basket" (click)="addNeedToBasket(need)">Add</button>
+    <!-- Select multiple needs to add -->
+    <label id="select-multiple">.
+      <input type="checkbox" (click)="selectMultiple(need)">
+    </label>
   </li>
 </ul>
-<button class="add-selected"  title="Add selected to basket" (click)="addMultipleToBasket()">Add to basket</button>
+
+<!-- Add selected need(s) to basket -->
+<button class="add-selected" title="Add selected to basket" (click)="addMultipleToBasket()">Add to basket</button>
 <div class="added-need-message" *ngIf="addedNeedMessage">{{addedNeedMessage}}</div>
 <hr>
 
-<ul class="add-message">
+<!-- Message section -->
+<div class="add-message">
   <label for="add-message-box">Add Message: </label>
   <input #messageBox id="add-message-box"/>
   <button type="button" class="add" title="Add to message board"
       (click)="addMessage(messageBox.value); messageBox.value=''">+</button>
-</ul>
+</div>
 
+<!-- Logout button -->
 <div class="logout-button">
   <a href= "/login">
     <button>Logout</button>

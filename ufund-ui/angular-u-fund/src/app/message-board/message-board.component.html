@@ -1,8 +1,10 @@
 <h3>Message Board</h3>
 
+<!-- Display message if message board is empty -->
 <div *ngIf="messages.length === 0" class="no-messages-message">No messages are on the message board.</div>
 
-<ul *ngIf="messages.length > 0" class="messages">
+<!-- Message Board display -->
+<div *ngIf="messages.length > 0" class="messages">
   <ul class="message board">
     <li *ngFor="let message of messages">
       <a>
@@ -12,4 +14,4 @@
       </a>
     </li>
   </ul>
-</ul>
+</div>

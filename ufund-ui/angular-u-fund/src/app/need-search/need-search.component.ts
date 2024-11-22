@@ -11,6 +11,9 @@ import {HELPER} from "../mock-helper";
 import {CurrentUserService} from "../current-user.service";
 import {HelperService} from "../helper.service";
 
+/**
+ * Need Search Component that handles functionality for searching for a need
+ */
 @Component({
   selector: 'app-need-search',
   templateUrl: './need-search.component.html',
@@ -51,9 +54,19 @@ export class NeedSearchComponent implements OnInit {
       }
     });
   }
+
+  /**
+   * Adds a given need from the search to the funding basket
+   * @param need The need to be added
+   */
   addNeedToBasket(need: Need): void{
     this.helperService.addNeedToBasket(need, this.user.username).subscribe(need => {this.fundingBasket.push(need);});
   }
+
+  /**
+   * Retrieves the funding basket from the helper service
+   * Updates the funding basket property with the retrieved data
+   */
   getBasket(): void{
     this.helperService.getBasket(this.user.username).subscribe(fundingBasket => this.fundingBasket = fundingBasket);
   }
