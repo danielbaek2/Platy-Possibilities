@@ -48,7 +48,14 @@ The Minimum Viable Product involves a basic login system, in which a user only n
 >  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
 
 ### Enhancements
-> _**[Sprint 4]** Describe what enhancements you have implemented for the project._
+
+#### Message Board
+
+There is a message board feature that allows any helper to send a message that can be read only by the admin. The admin is able to see any messages sent and can clear them from the message board.
+
+#### Multi Select
+
+When selecting needs, whether it be the helper choosing needs to add or remove from their basket or the admin choosing needs to delete, there is a feature to allow the selecting of multiple needs so the selected needs can be added, removed, or deleted with one button press.
 
 
 ## Application Domain
@@ -170,33 +177,29 @@ Polymorphism: The MessageBoard class, in a sense, showcases polymorphism, as it 
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
 
 ## Testing
-> _This section will provide information about the testing performed
-> and the results of the testing._
 
 ### Acceptance Testing
-> _**[Sprint 2 & 4]** Report on the number of user stories that have passed all their
-> acceptance criteria tests, the number that have some acceptance
-> criteria tests failing, and the number of user stories that
-> have not had any testing yet. Highlight the issues found during
-> acceptance testing and if there are any concerns._
 
+#### Sprint 4
+
+Out of a total of 19 user stories, all 19 have passed their acceptance criteria tests. There were initially a few bugs, such as a bug preventing the admin from changing certain fields of a need, but they have all been fixed.
 
 
 ### Unit Testing and Code Coverage
-> _**[Sprint 4]** Discuss your unit testing strategy. Report on the code coverage
-> achieved from unit testing of the code base. Discuss the team's
-> coverage targets, why you selected those values, and how well your
-> code coverage met your targets._
 
+#### Sprint 2
 ![Sprint 2 Code Coverage](CodeCoverageSprint2.png)
 One anomaly for this code coverage is that the CupboardController tests do not test for when the DAO may throw an IOException. This makes it appear that it is missing more coverage than it actually is.
 
+#### Sprint 3
 ![Sprint 3 Code Coverage](CodeCoverageSprint3.png)
 Many tests do not test for the situation where the DAO would throw an IOException, but considering they should behave in the same way in that scenario, it should be fine.
 
+#### Sprint 4
 ![Sprint 4 Code Coverage](CodeCoverageSprint4.png)
+There are no real anomolies with these tests, most situations are covered.
 
-The strategy for unit testing was to look at each significant function and determine the different paths that the code could take, creating a test for each different output. By the end of the project we wanted each element to have around 80% code coverage. That would mean that we would be covering most important functions while not necessitating unecessary tests such as tests for toString functions. In this regard we met our goal quite well.  
+The strategy for unit testing was to look at each significant function and determine the different paths that the code could take, creating a test for each different output. By the end of the project we wanted each element to have around 80%-90% code coverage. That would mean that we would be covering the important functions while not necessitating unecessary tests such as tests for toString functions. In this regard we met our goal quite well.  
 
 ## Ongoing Rationale
 >_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
