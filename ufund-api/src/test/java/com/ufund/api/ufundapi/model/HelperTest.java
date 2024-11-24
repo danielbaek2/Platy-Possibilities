@@ -1,6 +1,7 @@
 package com.ufund.api.ufundapi.model;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.mockito.Mockito.mock;
 
 import org.junit.jupiter.api.Tag;
@@ -12,7 +13,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Tag("Model-Tier")
-public class UserTest {
+public class HelperTest {
 
     @Test
     void testCreateHelper() {
@@ -68,5 +69,31 @@ public class UserTest {
         String expected = "User [Username = TestUsername]";
 
         assertEquals(expected, helper.toString());
+    }
+
+    @Test
+    void testEquals(){
+        String username = "TestUsername";
+        Helper helper = new Helper(username);
+        Helper helperTwo = new Helper(username);
+
+        assertEquals(helper, helperTwo);
+    }
+
+    @Test
+    void testNotEquals(){
+        String username = "TestUsername";
+        Helper helper = new Helper(username);
+        Helper helperTwo = new Helper("Test");
+
+        assertNotEquals(helper, helperTwo);
+    }
+
+    @Test
+    void testNotEqualsObject(){
+        String username = "TestUsername";
+        Helper helper = new Helper(username);
+
+        assertNotEquals(helper, "Test");
     }
 }

@@ -31,7 +31,7 @@ public class UserFileDAOTest {
         testHelperList[1] = new Helper("Uncle Ben");
         mockObjectMapper = mock(ObjectMapper.class);
 
-        when(mockObjectMapper.readValue(new File("test_file.txt"), Helper[].class)).thenReturn(testHelperList);
+        when(mockObjectMapper.readValue(new File("test_file.txt"), User[].class)).thenReturn(testHelperList);
 
         userFileDAO = new TestFileDao("test_file.txt", mockObjectMapper);
     }

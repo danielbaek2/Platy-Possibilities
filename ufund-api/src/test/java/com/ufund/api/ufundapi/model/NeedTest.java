@@ -2,6 +2,8 @@ package com.ufund.api.ufundapi.model;
 import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
 
 public class NeedTest {
@@ -72,18 +74,47 @@ public class NeedTest {
     void testEquals(){
         Need DuckSaving = new Need(saveDucks.getId(), saveDucks.getTitle(), saveDucks.getDescription(), saveDucks.getQuantity(), saveDucks.getCost());
 
-        Boolean expectedResult = true;
-
-        assertEquals(expectedResult, DuckSaving.equals(saveDucks));
+        assertEquals(DuckSaving, saveDucks);
     }
 
     @Test
-    void updateTitle(){
+    void testNotEquals(){
+        Need DuckSaving = new Need(21, saveDucks.getTitle(), saveDucks.getDescription(), saveDucks.getQuantity(), saveDucks.getCost());
+
+        assertNotEquals(DuckSaving, saveDucks);
+    }
+
+    @Test
+    void testNotEqualsObject(){
+        assertNotEquals("Test", saveDucks);
+    }
+
+    @Test
+    void testNotFundable(){
+        saveDucks.fundNeed(500);
+        assertFalse(saveDucks.fundable());
+    }
+
+    @Test
+    void testUpdateTitle(){
         String expectedTitle = "Not Saving Ducks";
 
         saveDucks.setTitle(expectedTitle);
 
         assertEquals(expectedTitle, saveDucks.getTitle());
+    }
+
+    @Test
+    void testOverfundAmount(){
+        saveDucks.fundNeed(600);
+        assertEquals(500, saveDucks.getQuantityFunded());
+    }
+    
+    @Test
+    void testOverfundIncrement(){
+        saveDucks.fundNeed(500);
+        saveDucks.fundNeed();
+        assertEquals(500, saveDucks.getQuantityFunded());
     }
     
 }

@@ -102,10 +102,6 @@ public class Need {
     public void fundNeed(){
         if(fundable()){
             quantity_funded ++;
-        
-            if(quantity_funded > quantity){
-                quantity_funded = quantity;
-            }
         }
         
     }
@@ -120,7 +116,7 @@ public class Need {
     }
 
     public boolean fundable(){
-        if(quantity_funded <= quantity){
+        if(quantity_funded < quantity){
             return true;
         }
 

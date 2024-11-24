@@ -9,6 +9,7 @@ import org.junit.jupiter.api.Tag;
 import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.ufund.api.ufundapi.model.User;
 import com.ufund.api.ufundapi.model.User.Admin;
 
 import java.io.File;
@@ -22,9 +23,11 @@ public class AdminFileDAOTest {
 
     @BeforeEach
     void setupAdminFileDAO() throws IOException {
-        testAdmin = new Admin("Test");
+        testAdmin = new Admin("Admin");
         mockObjectMapper = mock(ObjectMapper.class);
-        when(mockObjectMapper.readValue(new File("test_file.txt"), Admin.class)).thenReturn(testAdmin);
+        User[] mockUserArray = new User[1];
+        mockUserArray[0] = testAdmin;
+        when(mockObjectMapper.readValue(new File("test_file.txt"), User[].class)).thenReturn(mockUserArray);
         adminFileDAO = new AdminFileDAO("test_file.txt", mockObjectMapper);
     }
 
