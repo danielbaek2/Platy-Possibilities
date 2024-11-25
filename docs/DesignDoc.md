@@ -62,7 +62,7 @@ When selecting needs, whether it be the helper choosing needs to add or remove f
 
 This section describes the application domain.
 
-![Domain Model](domain-model-sprint-3.png)
+![Domain Model](FINALDOMAINMODEL.png)
 
 Everyone who signs into the application is a User. Most Users are Helpers who each have a Funding Basket where they can place the Needs that they want to fund and remove the ones that they do not. The Needs are stored in the Cupboard, where the Helpers can search for Needs they want and select Needs to move to their Basket. The other kind of User is the U-Fund Maneger, or Admin, who can create, modify, and remove Needs from the Cupboard. The Admin does not have a Funding Basket.
 
@@ -80,7 +80,7 @@ This section describes the application architecture.
 The following Tiers/Layers model shows a high-level view of the webapp's architecture. 
 **NOTE**: detailed diagrams are required in later sections of this document.
 
-![The Tiers & Layers of the Architecture](architecture-tiers-and-layers.png)
+![The Tiers & Layers of the Architecture](ArchitectureDesign.png)
 
 The web application, is built using the Model–View–ViewModel (MVVM) architecture pattern. 
 
