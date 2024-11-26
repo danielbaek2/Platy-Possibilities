@@ -22,7 +22,6 @@ Platy Possibilities is a web application focused around funding wilderness prese
 The project focuses on developing an Angular web application that manages the needs of a wilderness preservation organization. The most important user group of the project are the environmentalists, conservationists, and volunteers dedicated to preserving wilderness areas, while the most important user goals are to monitor ecosystems, track endangered species, and promote conservation efforts to safeguard natural habitats for future generations.
 
 ### Glossary and Acronyms
-> _**[Sprint 2 & 4]** Provide a table of terms and acronyms._
 
 | Term | Definition |
 |------|------------|
@@ -77,12 +76,7 @@ This section describes the application domain.
 
 ![Domain Model](FINALDOMAINMODEL.png)
 
-Everyone who signs into the application is a User. Most Users are Helpers who each have a Funding Basket where they can place the Needs that they want to fund and remove the ones that they do not. The Needs are stored in the Cupboard, where the Helpers can search for Needs they want and select Needs to move to their Basket. The other kind of User is the U-Fund Maneger, or Admin, who can create, modify, and remove Needs from the Cupboard. The Admin does not have a Funding Basket.
-
-> _**[Sprint 2 & 4]** Provide a high-level overview of the domain for this application. You
-> can discuss the more important domain entities and their relationship
-> to each other._
-
+Everyone who signs into the application is a User. Most Users are Helpers who each have a Funding Basket where they can place the Needs that they want to fund and remove the ones that they do not. The Needs are stored in the Cupboard, where the Helpers can search for Needs they want and select Needs to move to their Basket. The other kind of User is the U-Fund Manager, or Admin, who can create, modify, and remove Needs from the Cupboard. The Admin does not have a Funding Basket.
 
 ## Architecture and Design
 
@@ -90,8 +84,7 @@ This section describes the application architecture.
 
 ### Summary
 
-The following Tiers/Layers model shows a high-level view of the webapp's architecture. 
-**NOTE**: detailed diagrams are required in later sections of this document.
+The following Tiers/Layers model shows a high-level view of the webapp's architecture.
 
 ![The Tiers & Layers of the Architecture](ArchitectureDesign.png)
 
