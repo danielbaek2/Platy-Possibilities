@@ -49,7 +49,7 @@ The Minimum Viable Product involves a basic login system, in which a user only n
   - Can login as a Helper, allowing for the funding of needs
 
 * Helper & Admin
-- Can view the needs in the Cupboard
+  - Can view the needs in the Cupboard
 
 * Helper
   - As a Helper, can add needs to the funding basket
