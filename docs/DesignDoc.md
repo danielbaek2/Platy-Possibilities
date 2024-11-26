@@ -195,6 +195,24 @@ Polymorphism: The MessageBoard class, in a sense, showcases polymorphism, as it 
 
 > _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
 
+![Read only example](StaticReadOnly.png)
+
+Often flagged pieces of code were variables that never changed in runtime, but were mutable. The solution provided was to make all these variables readonly, or essentially a constant.
+My recommendation follows this solution. While no issues arised related to these variables in our time working on this project, to prevent future errors it is a great idea to make these variables immutable.
+
+![Import example](Imports.png)
+
+This example is a small but crucial practice which is important for the readability and maintainability of the codebase. The general idea is to keep imports clean and concise by not
+having duplicate imports and unused imports in files. My recommendation is to follow this idea and keep all imports up-to-date and trimmed as the work on the project continues.
+
+![Method reference example](MethodReference.png)
+
+This issue is simple and related to the efficiency and readability of the codebase. The general idea is to simplfy code as much as possible to make it easier to read, debug and expand upon. My recommendation here is to use method references where possible, and simplfy overall logic (i.e returning a condition instead of using if -> return true/false)
+
+![Thread safety example](ThreadSafe.png)
+
+This issue is irrelevant for our project, as we only have one user logged in at a time, and thus don't have to worry about syncronization problems. With that being said, if this project were to be expanded this fault would be extremely critical to fix and prevent in the future. The general theme is thread safety and proper syncronization. Here we have a shared resource used to dynamically set the id for the next created need. To prevent issues with two users attempting to access this resource at the same time, I would recommend making the methods using this resource to be syncronized with a key to ensure only one user is changing or accessing the resource at a time.
+
 ## Testing
 
 ### Acceptance Testing
