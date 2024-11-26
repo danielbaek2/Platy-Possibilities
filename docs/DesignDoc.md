@@ -47,12 +47,16 @@ The Minimum Viable Product involves a basic login system, in which a user only n
 * Login
   - Can login as the Admin, allowing for the managment of needs
   - Can login as a Helper, allowing for the funding of needs
+
+* Helper & Admin
 - Can view the needs in the Cupboard
-- Can search the Cupboard for needs based on title
+
 * Helper
   - As a Helper, can add needs to the funding basket
   - As a Helper, can remove needs from the funding basket
   - As a Helper, can checkout the funding basket
+  - Can search the Cupboard for needs based on title
+
 * Admin
   - As the Admin, can create a new need in the cupboard
   - As the Admin, can remove the needs from the cupboard
@@ -129,9 +133,9 @@ The Need detail component essentially acts as a view of a specific method, displ
 
 The Need search component is a simple search engine in which the helper, who has access to this component, can input specific characters to find a specific Need. For example, if there is a Need titled "Fox Release Training" and the character "F" is input into the search bar, the Need will be displayed.
 
-(addNeed-sequence.png)
+![Create Need sequence diagram](addNeed-sequence.png)
 
-(addNeedToBasket-sequence.png)
+![Add need to basket sequence diagram](addNeedToBasket-sequence.png)
 
 ### ViewModel Tier
 
