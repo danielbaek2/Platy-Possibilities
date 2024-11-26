@@ -139,7 +139,7 @@ The Need search component is a simple search engine in which the helper, who has
 
 ### ViewModel Tier
 
-The classes supporting the ViewModel tier of the model would be the CupboardController public class, which houses the functions pertaining the needs, whether it be creating a need, deleting a need, get a need or needs, etc.
+The classes supporting the ViewModel tier of the model would be the CupboardController public class, which houses the functions pertaining the needs, whether it be creating a need, deleting a need, get a need or needs, etc. The AdminController only has methods for getting the messages on the message board and removing messages from it. The HelperController is where the basket methods and adding message method is located. The UserController is where the searchUsers method lies, in which it searches for all the users that have the inputted username.
 
 > _**[Sprint 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
@@ -152,13 +152,17 @@ The classes supporting the ViewModel tier of the model would be the CupboardCont
 
 ### Model Tier
 
-The class supporting the Model tier would be the Need, Admin, Helper, and User public classes. The Need class houses the ID, title, description, and total funding of the specific need, while defining the functions connected to that class. The Admin class extends the User class, housing only a username. The Helper class, which also extends the User class, houses a username as well as a funding basket, which is an array list. The User class only houses the username.
+The class supporting the Model tier would be the Need, Message Board, and User public classes. The Need class houses the ID, title, description, cost, quantity, and quantity-funded of the specific need, while defining the functions connected to that class. The User class houses the username and type, which splits into either a Helper or an Admin. The Message Board class is interesting. While this has the functionality for adding and removing messages on the board, it uses a private adminDAO in these methods, as the admin is ultimately who has the message board. This was made so that the helper can access it.
 
 > _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
 > section will follow the same instructions that are given for the View
 > Tier above._
 
-The Need class details every responsibility directly correlated with a Need, whether it be getting the properties (id, title, description, total_funding) from the object or changing the title of a specific Need to another one by updating it. The Admin class specifically details the actions and methods only an Admin can operate, which entails adding, removing, and editing the Needs in the cupboard. The Helper class can either remove needs from the funding basket, add needs to the funding basket, or get the funding basket entirely. The User class acts as a generalized backbone for the Admin and Helper classes, housing a method that gets the username of the User.
+The Need class details every responsibility directly correlated with a Need, whether it be getting the properties (id, title, description, cost, quantity, quantity_funded) from the object or changing the title of a specific Need to another one by updating it. 
+
+The User class acts as a generalized backbone for users, housing a method that gets the username of the User. This class can then be split into either a Helper or an Admin depending on the given username; if the given username is "admin," they will be classified as such. Otherwise, they will be a Helper.
+
+The Message Board class is where the messages get managed, mainly by the Admin. Generally, this class will be used by the Admin, such as seeing and deleting messages from the board; however, they cannot add messages to the board. Instead, the Helpers are the ones who send messages to them. This is because it acts as a sort of suggestion post, so that the Admin can create new Needs that fit these suggestions.
 
 > _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
 > static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
