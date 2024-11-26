@@ -18,8 +18,6 @@ Platy Possibilities is a web application focused around funding wilderness prese
 
 
 ### Purpose
->  _**[Sprint 2 & 4]** Provide a very brief statement about the project and the most
-> important user group and user goals._
 
 The project focuses on developing an Angular web application that manages the needs of a wilderness preservation organization. The most important user group of the project are the environmentalists, conservationists, and volunteers dedicated to preserving wilderness areas, while the most important user goals are to monitor ecosystems, track endangered species, and promote conservation efforts to safeguard natural habitats for future generations.
 
@@ -29,23 +27,38 @@ The project focuses on developing an Angular web application that manages the ne
 | Term | Definition |
 |------|------------|
 | SPA | Single Page |
+| User | Anyone loged in and using the app. |
+| Helper | The users who contribute to the needs. |
+| U-Fund Manager/Admin | The user who creates, modifies, and deletes the needs. |
+| Cupboard | The area of the app where helpers can search through and find needs they want to fund. |
+| Need | Goals for the Helpers to fund. |
+| Funding Basket | The menu containing the needs that a Helper has chosen to fund. Each helper has their own Funding Basket. | 
 
 
 ## Requirements
 
 This section describes the features of the application.
 
-> _In this section you do not need to be exhaustive and list every
-> story.  Focus on top-level features from the Vision document and
-> maybe Epics and critical Stories._
-
 ### Definition of MVP
-> _**[Sprint 2 & 4]** Provide a simple description of the Minimum Viable Product._
 
-The Minimum Viable Product involves a basic login system, in which a user only needs to put in a username to log in. If the username inputted is "admin," the user will log in as the U-Fund Manager. Otherwise, they will be a helper. They can also log out of the application. A helper can search for a need in the cupboard, as well as being able to add and remove needs from their funding basket. A U-Fund Manager can add, remove, and edit needs in the cupboard, but they do not have any access to a funding basket; this is something exclusive to helpers.
+The Minimum Viable Product involves a basic login system, in which a user only needs to put in a username to log in. If the username inputted is "admin," the user will log in as the U-Fund Manager. Otherwise, they will be a helper. They can also log out of the application. A helper can search for a need in the cupboard, and is able to add and remove needs from their funding basket. Helpers can checkout their basket at any time, funding the needs and emptying the basket. A U-Fund Manager can add, remove, and edit needs in the cupboard, but they do not have any access to a funding basket; this is something exclusive to helpers.
 
 ### MVP Features
->  _**[Sprint 4]** Provide a list of top-level Epics and/or Stories of the MVP._
+
+* Login
+  - Can login as the Admin, allowing for the managment of needs
+  - Can login as a Helper, allowing for the funding of needs
+- Can view the needs in the Cupboard
+- Can search the Cupboard for needs based on title
+* Helper
+  - As a Helper, can add needs to the funding basket
+  - As a Helper, can remove needs from the funding basket
+  - As a Helper, can checkout the funding basket
+* Admin
+  - As the Admin, can create a new need in the cupboard
+  - As the Admin, can remove the needs from the cupboard
+  - As the Admin, can edit the needs in the cupboard
+
 
 ### Enhancements
 
