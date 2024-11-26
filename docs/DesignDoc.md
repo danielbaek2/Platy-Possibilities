@@ -115,17 +115,27 @@ The admin page will show the admin username up top, an input box to add a new Ne
 > responsibilities.  This should be a narrative description, i.e. it has
 > a flow or "story line" that the reader can follow._
 
-> _**[Sprint 4]** You must  provide at least **2 sequence diagrams** as is relevant to a particular aspects 
-> of the design that you are describing.  (**For example**, in a shopping experience application you might create a 
-> sequence diagram of a customer searching for an item and adding to their cart.)
-> As these can span multiple tiers, be sure to include an relevant HTTP requests from the client-side to the server-side 
-> to help illustrate the end-to-end flow._
+The View Tier consists of admin, basket, helper, login, message board, need, need detail, and need search components.
 
-> _**[Sprint 4]** To adequately show your system, you will need to present the **class diagrams** where relevant in your design. Some additional tips:_
- >* _Class diagrams only apply to the **ViewModel** and **Model** Tier_
->* _A single class diagram of the entire system will not be effective. You may start with one, but will be need to break it down into smaller sections to account for requirements of each of the Tier static models below._
- >* _Correct labeling of relationships with proper notation for the relationship type, multiplicities, and navigation information will be important._
- >* _Include other details such as attributes and method signatures that you think are needed to support the level of detail in your discussion._
+The admin component focuses solely on the admin page and houses their responsibilities, which is mainly getting the message board and deleting messages from it. They also have full access to the Need cupboard, but the admin takes from the Need component for the functionalities.
+
+The basket component focuses on the basket page of the UI, in which it manages the Needs in a helper's basket. On the page, Needs can either be removed from the basket or checked out, meaning they will be fully funded. Multiple Needs can also be removed and checked out with the "select all" button present on the page.
+
+The helper component houses responsibilities soley arranged for the helper role, whether it be adding Needs to the basket or sending a message to the message board. Like the basket component, the helper can select multiple Needs and add them to their respective basket.
+
+The login component only serves as a means of routing the user to the correct pages, so if a helper username that is in the database is given, they will be routed to that helper specific page. If "admin" is inputted, they will be routed to the admin page. If the user is not found, a message will be displayed saying this on the login page.
+
+The message board component correlates with the admin's message board, in which helpers can send messages/suggestions for new Needs the admin can add to the cupboard. While the methods to add and remove messages are in the message board component, the helpers and admin respectively have the responsibility of them.
+
+The Need component is where the main Need functionality lies, like adding a new Need and deleting a Need. The admin, through this component, also has access to the multiple selection of Needs, as this component is the one that implements it.
+
+The Need detail component essentially acts as a view of a specific method, displaying the ID, title, description, cost, quantity, and quantity funded of the Need. The only notable method in this component is the save method, as this is where you can change and update the information of a specific Need, like changing the title, description, etc.
+
+The Need search component is a simple search engine in which the helper, who has access to this component, can input specific characters to find a specific Need. For example, if there is a Need titled "Fox Release Training" and the character "F" is input into the search bar, the Need will be displayed.
+
+(addNeed-sequence.png)
+
+(addNeedToBasket-sequence.png)
 
 ### ViewModel Tier
 
