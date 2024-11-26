@@ -144,8 +144,6 @@ The Need search component is a simple search engine in which the helper, who has
 
 The classes supporting the ViewModel tier of the model would be the CupboardController public class, which houses the functions pertaining the needs, whether it be creating a need, deleting a need, get a need or needs, etc. The AdminController only has methods for getting the messages on the message board and removing messages from it. The HelperController is where the basket methods and adding message method is located. The UserController is where the searchUsers method lies, in which it searches for all the users that have the inputted username.
 
-![ViewModel Tier Diagram](viewmodel-sprint-3.png)
-
 ### Model Tier
 
 The class supporting the Model tier would be the Need, Message Board, and User public classes. The Need class houses the ID, title, description, cost, quantity, and quantity-funded of the specific need, while defining the functions connected to that class. The User class houses the username and type, which splits into either a Helper or an Admin. The Message Board class is interesting. While this has the functionality for adding and removing messages on the board, it uses a private adminDAO in these methods, as the admin is ultimately who has the message board. This was made so that the helper can access it.
@@ -155,8 +153,6 @@ The Need class details every responsibility directly correlated with a Need, whe
 The User class acts as a generalized backbone for users, housing a method that gets the username of the User. This class can then be split into either a Helper or an Admin depending on the given username; if the given username is "admin," they will be classified as such. Otherwise, they will be a Helper.
 
 The Message Board class is where the messages get managed, mainly by the Admin. Generally, this class will be used by the Admin, such as seeing and deleting messages from the board; however, they cannot add messages to the board. Instead, the Helpers are the ones who send messages to them. This is because it acts as a sort of suggestion post, so that the Admin can create new Needs that fit these suggestions.
-
-![Model Tier Diagram](model-sprint-3.png)
 
 ## OO Design Principles
 
