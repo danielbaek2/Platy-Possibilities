@@ -110,10 +110,6 @@ The basket page will show the individual Needs in the user's funding basket. If 
 The admin page will show the admin username up top, an input box to add a new Need to the cupboard, a list of all the Needs in the cupboard, and a message board of the messages the admin receives from the helpers. Here, the admin can choose to remove individual Needs via the remove button next to the Needs, or they can remove multiple via the checkboxes next to each as well as the "remove from cupboard" button. This works similarly with the message board, as the admin can remove messages that they've read. Lastly, a logout button is also available for the admin to be brought back to the login page.
 
 ### View Tier
-> _**[Sprint 4]** Provide a summary of the View Tier UI of your architecture.
-> Describe the types of components in the tier and describe their
-> responsibilities.  This should be a narrative description, i.e. it has
-> a flow or "story line" that the reader can follow._
 
 The View Tier consists of admin, basket, helper, login, message board, need, need detail, and need search components.
 
@@ -141,22 +137,11 @@ The Need search component is a simple search engine in which the helper, who has
 
 The classes supporting the ViewModel tier of the model would be the CupboardController public class, which houses the functions pertaining the needs, whether it be creating a need, deleting a need, get a need or needs, etc. The AdminController only has methods for getting the messages on the message board and removing messages from it. The HelperController is where the basket methods and adding message method is located. The UserController is where the searchUsers method lies, in which it searches for all the users that have the inputted username.
 
-> _**[Sprint 4]** Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
-
-> _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
-> static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
-> 
-![Replace with your ViewModel Tier class diagram 1, etc.](viewmodel-sprint-3.png)
+![ViewModel Tier Diagram](viewmodel-sprint-3.png)
 
 ### Model Tier
 
 The class supporting the Model tier would be the Need, Message Board, and User public classes. The Need class houses the ID, title, description, cost, quantity, and quantity-funded of the specific need, while defining the functions connected to that class. The User class houses the username and type, which splits into either a Helper or an Admin. The Message Board class is interesting. While this has the functionality for adding and removing messages on the board, it uses a private adminDAO in these methods, as the admin is ultimately who has the message board. This was made so that the helper can access it.
-
-> _**[Sprint 2, 3 & 4]** Provide a summary of this tier of your architecture. This
-> section will follow the same instructions that are given for the View
-> Tier above._
 
 The Need class details every responsibility directly correlated with a Need, whether it be getting the properties (id, title, description, cost, quantity, quantity_funded) from the object or changing the title of a specific Need to another one by updating it. 
 
@@ -164,16 +149,11 @@ The User class acts as a generalized backbone for users, housing a method that g
 
 The Message Board class is where the messages get managed, mainly by the Admin. Generally, this class will be used by the Admin, such as seeing and deleting messages from the board; however, they cannot add messages to the board. Instead, the Helpers are the ones who send messages to them. This is because it acts as a sort of suggestion post, so that the Admin can create new Needs that fit these suggestions.
 
-> _At appropriate places as part of this narrative provide **one** or more updated and **properly labeled**
-> static models (UML class diagrams) with some details such as associations (connections) between classes, and critical attributes and methods. (**Be sure** to revisit the Static **UML Review Sheet** to ensure your class diagrams are using correct format and syntax.)_
-> 
-![Replace with your Model Tier class diagram 1, etc.](model-sprint-3.png)
+![Model Tier Diagram](model-sprint-3.png)
 
 ## OO Design Principles
 
 The initial OO Principles that the team has considered for this first Sprint are the Single Responsibility and Controller principles. For the Single Responsibility, we have each class assigned to a specific portion of the project, whether it be having a class for the Cupboard or for the Need itself. For the Controller principle, we are implementing a CupboardController that allows for the manipulation of the needs, whether it be deleting a need, getting a need, or updating a need.
-
-> _**[Sprint 2, 3 & 4]** Will eventually address upto **4 key OO Principles** in your final design. Follow guidance in augmenting those completed in previous Sprints as indicated to you by instructor. Be sure to include any diagrams (or clearly refer to ones elsewhere in your Tier sections above) to support your claims._
 
 Encapsulation, Inheritance, Abstraction, Polymorphism
 
@@ -185,15 +165,9 @@ Abstraction: The overall User class is abstract, as it serves as a base class fo
 
 Polymorphism: The MessageBoard class, in a sense, showcases polymorphism, as it treats the Helper and Admin classes as User objects.
 
-> _**[Sprint 3 & 4]** OO Design Principles should span across **all tiers.**_
-
 ## Static Code Analysis/Future Design Improvements
-> _**[Sprint 4]** With the results from the Static Code Analysis exercise, 
-> **Identify 3-4** areas within your code that have been flagged by the Static Code 
-> Analysis Tool (SonarQube) and provide your analysis and recommendations.  
-> Include any relevant screenshot(s) with each area._
 
-> _**[Sprint 4]** Discuss **future** refactoring and other design improvements your team would explore if the team had additional time._
+### Static Analysis
 
 ![Read only example](StaticReadOnly.png)
 
@@ -213,6 +187,16 @@ This issue is simple and related to the efficiency and readability of the codeba
 
 This issue is irrelevant for our project, as we only have one user logged in at a time, and thus don't have to worry about syncronization problems. With that being said, if this project were to be expanded this fault would be extremely critical to fix and prevent in the future. The general theme is thread safety and proper syncronization. Here we have a shared resource used to dynamically set the id for the next created need. To prevent issues with two users attempting to access this resource at the same time, I would recommend making the methods using this resource to be syncronized with a key to ensure only one user is changing or accessing the resource at a time.
 
+### Future Design Improvements
+
+Company Managers: Wildlife conservation organizations are able to make their own manager accounts and house many needs in their own needs list.
+
+Search specific organizations: Helpers could filter by or get the needs list of an individual organization.
+
+Need detail expansion: Needs have images, contact info, and generally more information about how the money will be used to help wildlife conservation.
+
+General Donation: For helpers unsure of what needs to fund, a general donation will be routed to various open needs. General donation could go specifically to an organization.
+
 ## Testing
 
 ### Acceptance Testing
@@ -220,7 +204,6 @@ This issue is irrelevant for our project, as we only have one user logged in at 
 #### Sprint 4
 
 Out of a total of 19 user stories, all 19 have passed their acceptance criteria tests. There were initially a few bugs, such as a bug preventing the admin from changing certain fields of a need, but they have all been fixed.
-
 
 ### Unit Testing and Code Coverage
 
@@ -239,10 +222,13 @@ There are no real anomolies with these tests, most situations are covered.
 The strategy for unit testing was to look at each significant function and determine the different paths that the code could take, creating a test for each different output. By the end of the project we wanted each element to have around 80%-90% code coverage. That would mean that we would be covering the important functions while not necessitating unecessary tests such as tests for toString functions. In this regard we met our goal quite well.  
 
 ## Ongoing Rationale
->_**[Sprint 1, 2, 3 & 4]** Throughout the project, provide a time stamp **(yyyy/mm/dd): Sprint # and description** of any _**mayor**_ team decisions or design milestones/changes and corresponding justification._
 
 2024/09/29 Sprint 1: The team worked on and implemented the functionality of the CupboardController, while also implementing the routine formatting for the code. 
 
-2024/10/09 Sprint 2: The team decided that, for the helpers and admin, there would be a more generalized user class that the other two classes inherit from.
+2024/10/09 Sprint 2: The team decided that, for the helpers and admin, there would be a more generalized user class that the other two classes inherit from. We did this because 
+both the helpers and admin both shared many aspects and it would allow us to store them in a singular file for authentication.
 
 2024/11/06 Sprint 3: The team made a new class in the model, MessageBoard, so that the helper can access message board and add new messages.
+
+2024/11/17 Sprint 4: The team decided that checkout wouldn't remove a need from the cupboard, but instead fully fund it by updating the quantity funded field. We did this
+because we felt that it would be confusing from a user standpoint if the checked out needs simply disappeared from the cupboard as you wouldn't know which need disappeared.
