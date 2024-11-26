@@ -133,8 +133,11 @@ The Need detail component essentially acts as a view of a specific method, displ
 
 The Need search component is a simple search engine in which the helper, who has access to this component, can input specific characters to find a specific Need. For example, if there is a Need titled "Fox Release Training" and the character "F" is input into the search bar, the Need will be displayed.
 
+#### Sequence Diagram: Creating a new need
+
 ![Create Need sequence diagram](addNeed-sequence.png)
 
+#### Sequence Diagram: Adding a need to the basket
 ![Add need to basket sequence diagram](addNeedToBasket-sequence.png)
 
 ### ViewModel Tier
